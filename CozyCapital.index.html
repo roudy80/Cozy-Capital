@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncozy Finance</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVW5jb3p5IEZpbmFuY2UiLCJzaG9ydF9uYW1lIjoiVW5jb3p5Iiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZjZkYzQiLCJ0aGVtZV9jb2xvciI6IiNmZjZkYzQiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQTRORGdnT0RRNElqNDhjbVZqZENCNFBTSXpNaUlnZVQwaU16SWlJSGRwWkhSb1BTSTNPRFFpSUdobGFXZG9kRDBpTnpnMElpQm1hV3hzUFNJalpqWmtZelFpUGp3dmNtVmpkRDQ4Y0dGMGFDQmtQU0pOTkRJd0lEVTBNbXBrT0RCNFJEQWdOREJzTFRrNE1HYzNPVGdnTVRJMklpQm1hV3hzUFNJalptWm1iV1lpUGp3dmNHRjBhRDU4TDNOMlp6ND0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    <meta name="theme-color" content="#ff6dc4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .main-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .main-tab {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 15px 10px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .main-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .main-tab.active {
+            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            box-shadow: 0 8px 25px rgba(255, 109, 196, 0.4);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            min-height: 65vh;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Furniture Inventory Styles */
+        .action-button {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(255, 109, 196, 0.3);
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 109, 196, 0.4);
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .item-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: #ff6dc4;
+        }
+
+        .item-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #94a3b8;
+            border: 3px dashed #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .item-image:hover {
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            border-color: #ff6dc4;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .item-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .item-description {
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .price-tag {
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            flex: 1;
+            text-align: center;
+        }
+
+        .purchase-price {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
+        }
+
+        .sale-price {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #059669;
+        }
+
+        .item-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            color: white;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            color: #1f2937;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #374151;
+            font-size: 1.1rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff6dc4;
+            box-shadow: 0 0 0 3px rgba(255, 109, 196, 0.1);
+        }
+
+        .photo-upload-area {
+            border: 3px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .photo-upload-area:hover {
+            border-color: #ff6dc4;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        }
+
+        .photo-upload-area.has-file {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .modal-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #6b7280;
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            opacity: 0.7;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .empty-state p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            border: 3px dashed #cbd5e1;
+        }
+
+        .coming-soon-icon {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .coming-soon h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #374151;
+        }
+
+        .coming-soon p {
+            font-size: 1.3rem;
+            color: #6b7280;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Drag and Drop Styles */
+        .delivery-stop {
+            transition: all 0.2s ease;
+        }
+
+        .delivery-stop:hover {
+            background: #e2e8f0 !important;
+        }
+
+        .delivery-stop[draggable="true"] {
+            cursor: grab !important;
+        }
+
+        .delivery-stop[draggable="true"]:active {
+            cursor: grabbing !important;
+        }
+
+        .delivery-stop.dragging {
+            opacity: 0.4;
+            transform: rotate(2deg) scale(1.05);
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .delivery-stop.drag-over {
+            border-top: 2px solid #ff6dc4 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Compact stop styling */
+        .delivery-stop {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .delivery-stop:not([draggable="true"]) {
+            cursor: default;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .header, .main-content {
+                padding: 20px;
+                border-radius: 20px;
+            }
+            
+            .inventory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-tabs {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .modal-content {
+                padding: 25px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+            
+            .price-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            /* Mobile-friendly delivery controls */
+            .delivery-stop {
+                cursor: grab;
+                touch-action: none;
+            }
+            
+            .delivery-stop:active {
+                cursor: grabbing;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛋️ Uncozy Finance</h1>
+            <div class="subtitle">Furniture Sales & Airbnb Management Made Easy</div>
+            <div class="main-tabs">
+                <button class="main-tab active" onclick="switchTab('furniture')">
+                    🪑 Furniture
+                </button>
+                <button class="main-tab" onclick="switchTab('airbnb')">
+                    🏠 Airbnb
+                </button>
+                <button class="main-tab" onclick="switchTab('finances')">
+                    💰 Finances
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Furniture Section -->
+            <div id="furniture-section">
+                <h2 class="section-title">🪑 Furniture Inventory</h2>
+                
+                <!-- Pending Deliveries -->
+                <div id="pending-deliveries" class="hidden" style="margin-bottom: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="color: #ef4444; margin: 0;">📦 Pending Deliveries</h3>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="addStopToSelectedDelivery()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
+                                ➕ Add Stop
+                            </button>
+                            <button onclick="toggleEditMode()" id="edit-mode-btn" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
+                                ✏️ Edit Trips
+                            </button>
+                        </div>
+                    </div>
+                    <div id="deliveries-list" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-radius: 15px; padding: 20px;">
+                        <!-- Delivery requests will appear here -->
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                    <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📊</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #1e40af;" id="total-items">0</div>
+                        <div style="color: #6b7280; font-size: 0.9rem;">Total Items</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">💰</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #92400e;" id="total-invested">$0</div>
+                        <div style="color: #6b7280; font-size: 0.9rem;">Invested</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📈</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #059669;" id="potential-profit">$0</div>
+                        <div style="color: #6b7280; font-size: 0.9rem;">Potential Profit</div>
+                    </div>
+                </div>
+                
+                <button class="action-button" onclick="showAddItemModal()">
+                    🪑 Add New Furniture Item
+                </button>
+
+                <div id="furniture-inventory" class="inventory-grid">
+                    <!-- Items will appear here -->
+                </div>
+
+                <div id="furniture-empty" class="empty-state">
+                    <div class="empty-icon">🪑</div>
+                    <h3>Ready to Start Your Inventory!</h3>
+                    <p>Add your first furniture item with a photo, purchase price, and description. Keep track of everything in one beautiful place!</p>
+                </div>
+            </div>
+
+            <!-- Airbnb Section -->
+            <div id="airbnb-section" class="hidden">
+                <h2 class="section-title">🏠 Airbnb Inventory</h2>
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">🛏️</div>
+                    <h3>Airbnb Management Coming Soon!</h3>
+                    <p>Track towels, sheets, cleaning supplies, and get low-stock alerts. Plus expense tracking with mileage and tax calculations. Let's get the furniture business perfect first!</p>
+                </div>
+            </div>
+
+            <!-- Finances Section -->
+            <div id="finances-section" class="hidden">
+                <h2 class="section-title">💰 Financial Dashboard</h2>
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">📊</div>
+                    <h3>Financial Tracking Coming Soon!</h3>
+                    <p>Beautiful monthly charts showing income vs expenses, profit margins, and tax calculations. We'll make your bookkeeping effortless!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div id="add-item-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>🪑 Add Furniture Item</h3>
+            <form id="add-item-form">
+                <div class="form-group">
+                    <label for="item-title">What is it?</label>
+                    <input type="text" id="item-title" required placeholder="e.g., Vintage Oak Dining Table">
+                </div>
+                
+                <div class="form-group">
+                    <label for="item-description">Description (optional)</label>
+                    <textarea id="item-description" rows="3" placeholder="Size, condition, style, special features..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="item-purchase-price">What did you pay for it?</label>
+                    <input type="number" id="item-purchase-price" step="0.01" required placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="item-sale-price">Selling it for? (optional)</label>
+                    <input type="number" id="item-sale-price" step="0.01" placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label>Photo</label>
+                    <div class="photo-upload-area" onclick="document.getElementById('item-photo').click()">
+                        <span class="upload-icon">📸</span>
+                        <span class="upload-text">Tap to add photo</span>
+                        <input type="file" id="item-photo" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideAddItemModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Send for Delivery Modal -->
+    <div id="delivery-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>📦 Send for Delivery</h3>
+            <form id="delivery-form">
+                <div class="form-group">
+                    <label for="customer-name">Customer Name</label>
+                    <input type="text" id="customer-name" required placeholder="Who's buying it?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery-address">Where to deliver?</label>
+                    <textarea id="delivery-address" rows="2" required placeholder="Full address..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery-datetime">When to deliver?</label>
+                    <input type="datetime-local" id="delivery-datetime" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="final-price">Final sale price</label>
+                    <input type="number" id="final-price" step="0.01" required placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment-method">Payment method</label>
+                    <select id="payment-method" required>
+                        <option value="">Choose payment method</option>
+                        <option value="cash">💵 Cash</option>
+                        <option value="venmo">📱 Venmo</option>
+                        <option value="cashapp">💰 Cash App</option>
+                        <option value="zelle">🏦 Zelle</option>
+                        <option value="check">📝 Check</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment-status">Payment status</label>
+                    <select id="payment-status" required>
+                        <option value="pending">⏳ Not paid yet</option>
+                        <option value="paid">✅ Already paid</option>
+                    </select>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideDeliveryModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">📱 Send to Husband</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // App State
+        let currentTab = 'furniture';
+        let furnitureItems = [];
+        let pendingDeliveries = [];
+        let currentDeliveryItem = null;
+        let editMode = false;
+        let selectedDeliveryId = null;
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            loadFurnitureItems();
+            loadPendingDeliveries();
+            renderFurnitureItems();
+            renderPendingDeliveries();
+            setupPhotoUpload();
+            setupFormListeners();
+            console.log('Uncozy Finance App Initialized');
+        }
+
+        function setupFormListeners() {
+            // Handle add/edit item form
+            document.getElementById('add-item-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('item-title').value;
+                const description = document.getElementById('item-description').value;
+                const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
+                const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
+                const photoFile = document.getElementById('item-photo').files[0];
+                
+                if (window.editingItemId) {
+                    // Edit existing item
+                    const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
+                    if (itemIndex !== -1) {
+                        furnitureItems[itemIndex].title = title;
+                        furnitureItems[itemIndex].description = description;
+                        furnitureItems[itemIndex].purchasePrice = purchasePrice;
+                        furnitureItems[itemIndex].salePrice = salePrice;
+                        furnitureItems[itemIndex].updatedAt = new Date().toISOString();
+                        
+                        if (photoFile) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                furnitureItems[itemIndex].photo = e.target.result;
+                                saveFurnitureItems();
+                                renderFurnitureItems();
+                                hideAddItemModal();
+                            };
+                            reader.readAsDataURL(photoFile);
+                        } else {
+                            saveFurnitureItems();
+                            renderFurnitureItems();
+                            hideAddItemModal();
+                        }
+                    }
+                } else {
+                    // Add new item
+                    const newItem = {
+                        id: 'item' + Date.now(),
+                        title: title,
+                        description: description,
+                        purchasePrice: purchasePrice,
+                        salePrice: salePrice,
+                        createdAt: new Date().toISOString(),
+                        photo: null
+                    };
+                    
+                    if (photoFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            newItem.photo = e.target.result;
+                            furnitureItems.push(newItem);
+                            saveFurnitureItems();
+                            renderFurnitureItems();
+                            hideAddItemModal();
+                        };
+                        reader.readAsDataURL(photoFile);
+                    } else {
+                        furnitureItems.push(newItem);
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    }
+                }
+            });
+
+            // Handle delivery form
+            document.getElementById('delivery-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const deliveryRequest = {
+                    id: 'delivery' + Date.now(),
+                    item: currentDeliveryItem.title,
+                    itemId: currentDeliveryItem.id,
+                    customer: document.getElementById('customer-name').value,
+                    address: document.getElementById('delivery-address').value,
+                    datetime: document.getElementById('delivery-datetime').value,
+                    price: parseFloat(document.getElementById('final-price').value),
+                    paymentMethod: document.getElementById('payment-method').value,
+                    paymentStatus: document.getElementById('payment-status').value,
+                    tripStops: [], // Start with no stops, add them later in pending deliveries
+                    sentAt: new Date().toISOString()
+                };
+                
+                // Add to pending deliveries
+                pendingDeliveries.push(deliveryRequest);
+                savePendingDeliveries();
+                renderPendingDeliveries();
+                
+                // Show success message
+                const datetime = new Date(deliveryRequest.datetime);
+                const dateStr = datetime.toLocaleDateString();
+                const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                alert(`🎉 Delivery request sent!\n\n📦 Item: ${deliveryRequest.item}\n👤 Customer: ${deliveryRequest.customer}\n📅 When: ${dateStr} at ${timeStr}\n💰 Price: ${deliveryRequest.price}\n\n✨ Use "Add Stop" and "Edit Trips" to plan the route!`);
+                
+                hideDeliveryModal();
+            });
+        }
+
+        function loadPendingDeliveries() {
+            const saved = localStorage.getItem('pending-deliveries');
+            if (saved) {
+                pendingDeliveries = JSON.parse(saved);
+            }
+        }
+
+        function savePendingDeliveries() {
+            localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
+        }
+
+        function renderPendingDeliveries() {
+            const container = document.getElementById('pending-deliveries');
+            const list = document.getElementById('deliveries-list');
+            
+            if (pendingDeliveries.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            list.innerHTML = '';
+            
+            pendingDeliveries.forEach(delivery => {
+                const deliveryCard = document.createElement('div');
+                deliveryCard.style.cssText = 'background: white; border-radius: 12px; padding: 15px; margin-bottom: 10px; border-left: 4px solid #ef4444;';
+                
+                const datetime = new Date(delivery.datetime);
+                const dateStr = datetime.toLocaleDateString();
+                const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                deliveryCard.innerHTML = `
+                    <div style="font-weight: bold; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
+                    <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
+                        👤 <strong>${delivery.customer}</strong><br>
+                        📍 ${delivery.address}<br>
+                        📅 ${dateStr} at ${timeStr}<br>
+                        💰 ${delivery.price} (${delivery.paymentMethod} - ${delivery.paymentStatus})
+                    </div>
+                    <button onclick="completeDelivery('${delivery.id}')" style="background: #10b981; color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.9rem; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                        ✅ Mark Delivered
+                    </button>
+                `;
+                
+                list.appendChild(deliveryCard);
+            });
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.main-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide sections
+            document.querySelectorAll('[id$="-section"]').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(tab + '-section').classList.remove('hidden');
+        }
+
+        function selectDelivery(deliveryId) {
+            selectedDeliveryId = selectedDeliveryId === deliveryId ? null : deliveryId;
+            renderPendingDeliveries();
+        }
+
+        function toggleEditMode() {
+            editMode = !editMode;
+            const btn = document.getElementById('edit-mode-btn');
+            
+            if (editMode) {
+                btn.textContent = '💾 Done Editing';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                // Show helpful instruction
+                if (pendingDeliveries.length > 0) {
+                    setTimeout(() => {
+                        alert('✨ Edit Mode Active!\n\n1. Select a delivery (tap it)\n2. Drag the small stop chips to reorder\n3. Use × to remove stops\n4. Click "Add Stop" to add more');
+                    }, 100);
+                }
+            } else {
+                btn.textContent = '✏️ Edit Trips';
+                btn.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+                selectedDeliveryId = null; // Clear selection when exiting edit mode
+            }
+            
+            renderPendingDeliveries();
+        }
+
+        function addStopToSelectedDelivery() {
+            if (!selectedDeliveryId) {
+                alert('Please select a delivery first by tapping on it!');
+                return;
+            }
+            
+            const delivery = pendingDeliveries.find(d => d.id === selectedDeliveryId);
+            if (!delivery) return;
+            
+            const stopName = prompt('Add a stop:\n\nJust enter the business name (e.g., Walmart, Walgreens, Gas Station)');
+            if (!stopName) return;
+            
+            const newStop = {
+                id: 'stop' + Date.now(),
+                name: stopName,
+                address: '',
+                purpose: 'pickup'
+            };
+            
+            if (!delivery.tripStops) {
+                delivery.tripStops = [];
+            }
+            delivery.tripStops.push(newStop);
+            
+            savePendingDeliveries();
+            renderPendingDeliveries();
+        }
+
+        function cancelDelivery(deliveryId, itemName) {
+            if (confirm(`Cancel delivery for "${itemName}"?\n\nThis will remove the delivery request but keep the furniture item in your inventory.`)) {
+                pendingDeliveries = pendingDeliveries.filter(d => d.id !== deliveryId);
+                if (selectedDeliveryId === deliveryId) {
+                    selectedDeliveryId = null;
+                }
+                savePendingDeliveries();
+                renderPendingDeliveries();
+            }
+        }
+
+        function removeStopFromDelivery(deliveryId, stopIndex) {
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!delivery || !delivery.tripStops) return;
+            
+            delivery.tripStops.splice(stopIndex, 1);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+        }
+
+        function completeDelivery(deliveryId) {
+            pendingDeliveries = pendingDeliveries.filter(d => d.id !== deliveryId);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+        }
+
+        function cancelDelivery(deliveryId, itemName) {
+            if (confirm(`Cancel delivery for "${itemName}"?\n\nThis will remove the delivery request but keep the furniture item in your inventory.`)) {
+                pendingDeliveries = pendingDeliveries.filter(d => d.id !== deliveryId);
+                if (selectedDeliveryId === deliveryId) {
+                    selectedDeliveryId = null;
+                }
+                savePendingDeliveries();
+                renderPendingDeliveries();
+            }
+        }
+
+        function removeStopFromDelivery(deliveryId, stopIndex) {
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!delivery || !delivery.tripStops) return;
+            
+            delivery.tripStops.splice(stopIndex, 1);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+        }
+
+        function setupDragAndDrop() {
+            let draggedElement = null;
+            let draggedDeliveryId = null;
+            let draggedStopIndex = null;
+            
+            // Remove existing event listeners first
+            document.querySelectorAll('.delivery-stop').forEach(stop => {
+                stop.replaceWith(stop.cloneNode(true));
+            });
+            
+            // Add new event listeners
+            document.querySelectorAll('.delivery-stop[draggable="true"]').forEach(stop => {
+                stop.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    draggedDeliveryId = this.getAttribute('data-delivery-id');
+                    draggedStopIndex = parseInt(this.getAttribute('data-stop-index'));
+                    this.style.opacity = '0.4';
+                    this.style.transform = 'rotate(2deg)';
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/html', ''); // Required for mobile
+                });
+                
+                stop.addEventListener('dragend', function(e) {
+                    this.style.opacity = '1';
+                    this.style.transform = 'none';
+                    draggedElement = null;
+                    draggedDeliveryId = null;
+                    draggedStopIndex = null;
+                    
+                    // Clean up any visual indicators
+                    document.querySelectorAll('.delivery-stop').forEach(s => {
+                        s.style.borderTop = '';
+                        s.style.borderBottom = '';
+                    });
+                });
+                
+                stop.addEventListener('dragover', function(e) {
+                    if (!draggedElement) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    
+                    const targetDeliveryId = this.getAttribute('data-delivery-id');
+                    if (draggedDeliveryId === targetDeliveryId) {
+                        this.style.borderTop = '2px solid #ff6dc4';
+                    }
+                });
+                
+                stop.addEventListener('dragleave', function(e) {
+                    this.style.borderTop = '';
+                    this.style.borderBottom = '';
+                });
+                
+                stop.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.borderTop = '';
+                    this.style.borderBottom = '';
+                    
+                    if (!draggedElement || draggedElement === this) return;
+                    
+                    const targetDeliveryId = this.getAttribute('data-delivery-id');
+                    const targetStopIndex = parseInt(this.getAttribute('data-stop-index'));
+                    
+                    // Only allow reordering within the same delivery
+                    if (draggedDeliveryId === targetDeliveryId && draggedStopIndex !== targetStopIndex) {
+                        const delivery = pendingDeliveries.find(d => d.id === draggedDeliveryId);
+                        if (delivery && delivery.tripStops) {
+                            // Reorder the stops
+                            const draggedStop = delivery.tripStops.splice(draggedStopIndex, 1)[0];
+                            const insertIndex = draggedStopIndex < targetStopIndex ? targetStopIndex : targetStopIndex;
+                            delivery.tripStops.splice(insertIndex, 0, draggedStop);
+                            
+                            savePendingDeliveries();
+                            renderPendingDeliveries();
+                        }
+                    }
+                });
+                
+                // Touch support for mobile
+                stop.addEventListener('touchstart', function(e) {
+                    if (!editMode) return;
+                    this.style.cursor = 'grabbing';
+                }, { passive: true });
+                
+                stop.addEventListener('touchend', function(e) {
+                    this.style.cursor = editMode ? 'grab' : '';
+                }, { passive: true });
+            });
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.main-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide sections
+            document.querySelectorAll('[id$="-section"]').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(tab + '-section').classList.remove('hidden');
+        }
+
+        function loadFurnitureItems() {
+            const saved = localStorage.getItem('furniture-items');
+            if (saved) {
+                furnitureItems = JSON.parse(saved);
+            }
+        }
+
+        function saveFurnitureItems() {
+            localStorage.setItem('furniture-items', JSON.stringify(furnitureItems));
+        }
+
+        function renderFurnitureItems() {
+            const container = document.getElementById('furniture-inventory');
+            const emptyState = document.getElementById('furniture-empty');
+            
+            if (furnitureItems.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                updateStats();
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            container.innerHTML = '';
+            
+            furnitureItems.forEach(item => {
+                const card = createItemCard(item);
+                container.appendChild(card);
+            });
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const totalItems = furnitureItems.length;
+            const totalInvested = furnitureItems.reduce((sum, item) => sum + item.purchasePrice, 0);
+            const totalExpected = furnitureItems.reduce((sum, item) => sum + (item.salePrice || 0), 0);
+            const potentialProfit = totalExpected - totalInvested;
+            
+            document.getElementById('total-items').textContent = totalItems;
+            document.getElementById('total-invested').textContent = '
+
+        function createItemCard(item) {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            
+            const profitAmount = item.salePrice ? (item.salePrice - item.purchasePrice).toFixed(2) : '0.00';
+            const profitColor = profitAmount >= 0 ? '#059669' : '#dc2626';
+            
+            card.innerHTML = `
+                <div class="item-image" onclick="viewPhoto('${item.id}')">
+                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '🪑'}
+                </div>
+                <div class="item-title">${item.title}</div>
+                <div class="item-description">${item.description || 'No description added'}</div>
+                <div class="price-row">
+                    <div class="price-tag purchase-price">Paid: ${item.purchasePrice}</div>
+                    ${item.salePrice ? `<div class="price-tag sale-price">Sell: ${item.salePrice}</div>` : ''}
+                </div>
+                ${item.salePrice ? `<div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: ${profitColor};">Profit: ${profitAmount}</div>` : ''}
+                <div class="item-actions">
+                    <button class="action-btn send-btn" onclick="showDeliveryModal('${item.id}')">
+                        📦 Send
+                    </button>
+                    <button class="action-btn edit-btn" onclick="editItem('${item.id}')">
+                        ✏️ Edit
+                    </button>
+                    <button class="action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="deleteItem('${item.id}')">
+                        🗑️ Delete
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function showAddItemModal() {
+            document.getElementById('add-item-modal').classList.remove('hidden');
+        }
+
+        function hideAddItemModal() {
+            document.getElementById('add-item-modal').classList.add('hidden');
+            document.getElementById('add-item-form').reset();
+            resetPhotoUpload();
+            
+            // Reset form to "add" mode
+            document.querySelector('#add-item-modal h3').textContent = '🪑 Add Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
+            window.editingItemId = null;
+        }
+
+        function setupPhotoUpload() {
+            const photoInput = document.getElementById('item-photo');
+            const uploadArea = document.querySelector('.photo-upload-area');
+            
+            photoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    uploadArea.classList.add('has-file');
+                    uploadArea.querySelector('.upload-text').textContent = `📸 ${e.target.files[0].name}`;
+                } else {
+                    resetPhotoUpload();
+                }
+            });
+        }
+
+        function resetPhotoUpload() {
+            const uploadArea = document.querySelector('.photo-upload-area');
+            uploadArea.classList.remove('has-file');
+            uploadArea.querySelector('.upload-text').textContent = 'Tap to add photo';
+        }
+
+        function editItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (!item) return;
+            
+            // Pre-fill the form with existing data
+            document.getElementById('item-title').value = item.title;
+            document.getElementById('item-description').value = item.description || '';
+            document.getElementById('item-purchase-price').value = item.purchasePrice;
+            document.getElementById('item-sale-price').value = item.salePrice || '';
+            
+            // Change form to edit mode
+            document.querySelector('#add-item-modal h3').textContent = '🪑 Edit Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
+            
+            // Store edit mode info
+            window.editingItemId = itemId;
+            
+            showAddItemModal();
+        }
+
+        function deleteItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
+                furnitureItems = furnitureItems.filter(item => item.id !== itemId);
+                saveFurnitureItems();
+                renderFurnitureItems();
+            }
+        }
+
+        function viewPhoto(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (item.photo) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 20px;">
+                        <h3>${item.title}</h3>
+                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 15px;">
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                modal.onclick = (e) => {
+                    if (e.target === modal) modal.remove();
+                };
+                document.body.appendChild(modal);
+            }
+        }
+
+        function showAddItemModal() {
+            document.getElementById('add-item-modal').classList.remove('hidden');
+        }
+
+        function hideAddItemModal() {
+            document.getElementById('add-item-modal').classList.add('hidden');
+            document.getElementById('add-item-form').reset();
+            resetPhotoUpload();
+            
+            // Reset form to "add" mode
+            document.querySelector('#add-item-modal h3').textContent = '🪑 Add Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
+            window.editingItemId = null;
+        }
+
+        function showDeliveryModal(itemId) {
+            currentDeliveryItem = furnitureItems.find(item => item.id === itemId);
+            document.getElementById('final-price').value = currentDeliveryItem.salePrice || '';
+            document.getElementById('delivery-modal').classList.remove('hidden');
+        }
+
+        function hideDeliveryModal() {
+            document.getElementById('delivery-modal').classList.add('hidden');
+            document.getElementById('delivery-form').reset();
+            currentDeliveryItem = null;
+        }
+
+
+
+        function setupPhotoUpload() {
+            const photoInput = document.getElementById('item-photo');
+            const uploadArea = document.querySelector('.photo-upload-area');
+            
+            photoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    uploadArea.classList.add('has-file');
+                    uploadArea.querySelector('.upload-text').textContent = `📸 ${e.target.files[0].name}`;
+                } else {
+                    resetPhotoUpload();
+                }
+            });
+        }
+
+        function resetPhotoUpload() {
+            const uploadArea = document.querySelector('.photo-upload-area');
+            uploadArea.classList.remove('has-file');
+            uploadArea.querySelector('.upload-text').textContent = 'Tap to add photo';
+        }
+
+        // Handle add/edit item form
+        document.getElementById('add-item-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('item-title').value;
+            const description = document.getElementById('item-description').value;
+            const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
+            const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
+            const photoFile = document.getElementById('item-photo').files[0];
+            
+            if (window.editingItemId) {
+                // Edit existing item
+                const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
+                if (itemIndex !== -1) {
+                    furnitureItems[itemIndex].title = title;
+                    furnitureItems[itemIndex].description = description;
+                    furnitureItems[itemIndex].purchasePrice = purchasePrice;
+                    furnitureItems[itemIndex].salePrice = salePrice;
+                    furnitureItems[itemIndex].updatedAt = new Date().toISOString();
+                    
+                    if (photoFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            furnitureItems[itemIndex].photo = e.target.result;
+                            saveFurnitureItems();
+                            renderFurnitureItems();
+                            hideAddItemModal();
+                        };
+                        reader.readAsDataURL(photoFile);
+                    } else {
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    }
+                }
+            } else {
+                // Add new item
+                const newItem = {
+                    id: 'item' + Date.now(),
+                    title: title,
+                    description: description,
+                    purchasePrice: purchasePrice,
+                    salePrice: salePrice,
+                    createdAt: new Date().toISOString(),
+                    photo: null
+                };
+                
+                if (photoFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newItem.photo = e.target.result;
+                        furnitureItems.push(newItem);
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    };
+                    reader.readAsDataURL(photoFile);
+                } else {
+                    furnitureItems.push(newItem);
+                    saveFurnitureItems();
+                    renderFurnitureItems();
+                    hideAddItemModal();
+                }
+            }
+        });
+
+        // Handle delivery form
+        document.getElementById('delivery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const deliveryRequest = {
+                id: 'delivery' + Date.now(),
+                item: currentDeliveryItem.title,
+                itemId: currentDeliveryItem.id,
+                customer: document.getElementById('customer-name').value,
+                address: document.getElementById('delivery-address').value,
+                datetime: document.getElementById('delivery-datetime').value,
+                price: parseFloat(document.getElementById('final-price').value),
+                paymentMethod: document.getElementById('payment-method').value,
+                paymentStatus: document.getElementById('payment-status').value,
+                sentAt: new Date().toISOString()
+            };
+            
+            // Add to pending deliveries
+            pendingDeliveries.push(deliveryRequest);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+            
+            // In real app, this would also send to Firebase/husband's phone
+            console.log('DELIVERY REQUEST SENT:', deliveryRequest);
+            
+            // Show success message
+            const datetime = new Date(deliveryRequest.datetime);
+            const dateStr = datetime.toLocaleDateString();
+            const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            alert(`🎉 Delivery request sent!\n\n📦 Item: ${deliveryRequest.item}\n👤 Customer: ${deliveryRequest.customer}\n📅 When: ${dateStr} at ${timeStr}\n💰 Price: ${deliveryRequest.price}\n\n✨ Added to pending deliveries list!\n(With Firebase, this will instantly appear on your husband's phone)`);
+            
+            hideDeliveryModal();
+        });
+
+        function viewPhoto(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (item.photo) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 20px;">
+                        <h3>${item.title}</h3>
+                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 15px;">
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                modal.onclick = (e) => {
+                    if (e.target === modal) modal.remove();
+                };
+                document.body.appendChild(modal);
+            }
+        }
+
+        function editItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (!item) return;
+            
+            // Pre-fill the form with existing data
+            document.getElementById('item-title').value = item.title;
+            document.getElementById('item-description').value = item.description || '';
+            document.getElementById('item-purchase-price').value = item.purchasePrice;
+            document.getElementById('item-sale-price').value = item.salePrice || '';
+            
+            // Change form to edit mode
+            document.querySelector('#add-item-modal h3').textContent = '🪑 Edit Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
+            
+            // Store edit mode info
+            window.editingItemId = itemId;
+            
+            showAddItemModal();
+        }
+
+        function deleteItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
+                furnitureItems = furnitureItems.filter(item => item.id !== itemId);
+                saveFurnitureItems();
+                renderFurnitureItems();
+            }
+        }
+
+        // Firebase Configuration (Ready for integration)
+        // const firebaseConfig = {
+        //     apiKey: "your-api-key",
+        //     authDomain: "your-project.firebaseapp.com",
+        //     databaseURL: "your-database-url",
+        //     projectId: "your-project-id",
+        //     storageBucket: "your-bucket.appspot.com",
+        //     messagingSenderId: "your-sender-id",
+        //     appId: "your-app-id"
+        // };
+        
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZSkge2UuY2FjaGVzLm9wZW4oJ2J1c2luZXNzLWh1Yi12MScpLnRoZW4oZnVuY3Rpb24oY2FjaGUpIHtyZXR1cm4gY2FjaGUuYWRkQWxsKFsnLycsJy9pbmRleC5odG1sJ10pO30pO30p')
+                .then(registration => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+    </script>
+</body>
+</html> + totalInvested.toFixed(2);
+            document.getElementById('potential-profit').textContent = '
+
+        function createItemCard(item) {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            
+            const profitAmount = item.salePrice ? (item.salePrice - item.purchasePrice).toFixed(2) : '0.00';
+            const profitColor = profitAmount >= 0 ? '#059669' : '#dc2626';
+            
+            card.innerHTML = `
+                <div class="item-image" onclick="viewPhoto('${item.id}')">
+                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '📸'}
+                </div>
+                <div class="item-title">${item.title}</div>
+                <div class="item-description">${item.description || 'No description added'}</div>
+                <div class="price-row">
+                    <div class="price-tag purchase-price">Paid: $${item.purchasePrice}</div>
+                    ${item.salePrice ? `<div class="price-tag sale-price">Sell: $${item.salePrice}</div>` : ''}
+                </div>
+                ${item.salePrice ? `<div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: ${profitColor};">Profit: $${profitAmount}</div>` : ''}
+                <div class="item-actions">
+                    <button class="action-btn send-btn" onclick="showDeliveryModal('${item.id}')">
+                        📦 Send
+                    </button>
+                    <button class="action-btn edit-btn" onclick="editItem('${item.id}')">
+                        ✏️ Edit
+                    </button>
+                    <button class="action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="deleteItem('${item.id}')">
+                        🗑️ Delete
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function showAddItemModal() {
+            document.getElementById('add-item-modal').classList.remove('hidden');
+        }
+
+        function hideAddItemModal() {
+            document.getElementById('add-item-modal').classList.add('hidden');
+            document.getElementById('add-item-form').reset();
+            resetPhotoUpload();
+            
+            // Reset form to "add" mode
+            document.querySelector('#add-item-modal h3').textContent = '✨ Add Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
+            window.editingItemId = null;
+        }
+
+        function showDeliveryModal(itemId) {
+            currentDeliveryItem = furnitureItems.find(item => item.id === itemId);
+            document.getElementById('final-price').value = currentDeliveryItem.salePrice || '';
+            document.getElementById('delivery-modal').classList.remove('hidden');
+        }
+
+        function hideDeliveryModal() {
+            document.getElementById('delivery-modal').classList.add('hidden');
+            document.getElementById('delivery-form').reset();
+            currentDeliveryItem = null;
+        }
+
+        function setupPhotoUpload() {
+            const photoInput = document.getElementById('item-photo');
+            const uploadArea = document.querySelector('.photo-upload-area');
+            
+            photoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    uploadArea.classList.add('has-file');
+                    uploadArea.querySelector('.upload-text').textContent = `📸 ${e.target.files[0].name}`;
+                } else {
+                    resetPhotoUpload();
+                }
+            });
+        }
+
+        function resetPhotoUpload() {
+            const uploadArea = document.querySelector('.photo-upload-area');
+            uploadArea.classList.remove('has-file');
+            uploadArea.querySelector('.upload-text').textContent = 'Tap to add photo';
+        }
+
+        // Handle add/edit item form
+        document.getElementById('add-item-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('item-title').value;
+            const description = document.getElementById('item-description').value;
+            const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
+            const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
+            const photoFile = document.getElementById('item-photo').files[0];
+            
+            if (window.editingItemId) {
+                // Edit existing item
+                const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
+                if (itemIndex !== -1) {
+                    furnitureItems[itemIndex].title = title;
+                    furnitureItems[itemIndex].description = description;
+                    furnitureItems[itemIndex].purchasePrice = purchasePrice;
+                    furnitureItems[itemIndex].salePrice = salePrice;
+                    furnitureItems[itemIndex].updatedAt = new Date().toISOString();
+                    
+                    if (photoFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            furnitureItems[itemIndex].photo = e.target.result;
+                            saveFurnitureItems();
+                            renderFurnitureItems();
+                            hideAddItemModal();
+                        };
+                        reader.readAsDataURL(photoFile);
+                    } else {
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    }
+                }
+            } else {
+                // Add new item
+                const newItem = {
+                    id: 'item' + Date.now(),
+                    title: title,
+                    description: description,
+                    purchasePrice: purchasePrice,
+                    salePrice: salePrice,
+                    createdAt: new Date().toISOString(),
+                    photo: null
+                };
+                
+                if (photoFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newItem.photo = e.target.result;
+                        furnitureItems.push(newItem);
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    };
+                    reader.readAsDataURL(photoFile);
+                } else {
+                    furnitureItems.push(newItem);
+                    saveFurnitureItems();
+                    renderFurnitureItems();
+                    hideAddItemModal();
+                }
+            }
+        });
+
+        // Handle delivery form
+        document.getElementById('delivery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const deliveryRequest = {
+                id: 'delivery' + Date.now(),
+                item: currentDeliveryItem.title,
+                itemId: currentDeliveryItem.id,
+                customer: document.getElementById('customer-name').value,
+                address: document.getElementById('delivery-address').value,
+                datetime: document.getElementById('delivery-datetime').value,
+                price: parseFloat(document.getElementById('final-price').value),
+                paymentMethod: document.getElementById('payment-method').value,
+                paymentStatus: document.getElementById('payment-status').value,
+                sentAt: new Date().toISOString()
+            };
+            
+            // Add to pending deliveries
+            pendingDeliveries.push(deliveryRequest);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+            
+            // In real app, this would also send to Firebase/husband's phone
+            console.log('DELIVERY REQUEST SENT:', deliveryRequest);
+            
+            // Show success message
+            const datetime = new Date(deliveryRequest.datetime);
+            const dateStr = datetime.toLocaleDateString();
+            const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            alert(`🎉 Delivery request sent!\n\n📦 Item: ${deliveryRequest.item}\n👤 Customer: ${deliveryRequest.customer}\n📅 When: ${dateStr} at ${timeStr}\n💰 Price: ${deliveryRequest.price}\n\n✨ Added to pending deliveries list!\n(With Firebase, this will instantly appear on your husband's phone)`);
+            
+            hideDeliveryModal();
+        });
+
+        function viewPhoto(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (item.photo) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 20px;">
+                        <h3>${item.title}</h3>
+                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 15px;">
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                modal.onclick = (e) => {
+                    if (e.target === modal) modal.remove();
+                };
+                document.body.appendChild(modal);
+            }
+        }
+
+        function editItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (!item) return;
+            
+            // Pre-fill the form with existing data
+            document.getElementById('item-title').value = item.title;
+            document.getElementById('item-description').value = item.description || '';
+            document.getElementById('item-purchase-price').value = item.purchasePrice;
+            document.getElementById('item-sale-price').value = item.salePrice || '';
+            
+            // Change form to edit mode
+            document.querySelector('#add-item-modal h3').textContent = '✏️ Edit Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
+            
+            // Store edit mode info
+            window.editingItemId = itemId;
+            
+            showAddItemModal();
+        }
+
+        function deleteItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
+                furnitureItems = furnitureItems.filter(item => item.id !== itemId);
+                saveFurnitureItems();
+                renderFurnitureItems();
+            }
+        }
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZSkge2UuY2FjaGVzLm9wZW4oJ2J1c2luZXNzLWh1Yi12MScpLnRoZW4oZnVuY3Rpb24oY2FjaGUpIHtyZXR1cm4gY2FjaGUuYWRkQWxsKFsnLycsJy9pbmRleC5odG1sJ10pO30pO30p')
+                .then(registration => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+    </script>
+</body>
+</html> + potentialProfit.toFixed(2);
+            
+            // Change profit color based on positive/negative
+            const profitElement = document.getElementById('potential-profit');
+            if (potentialProfit >= 0) {
+                profitElement.style.color = '#059669';
+            } else {
+                profitElement.style.color = '#dc2626';
+            }
+        }
+
+        function createItemCard(item) {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            
+            const profitAmount = item.salePrice ? (item.salePrice - item.purchasePrice).toFixed(2) : '0.00';
+            const profitColor = profitAmount >= 0 ? '#059669' : '#dc2626';
+            
+            card.innerHTML = `
+                <div class="item-image" onclick="viewPhoto('${item.id}')">
+                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '📸'}
+                </div>
+                <div class="item-title">${item.title}</div>
+                <div class="item-description">${item.description || 'No description added'}</div>
+                <div class="price-row">
+                    <div class="price-tag purchase-price">Paid: $${item.purchasePrice}</div>
+                    ${item.salePrice ? `<div class="price-tag sale-price">Sell: $${item.salePrice}</div>` : ''}
+                </div>
+                ${item.salePrice ? `<div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: ${profitColor};">Profit: $${profitAmount}</div>` : ''}
+                <div class="item-actions">
+                    <button class="action-btn send-btn" onclick="showDeliveryModal('${item.id}')">
+                        📦 Send
+                    </button>
+                    <button class="action-btn edit-btn" onclick="editItem('${item.id}')">
+                        ✏️ Edit
+                    </button>
+                    <button class="action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="deleteItem('${item.id}')">
+                        🗑️ Delete
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function showAddItemModal() {
+            document.getElementById('add-item-modal').classList.remove('hidden');
+        }
+
+        function hideAddItemModal() {
+            document.getElementById('add-item-modal').classList.add('hidden');
+            document.getElementById('add-item-form').reset();
+            resetPhotoUpload();
+            
+            // Reset form to "add" mode
+            document.querySelector('#add-item-modal h3').textContent = '✨ Add Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
+            window.editingItemId = null;
+        }
+
+        function showDeliveryModal(itemId) {
+            currentDeliveryItem = furnitureItems.find(item => item.id === itemId);
+            document.getElementById('final-price').value = currentDeliveryItem.salePrice || '';
+            document.getElementById('delivery-modal').classList.remove('hidden');
+        }
+
+        function hideDeliveryModal() {
+            document.getElementById('delivery-modal').classList.add('hidden');
+            document.getElementById('delivery-form').reset();
+            currentDeliveryItem = null;
+        }
+
+        function setupPhotoUpload() {
+            const photoInput = document.getElementById('item-photo');
+            const uploadArea = document.querySelector('.photo-upload-area');
+            
+            photoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    uploadArea.classList.add('has-file');
+                    uploadArea.querySelector('.upload-text').textContent = `📸 ${e.target.files[0].name}`;
+                } else {
+                    resetPhotoUpload();
+                }
+            });
+        }
+
+        function resetPhotoUpload() {
+            const uploadArea = document.querySelector('.photo-upload-area');
+            uploadArea.classList.remove('has-file');
+            uploadArea.querySelector('.upload-text').textContent = 'Tap to add photo';
+        }
+
+        // Handle add/edit item form
+        document.getElementById('add-item-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('item-title').value;
+            const description = document.getElementById('item-description').value;
+            const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
+            const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
+            const photoFile = document.getElementById('item-photo').files[0];
+            
+            if (window.editingItemId) {
+                // Edit existing item
+                const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
+                if (itemIndex !== -1) {
+                    furnitureItems[itemIndex].title = title;
+                    furnitureItems[itemIndex].description = description;
+                    furnitureItems[itemIndex].purchasePrice = purchasePrice;
+                    furnitureItems[itemIndex].salePrice = salePrice;
+                    furnitureItems[itemIndex].updatedAt = new Date().toISOString();
+                    
+                    if (photoFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            furnitureItems[itemIndex].photo = e.target.result;
+                            saveFurnitureItems();
+                            renderFurnitureItems();
+                            hideAddItemModal();
+                        };
+                        reader.readAsDataURL(photoFile);
+                    } else {
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    }
+                }
+            } else {
+                // Add new item
+                const newItem = {
+                    id: 'item' + Date.now(),
+                    title: title,
+                    description: description,
+                    purchasePrice: purchasePrice,
+                    salePrice: salePrice,
+                    createdAt: new Date().toISOString(),
+                    photo: null
+                };
+                
+                if (photoFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newItem.photo = e.target.result;
+                        furnitureItems.push(newItem);
+                        saveFurnitureItems();
+                        renderFurnitureItems();
+                        hideAddItemModal();
+                    };
+                    reader.readAsDataURL(photoFile);
+                } else {
+                    furnitureItems.push(newItem);
+                    saveFurnitureItems();
+                    renderFurnitureItems();
+                    hideAddItemModal();
+                }
+            }
+        });
+
+        // Handle delivery form
+        document.getElementById('delivery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const deliveryRequest = {
+                id: 'delivery' + Date.now(),
+                item: currentDeliveryItem.title,
+                itemId: currentDeliveryItem.id,
+                customer: document.getElementById('customer-name').value,
+                address: document.getElementById('delivery-address').value,
+                datetime: document.getElementById('delivery-datetime').value,
+                price: parseFloat(document.getElementById('final-price').value),
+                paymentMethod: document.getElementById('payment-method').value,
+                paymentStatus: document.getElementById('payment-status').value,
+                sentAt: new Date().toISOString()
+            };
+            
+            // Add to pending deliveries
+            pendingDeliveries.push(deliveryRequest);
+            savePendingDeliveries();
+            renderPendingDeliveries();
+            
+            // In real app, this would also send to Firebase/husband's phone
+            console.log('DELIVERY REQUEST SENT:', deliveryRequest);
+            
+            // Show success message
+            const datetime = new Date(deliveryRequest.datetime);
+            const dateStr = datetime.toLocaleDateString();
+            const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            alert(`🎉 Delivery request sent!\n\n📦 Item: ${deliveryRequest.item}\n👤 Customer: ${deliveryRequest.customer}\n📅 When: ${dateStr} at ${timeStr}\n💰 Price: ${deliveryRequest.price}\n\n✨ Added to pending deliveries list!\n(With Firebase, this will instantly appear on your husband's phone)`);
+            
+            hideDeliveryModal();
+        });
+
+        function viewPhoto(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (item.photo) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 20px;">
+                        <h3>${item.title}</h3>
+                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 15px;">
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                modal.onclick = (e) => {
+                    if (e.target === modal) modal.remove();
+                };
+                document.body.appendChild(modal);
+            }
+        }
+
+        function editItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (!item) return;
+            
+            // Pre-fill the form with existing data
+            document.getElementById('item-title').value = item.title;
+            document.getElementById('item-description').value = item.description || '';
+            document.getElementById('item-purchase-price').value = item.purchasePrice;
+            document.getElementById('item-sale-price').value = item.salePrice || '';
+            
+            // Change form to edit mode
+            document.querySelector('#add-item-modal h3').textContent = '✏️ Edit Furniture Item';
+            document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
+            
+            // Store edit mode info
+            window.editingItemId = itemId;
+            
+            showAddItemModal();
+        }
+
+        function deleteItem(itemId) {
+            const item = furnitureItems.find(item => item.id === itemId);
+            if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
+                furnitureItems = furnitureItems.filter(item => item.id !== itemId);
+                saveFurnitureItems();
+                renderFurnitureItems();
+            }
+        }
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZSkge2UuY2FjaGVzLm9wZW4oJ2J1c2luZXNzLWh1Yi12MScpLnRoZW4oZnVuY3Rpb24oY2FjaGUpIHtyZXR1cm4gY2FjaGUuYWRkQWxsKFsnLycsJy9pbmRleC5odG1sJ10pO30pO30p')
+                .then(registration => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+    </script>
+</body>
+</html>
