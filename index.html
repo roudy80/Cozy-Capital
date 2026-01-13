@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uncozy Finance</title>
-    
+    <title>Cozy Capital - Inventory & Delivery Management</title>
+
     <!-- PWA Configuration -->
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVW5jb3p5IEZpbmFuY2UiLCJzaG9ydF9uYW1lIjoiVW5jb3p5Iiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZjZkYzQiLCJ0aGVtZV9jb2xvciI6IiNmZjZkYzQiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQTRORGdnT0RRNElqNDhjbVZqZENCNFBTSXpNaUlnZVQwaU16SWlJSGRwWkhSb1BTSTNPRFFpSUdobGFXZG9kRDBpTnpnMElpQm1hV3hzUFNJalpqWmtZelFpUGp3dmNtVmpkRDQ4Y0dGMGFDQmtQU0pOTkRJd0lEVTBNbXBrT0RCNFJEQWdOREJzTFRrNE1HYzNPVGdnTVRJMklpQm1hV3hzUFNJalptWm1iV1lpUGp3dmNHRjBhRDU4TDNOMlp6ND0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
-    <meta name="theme-color" content="#ff6dc4">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ296eSBDYXBpdGFsIiwic2hvcnRfbmFtZSI6IkNvenlfQ2FwaXRhbCIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZmZmZmZmIiwidGhlbWVfY29sb3IiOiIjMWU0MGFmIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0E0TkRnZ09EUTRJajQ4Y21WamRDQjRQU0l6TWlJZ2VUMGlNeklpSUhkcFpIUm9QU0kzT0RRaUlHaGxhV2RvZEQwaU56ZzBJaUJtYVd4c1BTSWpNV1UwTUdGbUlqNDhMM0psWTNRK1BIQmhkR2dnWkQwaVRUUXlNQ0ExTkRKcVpEZzRlRVF3SURRME1HZ3RNVGs0Ympjek9Dd3hNallpSUdacGJHdzlJaU5tWm1abWJXWWlQand2Y0dGMGFENDhMM04yWno0PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+    <meta name="theme-color" content="#1e40af">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
+
     <style>
         * {
             margin: 0;
@@ -19,223 +19,225 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
             min-height: 100vh;
-            color: #333;
+            color: #1f2937;
         }
 
         .container {
-            max-width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 20px;
             min-height: 100vh;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #1e40af;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: 1.875rem;
+            color: #1e40af;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .header .subtitle {
-            color: #666;
-            font-size: 1.1rem;
+            color: #6b7280;
+            font-size: 0.95rem;
             margin-bottom: 20px;
-            font-weight: 500;
         }
 
         .main-tabs {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            justify-content: center;
         }
 
         .main-tab {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 15px 10px;
-            font-size: 0.95rem;
-            font-weight: bold;
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-align: center;
         }
 
         .main-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            background: #e5e7eb;
+            border-color: #1e40af;
         }
 
         .main-tab.active {
-            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
-            box-shadow: 0 8px 25px rgba(255, 109, 196, 0.4);
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
         }
 
         .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             min-height: 65vh;
         }
 
         .section-title {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 24px;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .action-button {
             width: 100%;
-            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            background: #1e40af;
             color: white;
             border: none;
-            border-radius: 20px;
-            padding: 20px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            border-radius: 6px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(255, 109, 196, 0.3);
+            transition: all 0.2s ease;
+            margin-bottom: 24px;
         }
 
         .action-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 109, 196, 0.4);
+            background: #1e3a8a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 1.75rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
         .inventory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
         .item-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .item-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            transition: all 0.2s ease;
         }
 
         .item-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border-color: #ff6dc4;
-        }
-
-        .item-card:hover::before {
-            transform: scaleX(1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #1e40af;
         }
 
         .item-image {
             width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-            border-radius: 15px;
-            margin-bottom: 20px;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            color: #94a3b8;
-            border: 3px dashed #cbd5e1;
+            font-size: 3rem;
+            color: #9ca3af;
+            border: 2px dashed #d1d5db;
             cursor: pointer;
-            transition: all 0.3s ease;
             overflow: hidden;
-        }
-
-        .item-image:hover {
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            border-color: #ff6dc4;
         }
 
         .item-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 4px;
         }
 
         .item-title {
-            font-size: 1.4rem;
-            font-weight: bold;
+            font-size: 1.125rem;
+            font-weight: 600;
             color: #1f2937;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .item-description {
             color: #6b7280;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            font-size: 1rem;
+            margin-bottom: 16px;
+            font-size: 0.875rem;
+            line-height: 1.5;
         }
 
-        .price-row {
+        .cost-breakdown {
+            background: #f9fafb;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 0.875rem;
+        }
+
+        .cost-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
+            margin-bottom: 6px;
+            color: #4b5563;
         }
 
-        .price-tag {
-            padding: 10px 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            flex: 1;
-            text-align: center;
+        .cost-row.total {
+            font-weight: 600;
+            color: #1f2937;
+            padding-top: 6px;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 6px;
         }
 
-        .purchase-price {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            color: #1e40af;
-        }
-
-        .sale-price {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-            color: #059669;
+        .cost-row.profit {
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding-top: 8px;
+            border-top: 2px solid #e5e7eb;
+            margin-top: 8px;
         }
 
         .item-actions {
@@ -245,28 +247,40 @@
         }
 
         .action-btn {
-            padding: 12px;
+            padding: 10px 12px;
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .send-btn {
-            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            background: #1e40af;
             color: white;
+        }
+
+        .send-btn:hover {
+            background: #1e3a8a;
         }
 
         .edit-btn {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: #f59e0b;
             color: white;
         }
 
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        .edit-btn:hover {
+            background: #d97706;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
         }
 
         /* Modal Styles */
@@ -276,7 +290,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -287,227 +301,387 @@
 
         .modal-content {
             background: white;
-            border-radius: 25px;
-            padding: 35px;
+            border-radius: 8px;
+            padding: 32px;
             width: 100%;
-            max-width: 500px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
             max-height: 90vh;
             overflow-y: auto;
         }
 
         .modal h3 {
             color: #1f2937;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 600;
             color: #374151;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 18px;
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
-            border-color: #ff6dc4;
-            box-shadow: 0 0 0 3px rgba(255, 109, 196, 0.1);
+            border-color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .expense-section {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .expense-section h4 {
+            font-size: 1rem;
+            color: #1f2937;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .photo-upload-area {
-            border: 3px dashed #cbd5e1;
-            border-radius: 15px;
-            padding: 40px 20px;
+            border: 2px dashed #d1d5db;
+            border-radius: 6px;
+            padding: 32px 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            transition: all 0.2s ease;
+            background: #f9fafb;
         }
 
         .photo-upload-area:hover {
-            border-color: #ff6dc4;
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-color: #1e40af;
+            background: #f3f4f6;
         }
 
         .photo-upload-area.has-file {
             border-color: #10b981;
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            background: #d1fae5;
         }
 
         .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
             display: block;
         }
 
         .upload-text {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 600;
             color: #374151;
         }
 
         .modal-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-top: 24px;
         }
 
         .btn {
-            padding: 18px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #ff6dc4, #ff9a8b);
+            background: #1e40af;
             color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e3a8a;
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
+            background: #6b7280;
             color: white;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        .btn-secondary:hover {
+            background: #4b5563;
         }
 
         .empty-state {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             color: #6b7280;
         }
 
         .empty-icon {
-            font-size: 5rem;
-            margin-bottom: 25px;
+            font-size: 4rem;
+            margin-bottom: 16px;
             opacity: 0.7;
         }
 
         .empty-state h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
             color: #374151;
         }
 
         .empty-state p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             line-height: 1.6;
         }
 
-        .coming-soon {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 20px;
-            border: 3px dashed #cbd5e1;
+        /* Delivery Section */
+        .delivery-section {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 24px;
         }
 
-        .coming-soon-icon {
-            font-size: 6rem;
-            margin-bottom: 30px;
-            opacity: 0.8;
+        .delivery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
 
-        .coming-soon h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+        .delivery-header h3 {
+            color: #991b1b;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .delivery-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .delivery-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .delivery-card:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .delivery-card.selected {
+            border-color: #1e40af;
+            background: #eff6ff;
+        }
+
+        .delivery-info {
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .trip-stops {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .trip-stops-label {
+            font-weight: 600;
             color: #374151;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
         }
 
-        .coming-soon p {
-            font-size: 1.3rem;
+        .stop-chip {
+            display: inline-flex;
+            align-items: center;
+            background: #e0e7ff;
+            color: #1e40af;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            cursor: move;
+            transition: all 0.2s ease;
+        }
+
+        .stop-chip:hover {
+            background: #c7d2fe;
+        }
+
+        .stop-chip.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .stop-chip .remove-stop {
+            margin-left: 6px;
+            cursor: pointer;
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .stop-number {
+            background: #1e40af;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 6px;
+        }
+
+        .complete-delivery-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .complete-delivery-btn:hover {
+            background: #059669;
+        }
+
+        /* History Section */
+        .history-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+        }
+
+        .history-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .history-item-title {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 1rem;
+        }
+
+        .history-item-date {
             color: #6b7280;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 0.8rem;
+        }
+
+        .profit-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .profit-badge.positive {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .profit-badge.negative {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
         .hidden {
             display: none;
         }
 
-        .delivery-stop {
-            transition: all 0.2s ease;
-            cursor: grab;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .delivery-stop:hover {
-            background: #e2e8f0 !important;
-        }
-
-        .delivery-stop[draggable="true"]:active {
-            cursor: grabbing !important;
-        }
-
-        .delivery-stop.dragging {
-            opacity: 0.4;
-            transform: rotate(2deg) scale(1.05);
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .delivery-stop.drag-over {
-            border-top: 2px solid #ff6dc4 !important;
-            transform: translateY(-2px);
-        }
-
         @media (max-width: 768px) {
             .container {
-                padding: 5px;
+                padding: 10px;
             }
-            
+
             .header, .main-content {
-                padding: 20px;
-                border-radius: 20px;
+                padding: 16px;
             }
-            
+
             .inventory-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .main-tabs {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                grid-template-columns: 1fr 1fr;
             }
-            
+
             .modal-content {
-                padding: 25px;
-                margin: 10px;
-                border-radius: 20px;
+                padding: 24px;
             }
-            
-            .price-row {
-                flex-direction: column;
-                gap: 10px;
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
-            
-            .delivery-stop {
-                touch-action: none;
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -516,14 +690,17 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🛋️ Uncozy Finance</h1>
-            <div class="subtitle">Furniture Sales & Airbnb Management Made Easy</div>
+            <h1>🏢 Cozy Capital</h1>
+            <div class="subtitle">Professional Inventory & Delivery Management</div>
             <div class="main-tabs">
                 <button class="main-tab active" onclick="switchTab('furniture')">
-                    🪑 Furniture
+                    📦 Inventory
                 </button>
                 <button class="main-tab" onclick="switchTab('airbnb')">
                     🏠 Airbnb
+                </button>
+                <button class="main-tab" onclick="switchTab('history')">
+                    📊 History
                 </button>
                 <button class="main-tab" onclick="switchTab('finances')">
                     💰 Finances
@@ -535,47 +712,52 @@
         <div class="main-content">
             <!-- Furniture Section -->
             <div id="furniture-section">
-                <h2 class="section-title">🪑 Furniture Inventory</h2>
-                
+                <h2 class="section-title">Current Inventory</h2>
+
                 <!-- Pending Deliveries -->
-                <div id="pending-deliveries" class="hidden" style="margin-bottom: 25px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h3 style="color: #ef4444; margin: 0;">📦 Pending Deliveries</h3>
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="addStopToSelectedDelivery()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
+                <div id="pending-deliveries" class="hidden delivery-section">
+                    <div class="delivery-header">
+                        <h3>📦 Pending Deliveries</h3>
+                        <div class="delivery-actions">
+                            <button onclick="addStopToSelectedDelivery()" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;">
                                 ➕ Add Stop
                             </button>
-                            <button onclick="toggleEditMode()" id="edit-mode-btn" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer;">
-                                ✏️ Edit Trips
+                            <button onclick="toggleEditMode()" id="edit-mode-btn" class="btn" style="background: #f59e0b; color: white; padding: 6px 12px; font-size: 0.8rem;">
+                                ✏️ Edit Routes
                             </button>
                         </div>
                     </div>
-                    <div id="deliveries-list" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-radius: 15px; padding: 20px;">
+                    <div id="deliveries-list">
                         <!-- Delivery requests will appear here -->
                     </div>
                 </div>
-                
+
                 <!-- Quick Stats -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px;">
-                    <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 15px; padding: 20px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">📊</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: #1e40af;" id="total-items">0</div>
-                        <div style="color: #6b7280; font-size: 0.9rem;">Total Items</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value" id="total-items">0</div>
+                        <div class="stat-label">Total Items</div>
                     </div>
-                    <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 15px; padding: 20px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">💰</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: #92400e;" id="total-invested">$0</div>
-                        <div style="color: #6b7280; font-size: 0.9rem;">Invested</div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="total-invested">$0</div>
+                        <div class="stat-label">Total Invested</div>
                     </div>
-                    <div style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 15px; padding: 20px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">📈</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: #059669;" id="potential-profit">$0</div>
-                        <div style="color: #6b7280; font-size: 0.9rem;">Potential Profit</div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value" id="potential-revenue">$0</div>
+                        <div class="stat-label">Potential Revenue</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value" id="potential-profit">$0</div>
+                        <div class="stat-label">Expected Profit</div>
                     </div>
                 </div>
-                
+
                 <button class="action-button" onclick="showAddItemModal()">
-                    🪑 Add New Furniture Item
+                    ➕ Add New Item
                 </button>
 
                 <div id="furniture-inventory" class="inventory-grid">
@@ -583,68 +765,126 @@
                 </div>
 
                 <div id="furniture-empty" class="empty-state">
-                    <div class="empty-icon">🪑</div>
-                    <h3>Ready to Start Your Inventory!</h3>
-                    <p>Add your first furniture item with a photo, purchase price, and description. Keep track of everything in one beautiful place!</p>
+                    <div class="empty-icon">📦</div>
+                    <h3>No Items in Inventory</h3>
+                    <p>Start tracking your inventory by adding your first item with photos, costs, and pricing.</p>
                 </div>
             </div>
 
             <!-- Airbnb Section -->
             <div id="airbnb-section" class="hidden">
-                <h2 class="section-title">🏠 Airbnb Inventory</h2>
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">🛏️</div>
-                    <h3>Airbnb Management Coming Soon!</h3>
-                    <p>Track towels, sheets, cleaning supplies, and get low-stock alerts. Plus expense tracking with mileage and tax calculations. Let's get the furniture business perfect first!</p>
+                <h2 class="section-title">Airbnb Supplies</h2>
+                <div class="empty-state">
+                    <div class="empty-icon">🛏️</div>
+                    <h3>Airbnb Management Coming Soon</h3>
+                    <p>Track towels, sheets, cleaning supplies, and get low-stock alerts with expense tracking and tax calculations.</p>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div id="history-section" class="hidden">
+                <h2 class="section-title">Sales History</h2>
+
+                <div class="stats-grid" style="margin-bottom: 24px;">
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="total-sold">0</div>
+                        <div class="stat-label">Items Sold</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💵</div>
+                        <div class="stat-value" id="total-revenue">$0</div>
+                        <div class="stat-label">Total Revenue</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📉</div>
+                        <div class="stat-value" id="total-costs">$0</div>
+                        <div class="stat-label">Total Costs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="actual-profit">$0</div>
+                        <div class="stat-label">Actual Profit</div>
+                    </div>
+                </div>
+
+                <div id="history-list">
+                    <!-- History items will appear here -->
+                </div>
+
+                <div id="history-empty" class="empty-state">
+                    <div class="empty-icon">📋</div>
+                    <h3>No Sales History Yet</h3>
+                    <p>Complete deliveries to see your sales history and profit tracking here.</p>
                 </div>
             </div>
 
             <!-- Finances Section -->
             <div id="finances-section" class="hidden">
-                <h2 class="section-title">💰 Financial Dashboard</h2>
-                <div class="coming-soon">
-                    <div class="coming-soon-icon">📊</div>
-                    <h3>Financial Tracking Coming Soon!</h3>
-                    <p>Beautiful monthly charts showing income vs expenses, profit margins, and tax calculations. We'll make your bookkeeping effortless!</p>
+                <h2 class="section-title">Financial Dashboard</h2>
+                <div class="empty-state">
+                    <div class="empty-icon">📊</div>
+                    <h3>Financial Analytics Coming Soon</h3>
+                    <p>Detailed charts showing monthly income vs expenses, profit margins, and tax calculations.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Item Modal -->
+    <!-- Add/Edit Item Modal -->
     <div id="add-item-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>🪑 Add Furniture Item</h3>
+            <h3>Add New Item</h3>
             <form id="add-item-form">
                 <div class="form-group">
-                    <label for="item-title">What is it?</label>
+                    <label for="item-title">Item Name *</label>
                     <input type="text" id="item-title" required placeholder="e.g., Vintage Oak Dining Table">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="item-description">Description (optional)</label>
-                    <textarea id="item-description" rows="3" placeholder="Size, condition, style, special features..."></textarea>
+                    <label for="item-description">Description</label>
+                    <textarea id="item-description" rows="3" placeholder="Size, condition, style, features..."></textarea>
                 </div>
-                
-                <div class="form-group">
-                    <label for="item-purchase-price">What did you pay for it?</label>
-                    <input type="number" id="item-purchase-price" step="0.01" required placeholder="0.00">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-purchase-price">Purchase Price *</label>
+                        <input type="number" id="item-purchase-price" step="0.01" required placeholder="0.00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="item-sale-price">Sale Price</label>
+                        <input type="number" id="item-sale-price" step="0.01" placeholder="0.00">
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="item-sale-price">Selling it for? (optional)</label>
-                    <input type="number" id="item-sale-price" step="0.01" placeholder="0.00">
+
+                <div class="expense-section">
+                    <h4>💸 Additional Costs</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="travel-cost">Travel/Pickup Cost</label>
+                            <input type="number" id="travel-cost" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="materials-cost">Materials Cost</label>
+                            <input type="number" id="materials-cost" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="repair-cost">Repair/Labor Cost</label>
+                        <input type="number" id="repair-cost" step="0.01" placeholder="0.00">
+                    </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Photo</label>
                     <div class="photo-upload-area" onclick="document.getElementById('item-photo').click()">
                         <span class="upload-icon">📸</span>
-                        <span class="upload-text">Tap to add photo</span>
+                        <span class="upload-text">Click to add photo</span>
                         <input type="file" id="item-photo" accept="image/*" style="display: none;">
                     </div>
                 </div>
-                
+
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="hideAddItemModal()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Add Item</button>
@@ -656,51 +896,89 @@
     <!-- Send for Delivery Modal -->
     <div id="delivery-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>📦 Send for Delivery</h3>
+            <h3>📦 Create Delivery</h3>
             <form id="delivery-form">
                 <div class="form-group">
-                    <label for="customer-name">Customer Name</label>
-                    <input type="text" id="customer-name" required placeholder="Who's buying it?">
+                    <label for="customer-name">Customer Name *</label>
+                    <input type="text" id="customer-name" required placeholder="Customer name">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="delivery-address">Where to deliver?</label>
-                    <textarea id="delivery-address" rows="2" required placeholder="Full address..."></textarea>
+                    <label for="delivery-address">Delivery Address *</label>
+                    <textarea id="delivery-address" rows="2" required placeholder="Full address"></textarea>
                 </div>
-                
-                <div class="form-group">
-                    <label for="delivery-datetime">When to deliver?</label>
-                    <input type="datetime-local" id="delivery-datetime" required>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="delivery-date">Delivery Date *</label>
+                        <input type="date" id="delivery-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery-time">Time *</label>
+                        <input type="time" id="delivery-time" required>
+                    </div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="final-price">Final sale price</label>
+                    <label for="final-price">Final Sale Price *</label>
                     <input type="number" id="final-price" step="0.01" required placeholder="0.00">
                 </div>
-                
-                <div class="form-group">
-                    <label for="payment-method">Payment method</label>
-                    <select id="payment-method" required>
-                        <option value="">Choose payment method</option>
-                        <option value="cash">💵 Cash</option>
-                        <option value="venmo">📱 Venmo</option>
-                        <option value="cashapp">💰 Cash App</option>
-                        <option value="zelle">🏦 Zelle</option>
-                        <option value="check">📝 Check</option>
-                    </select>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="payment-method">Payment Method *</label>
+                        <select id="payment-method" required>
+                            <option value="">Select method</option>
+                            <option value="cash">💵 Cash</option>
+                            <option value="venmo">📱 Venmo</option>
+                            <option value="cashapp">💰 Cash App</option>
+                            <option value="zelle">🏦 Zelle</option>
+                            <option value="check">📝 Check</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment-status">Payment Status *</label>
+                        <select id="payment-status" required>
+                            <option value="pending">⏳ Pending</option>
+                            <option value="paid">✅ Paid</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="payment-status">Payment status</label>
-                    <select id="payment-status" required>
-                        <option value="pending">⏳ Not paid yet</option>
-                        <option value="paid">✅ Already paid</option>
-                    </select>
-                </div>
-                
+
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="hideDeliveryModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">📱 Send to Husband</button>
+                    <button type="submit" class="btn btn-primary">Create Delivery</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Complete Delivery Modal -->
+    <div id="complete-delivery-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>✅ Complete Delivery</h3>
+            <form id="complete-delivery-form">
+                <div id="delivery-summary" style="background: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+                    <!-- Delivery info will be inserted here -->
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery-mileage">Delivery Mileage (miles) *</label>
+                    <input type="number" id="delivery-mileage" step="0.1" required placeholder="0.0">
+                    <small style="color: #6b7280; display: block; margin-top: 6px;">
+                        Mileage cost: $<span id="mileage-cost">0.00</span> (at $0.67/mile)
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery-notes">Delivery Notes</label>
+                    <textarea id="delivery-notes" rows="3" placeholder="Any notes about the delivery..."></textarea>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideCompleteDeliveryModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Complete Delivery</button>
                 </div>
             </form>
         </div>
@@ -711,9 +989,15 @@
         let currentTab = 'furniture';
         let furnitureItems = [];
         let pendingDeliveries = [];
+        let salesHistory = [];
         let currentDeliveryItem = null;
+        let currentCompletingDelivery = null;
         let editMode = false;
         let selectedDeliveryId = null;
+        let draggedStop = null;
+
+        // Constants
+        const MILEAGE_RATE = 0.67; // IRS standard mileage rate
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -721,129 +1005,166 @@
         });
 
         function initializeApp() {
-            loadFurnitureItems();
-            loadPendingDeliveries();
+            loadData();
+            renderAll();
+            setupEventListeners();
+            console.log('Cozy Capital App Initialized');
+        }
+
+        // Data Management
+        function loadData() {
+            furnitureItems = JSON.parse(localStorage.getItem('furniture-items') || '[]');
+            pendingDeliveries = JSON.parse(localStorage.getItem('pending-deliveries') || '[]');
+            salesHistory = JSON.parse(localStorage.getItem('sales-history') || '[]');
+        }
+
+        function saveData() {
+            localStorage.setItem('furniture-items', JSON.stringify(furnitureItems));
+            localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
+            localStorage.setItem('sales-history', JSON.stringify(salesHistory));
+        }
+
+        function renderAll() {
             renderFurnitureItems();
             renderPendingDeliveries();
-            setupPhotoUpload();
-            setupFormListeners();
-            console.log('Uncozy Finance App Initialized');
+            renderSalesHistory();
+            updateStats();
         }
 
         // Tab Management
         function switchTab(tab) {
             currentTab = tab;
-            
-            // Update tab buttons
+
             document.querySelectorAll('.main-tab').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Show/hide sections
+
             document.querySelectorAll('[id$="-section"]').forEach(section => {
                 section.classList.add('hidden');
             });
             document.getElementById(tab + '-section').classList.remove('hidden');
         }
 
-        // Data Management
-        function loadFurnitureItems() {
-            const saved = localStorage.getItem('furniture-items');
-            if (saved) {
-                furnitureItems = JSON.parse(saved);
-            }
-        }
-
-        function saveFurnitureItems() {
-            localStorage.setItem('furniture-items', JSON.stringify(furnitureItems));
-        }
-
-        function loadPendingDeliveries() {
-            const saved = localStorage.getItem('pending-deliveries');
-            if (saved) {
-                pendingDeliveries = JSON.parse(saved);
-            }
-        }
-
-        function savePendingDeliveries() {
-            localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
-        }
-
         // Stats Updates
         function updateStats() {
+            // Current inventory stats
             const totalItems = furnitureItems.length;
-            const totalInvested = furnitureItems.reduce((sum, item) => sum + item.purchasePrice, 0);
-            const totalExpected = furnitureItems.reduce((sum, item) => sum + (item.salePrice || 0), 0);
-            const potentialProfit = totalExpected - totalInvested;
-            
+            const totalInvested = furnitureItems.reduce((sum, item) => {
+                return sum + calculateTotalCost(item);
+            }, 0);
+            const potentialRevenue = furnitureItems.reduce((sum, item) => sum + (item.salePrice || 0), 0);
+            const potentialProfit = potentialRevenue - totalInvested;
+
             document.getElementById('total-items').textContent = totalItems;
             document.getElementById('total-invested').textContent = '$' + totalInvested.toFixed(2);
+            document.getElementById('potential-revenue').textContent = '$' + potentialRevenue.toFixed(2);
             document.getElementById('potential-profit').textContent = '$' + potentialProfit.toFixed(2);
-            
-            // Change profit color based on positive/negative
+
             const profitElement = document.getElementById('potential-profit');
-            if (potentialProfit >= 0) {
-                profitElement.style.color = '#059669';
-            } else {
-                profitElement.style.color = '#dc2626';
-            }
+            profitElement.style.color = potentialProfit >= 0 ? '#059669' : '#dc2626';
+
+            // Sales history stats
+            const totalSold = salesHistory.length;
+            const totalRevenue = salesHistory.reduce((sum, sale) => sum + sale.finalPrice, 0);
+            const totalCosts = salesHistory.reduce((sum, sale) => sum + sale.totalCost, 0);
+            const actualProfit = totalRevenue - totalCosts;
+
+            document.getElementById('total-sold').textContent = totalSold;
+            document.getElementById('total-revenue').textContent = '$' + totalRevenue.toFixed(2);
+            document.getElementById('total-costs').textContent = '$' + totalCosts.toFixed(2);
+            document.getElementById('actual-profit').textContent = '$' + actualProfit.toFixed(2);
+
+            const actualProfitElement = document.getElementById('actual-profit');
+            actualProfitElement.style.color = actualProfit >= 0 ? '#059669' : '#dc2626';
+        }
+
+        function calculateTotalCost(item) {
+            return (item.purchasePrice || 0) +
+                   (item.travelCost || 0) +
+                   (item.materialsCost || 0) +
+                   (item.repairCost || 0) +
+                   (item.deliveryMileageCost || 0);
         }
 
         // Furniture Items Rendering
         function renderFurnitureItems() {
             const container = document.getElementById('furniture-inventory');
             const emptyState = document.getElementById('furniture-empty');
-            
+
             if (furnitureItems.length === 0) {
                 container.innerHTML = '';
                 emptyState.classList.remove('hidden');
-                updateStats();
                 return;
             }
-            
+
             emptyState.classList.add('hidden');
             container.innerHTML = '';
-            
+
             furnitureItems.forEach(item => {
                 const card = createItemCard(item);
                 container.appendChild(card);
             });
-            
-            updateStats();
         }
 
         function createItemCard(item) {
             const card = document.createElement('div');
             card.className = 'item-card';
-            
-            const profitAmount = item.salePrice ? (item.salePrice - item.purchasePrice).toFixed(2) : '0.00';
-            const profitColor = profitAmount >= 0 ? '#059669' : '#dc2626';
-            
+
+            const totalCost = calculateTotalCost(item);
+            const profit = (item.salePrice || 0) - totalCost;
+            const profitColor = profit >= 0 ? '#059669' : '#dc2626';
+
             card.innerHTML = `
                 <div class="item-image" onclick="viewPhoto('${item.id}')">
-                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '🪑'}
+                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '📦'}
                 </div>
                 <div class="item-title">${item.title}</div>
-                <div class="item-description">${item.description || 'No description added'}</div>
-                <div class="price-row">
-                    <div class="price-tag purchase-price">Paid: $${item.purchasePrice}</div>
-                    ${item.salePrice ? `<div class="price-tag sale-price">Sell: $${item.salePrice}</div>` : ''}
+                <div class="item-description">${item.description || 'No description'}</div>
+                <div class="cost-breakdown">
+                    <div class="cost-row">
+                        <span>Purchase:</span>
+                        <span>$${item.purchasePrice.toFixed(2)}</span>
+                    </div>
+                    ${item.travelCost ? `<div class="cost-row">
+                        <span>Travel:</span>
+                        <span>$${item.travelCost.toFixed(2)}</span>
+                    </div>` : ''}
+                    ${item.materialsCost ? `<div class="cost-row">
+                        <span>Materials:</span>
+                        <span>$${item.materialsCost.toFixed(2)}</span>
+                    </div>` : ''}
+                    ${item.repairCost ? `<div class="cost-row">
+                        <span>Repairs:</span>
+                        <span>$${item.repairCost.toFixed(2)}</span>
+                    </div>` : ''}
+                    <div class="cost-row total">
+                        <span>Total Cost:</span>
+                        <span>$${totalCost.toFixed(2)}</span>
+                    </div>
+                    ${item.salePrice ? `
+                    <div class="cost-row" style="color: #1e40af; font-weight: 600;">
+                        <span>Sale Price:</span>
+                        <span>$${item.salePrice.toFixed(2)}</span>
+                    </div>
+                    <div class="cost-row profit" style="color: ${profitColor};">
+                        <span>Expected Profit:</span>
+                        <span>$${profit.toFixed(2)}</span>
+                    </div>` : ''}
                 </div>
-                ${item.salePrice ? `<div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: ${profitColor};">Profit: $${profitAmount}</div>` : ''}
                 <div class="item-actions">
                     <button class="action-btn send-btn" onclick="showDeliveryModal('${item.id}')">
-                        📦 Send
+                        📦 Deliver
                     </button>
                     <button class="action-btn edit-btn" onclick="editItem('${item.id}')">
                         ✏️ Edit
                     </button>
-                    <button class="action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="deleteItem('${item.id}')">
-                        🗑️ Delete
+                    <button class="action-btn delete-btn" onclick="deleteItem('${item.id}')">
+                        🗑️
                     </button>
                 </div>
             `;
-            
+
             return card;
         }
 
@@ -856,9 +1177,7 @@
             document.getElementById('add-item-modal').classList.add('hidden');
             document.getElementById('add-item-form').reset();
             resetPhotoUpload();
-            
-            // Reset form to "add" mode
-            document.querySelector('#add-item-modal h3').textContent = '🪑 Add Furniture Item';
+            document.querySelector('#add-item-modal h3').textContent = 'Add New Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
             window.editingItemId = null;
         }
@@ -875,11 +1194,35 @@
             currentDeliveryItem = null;
         }
 
+        function showCompleteDeliveryModal(deliveryId) {
+            currentCompletingDelivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!currentCompletingDelivery) return;
+
+            const summary = document.getElementById('delivery-summary');
+            const datetime = new Date(currentCompletingDelivery.datetime);
+            summary.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 8px;">📦 ${currentCompletingDelivery.item}</div>
+                <div style="color: #6b7280; font-size: 0.875rem; line-height: 1.6;">
+                    👤 ${currentCompletingDelivery.customer}<br>
+                    📍 ${currentCompletingDelivery.address}<br>
+                    💰 $${currentCompletingDelivery.price}
+                </div>
+            `;
+
+            document.getElementById('complete-delivery-modal').classList.remove('hidden');
+        }
+
+        function hideCompleteDeliveryModal() {
+            document.getElementById('complete-delivery-modal').classList.add('hidden');
+            document.getElementById('complete-delivery-form').reset();
+            currentCompletingDelivery = null;
+        }
+
         // Photo Upload
-        function setupPhotoUpload() {
+        function setupEventListeners() {
             const photoInput = document.getElementById('item-photo');
             const uploadArea = document.querySelector('.photo-upload-area');
-            
+
             photoInput.addEventListener('change', function(e) {
                 if (e.target.files.length > 0) {
                     uploadArea.classList.add('has-file');
@@ -888,134 +1231,208 @@
                     resetPhotoUpload();
                 }
             });
+
+            // Mileage cost calculator
+            document.getElementById('delivery-mileage').addEventListener('input', function(e) {
+                const miles = parseFloat(e.target.value) || 0;
+                const cost = miles * MILEAGE_RATE;
+                document.getElementById('mileage-cost').textContent = cost.toFixed(2);
+            });
+
+            // Add/Edit Item Form
+            document.getElementById('add-item-form').addEventListener('submit', handleAddEditItem);
+
+            // Delivery Form
+            document.getElementById('delivery-form').addEventListener('submit', handleCreateDelivery);
+
+            // Complete Delivery Form
+            document.getElementById('complete-delivery-form').addEventListener('submit', handleCompleteDelivery);
         }
 
         function resetPhotoUpload() {
             const uploadArea = document.querySelector('.photo-upload-area');
             uploadArea.classList.remove('has-file');
-            uploadArea.querySelector('.upload-text').textContent = 'Tap to add photo';
+            uploadArea.querySelector('.upload-text').textContent = 'Click to add photo';
         }
 
         // Form Handlers
-        function setupFormListeners() {
-            // Handle add/edit item form
-            document.getElementById('add-item-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const title = document.getElementById('item-title').value;
-                const description = document.getElementById('item-description').value;
-                const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
-                const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
-                const photoFile = document.getElementById('item-photo').files[0];
-                
-                if (window.editingItemId) {
-                    // Edit existing item
-                    const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
-                    if (itemIndex !== -1) {
-                        furnitureItems[itemIndex].title = title;
-                        furnitureItems[itemIndex].description = description;
-                        furnitureItems[itemIndex].purchasePrice = purchasePrice;
-                        furnitureItems[itemIndex].salePrice = salePrice;
-                        furnitureItems[itemIndex].updatedAt = new Date().toISOString();
-                        
-                        if (photoFile) {
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                furnitureItems[itemIndex].photo = e.target.result;
-                                saveFurnitureItems();
-                                renderFurnitureItems();
-                                hideAddItemModal();
-                            };
-                            reader.readAsDataURL(photoFile);
-                        } else {
-                            saveFurnitureItems();
-                            renderFurnitureItems();
-                            hideAddItemModal();
-                        }
-                    }
-                } else {
-                    // Add new item
-                    const newItem = {
-                        id: 'item' + Date.now(),
-                        title: title,
-                        description: description,
-                        purchasePrice: purchasePrice,
-                        salePrice: salePrice,
-                        createdAt: new Date().toISOString(),
-                        photo: null
-                    };
-                    
+        function handleAddEditItem(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('item-title').value;
+            const description = document.getElementById('item-description').value;
+            const purchasePrice = parseFloat(document.getElementById('item-purchase-price').value);
+            const salePrice = parseFloat(document.getElementById('item-sale-price').value) || null;
+            const travelCost = parseFloat(document.getElementById('travel-cost').value) || 0;
+            const materialsCost = parseFloat(document.getElementById('materials-cost').value) || 0;
+            const repairCost = parseFloat(document.getElementById('repair-cost').value) || 0;
+            const photoFile = document.getElementById('item-photo').files[0];
+
+            const itemData = {
+                title,
+                description,
+                purchasePrice,
+                salePrice,
+                travelCost,
+                materialsCost,
+                repairCost,
+                updatedAt: new Date().toISOString()
+            };
+
+            if (window.editingItemId) {
+                // Edit existing item
+                const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
+                if (itemIndex !== -1) {
+                    furnitureItems[itemIndex] = { ...furnitureItems[itemIndex], ...itemData };
+
                     if (photoFile) {
                         const reader = new FileReader();
                         reader.onload = function(e) {
-                            newItem.photo = e.target.result;
-                            furnitureItems.push(newItem);
-                            saveFurnitureItems();
-                            renderFurnitureItems();
+                            furnitureItems[itemIndex].photo = e.target.result;
+                            saveData();
+                            renderAll();
                             hideAddItemModal();
                         };
                         reader.readAsDataURL(photoFile);
                     } else {
-                        furnitureItems.push(newItem);
-                        saveFurnitureItems();
-                        renderFurnitureItems();
+                        saveData();
+                        renderAll();
                         hideAddItemModal();
                     }
                 }
-            });
-
-            // Handle delivery form
-            document.getElementById('delivery-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const deliveryRequest = {
-                    id: 'delivery' + Date.now(),
-                    item: currentDeliveryItem.title,
-                    itemId: currentDeliveryItem.id,
-                    customer: document.getElementById('customer-name').value,
-                    address: document.getElementById('delivery-address').value,
-                    datetime: document.getElementById('delivery-datetime').value,
-                    price: parseFloat(document.getElementById('final-price').value),
-                    paymentMethod: document.getElementById('payment-method').value,
-                    paymentStatus: document.getElementById('payment-status').value,
-                    tripStops: [],
-                    sentAt: new Date().toISOString()
+            } else {
+                // Add new item
+                const newItem = {
+                    id: 'item' + Date.now(),
+                    ...itemData,
+                    createdAt: new Date().toISOString(),
+                    photo: null
                 };
-                
-                // Add to pending deliveries
-                pendingDeliveries.push(deliveryRequest);
-                savePendingDeliveries();
-                renderPendingDeliveries();
-                
-                // Show success message
-                const datetime = new Date(deliveryRequest.datetime);
-                const dateStr = datetime.toLocaleDateString();
-                const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                
-                alert(`🎉 Delivery request sent!\n\n📦 Item: ${deliveryRequest.item}\n👤 Customer: ${deliveryRequest.customer}\n📅 When: ${dateStr} at ${timeStr}\n💰 Price: $${deliveryRequest.price}\n\n✨ Use "Add Stop" and "Edit Trips" to plan the route!`);
-                
-                hideDeliveryModal();
-            });
+
+                if (photoFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newItem.photo = e.target.result;
+                        furnitureItems.push(newItem);
+                        saveData();
+                        renderAll();
+                        hideAddItemModal();
+                    };
+                    reader.readAsDataURL(photoFile);
+                } else {
+                    furnitureItems.push(newItem);
+                    saveData();
+                    renderAll();
+                    hideAddItemModal();
+                }
+            }
+        }
+
+        function handleCreateDelivery(e) {
+            e.preventDefault();
+
+            const date = document.getElementById('delivery-date').value;
+            const time = document.getElementById('delivery-time').value;
+            const datetime = new Date(`${date}T${time}`).toISOString();
+
+            const customerName = document.getElementById('customer-name').value;
+            const itemName = currentDeliveryItem.title;
+
+            const deliveryRequest = {
+                id: 'delivery' + Date.now(),
+                item: itemName,
+                itemId: currentDeliveryItem.id,
+                customer: customerName,
+                address: document.getElementById('delivery-address').value,
+                datetime: datetime,
+                price: parseFloat(document.getElementById('final-price').value),
+                paymentMethod: document.getElementById('payment-method').value,
+                paymentStatus: document.getElementById('payment-status').value,
+                tripStops: [],
+                sentAt: new Date().toISOString()
+            };
+
+            pendingDeliveries.push(deliveryRequest);
+            saveData();
+            renderPendingDeliveries();
+
+            hideDeliveryModal();
+
+            // Success notification
+            const deliveryDate = new Date(datetime);
+            alert(`✅ Delivery Created!\n\n📦 ${itemName}\n👤 ${customerName}\n📅 ${deliveryDate.toLocaleDateString()} at ${deliveryDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}\n\n💡 Use "Edit Routes" to add stops!`);
+        }
+
+        function handleCompleteDelivery(e) {
+            e.preventDefault();
+
+            const mileage = parseFloat(document.getElementById('delivery-mileage').value);
+            const mileageCost = mileage * MILEAGE_RATE;
+            const notes = document.getElementById('delivery-notes').value;
+
+            // Find the item
+            const item = furnitureItems.find(i => i.id === currentCompletingDelivery.itemId);
+            if (!item) return;
+
+            // Calculate final costs
+            const totalCost = calculateTotalCost(item) + mileageCost;
+            const profit = currentCompletingDelivery.price - totalCost;
+
+            // Create history entry
+            const historyEntry = {
+                id: 'history' + Date.now(),
+                item: currentCompletingDelivery.item,
+                customer: currentCompletingDelivery.customer,
+                finalPrice: currentCompletingDelivery.price,
+                purchasePrice: item.purchasePrice,
+                travelCost: item.travelCost || 0,
+                materialsCost: item.materialsCost || 0,
+                repairCost: item.repairCost || 0,
+                deliveryMileage: mileage,
+                deliveryMileageCost: mileageCost,
+                totalCost: totalCost,
+                profit: profit,
+                paymentMethod: currentCompletingDelivery.paymentMethod,
+                paymentStatus: currentCompletingDelivery.paymentStatus,
+                deliveryDate: currentCompletingDelivery.datetime,
+                completedDate: new Date().toISOString(),
+                notes: notes,
+                photo: item.photo
+            };
+
+            salesHistory.push(historyEntry);
+
+            // Remove from pending deliveries
+            pendingDeliveries = pendingDeliveries.filter(d => d.id !== currentCompletingDelivery.id);
+
+            // Remove from inventory
+            furnitureItems = furnitureItems.filter(i => i.id !== currentCompletingDelivery.itemId);
+
+            saveData();
+            renderAll();
+            hideCompleteDeliveryModal();
+
+            // Success notification
+            alert(`✅ Delivery Completed!\n\n📦 ${historyEntry.item}\n💰 Profit: $${profit.toFixed(2)}\n\n✨ Check the History tab to see details!`);
         }
 
         // Item Actions
         function editItem(itemId) {
             const item = furnitureItems.find(item => item.id === itemId);
             if (!item) return;
-            
-            // Pre-fill the form with existing data
+
             document.getElementById('item-title').value = item.title;
             document.getElementById('item-description').value = item.description || '';
             document.getElementById('item-purchase-price').value = item.purchasePrice;
             document.getElementById('item-sale-price').value = item.salePrice || '';
-            
-            // Change form to edit mode
-            document.querySelector('#add-item-modal h3').textContent = '🪑 Edit Furniture Item';
+            document.getElementById('travel-cost').value = item.travelCost || '';
+            document.getElementById('materials-cost').value = item.materialsCost || '';
+            document.getElementById('repair-cost').value = item.repairCost || '';
+
+            document.querySelector('#add-item-modal h3').textContent = 'Edit Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
-            
-            // Store edit mode info
+
             window.editingItemId = itemId;
-            
             showAddItemModal();
         }
 
@@ -1023,8 +1440,8 @@
             const item = furnitureItems.find(item => item.id === itemId);
             if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
                 furnitureItems = furnitureItems.filter(item => item.id !== itemId);
-                saveFurnitureItems();
-                renderFurnitureItems();
+                saveData();
+                renderAll();
             }
         }
 
@@ -1034,10 +1451,10 @@
                 const modal = document.createElement('div');
                 modal.className = 'modal';
                 modal.innerHTML = `
-                    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 20px;">
+                    <div class="modal-content" style="max-width: 90vw; padding: 24px;">
                         <h3>${item.title}</h3>
-                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 15px;">
-                        <div style="text-align: center; margin-top: 25px;">
+                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 6px; margin-top: 16px;">
+                        <div style="text-align: center; margin-top: 20px;">
                             <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
                         </div>
                     </div>
@@ -1053,94 +1470,234 @@
         function renderPendingDeliveries() {
             const container = document.getElementById('pending-deliveries');
             const list = document.getElementById('deliveries-list');
-            
+
             if (pendingDeliveries.length === 0) {
                 container.classList.add('hidden');
                 return;
             }
-            
+
             container.classList.remove('hidden');
             list.innerHTML = '';
-            
+
             pendingDeliveries.forEach(delivery => {
                 const deliveryCard = document.createElement('div');
-                deliveryCard.style.cssText = 'background: white; border-radius: 12px; padding: 15px; margin-bottom: 10px; border-left: 4px solid #ef4444;';
-                
+                deliveryCard.className = 'delivery-card';
+                if (selectedDeliveryId === delivery.id) {
+                    deliveryCard.classList.add('selected');
+                }
+
                 const datetime = new Date(delivery.datetime);
                 const dateStr = datetime.toLocaleDateString();
                 const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                
+
+                let stopsHtml = '';
+                if (delivery.tripStops && delivery.tripStops.length > 0) {
+                    stopsHtml = `
+                        <div class="trip-stops">
+                            <div class="trip-stops-label">📍 Route Stops:</div>
+                            <div class="stops-container" data-delivery-id="${delivery.id}">
+                                ${delivery.tripStops.map((stop, index) => `
+                                    <span class="stop-chip" draggable="${editMode}" data-stop-id="${stop.id}"
+                                          ondragstart="handleStopDragStart(event, '${delivery.id}', '${stop.id}')"
+                                          ondragover="handleStopDragOver(event)"
+                                          ondrop="handleStopDrop(event, '${delivery.id}', '${stop.id}')"
+                                          ondragend="handleStopDragEnd(event)"
+                                          title="${stop.instructions ? stop.instructions : 'No instructions'}">
+                                        <span class="stop-number">${index + 1}</span>
+                                        ${stop.name}${stop.instructions ? ' 📝' : ''}
+                                        ${editMode ? `<span class="remove-stop" onclick="removeStop('${delivery.id}', '${stop.id}')">×</span>` : ''}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
                 deliveryCard.innerHTML = `
-                    <div style="font-weight: bold; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
-                    <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
-                        👤 <strong>${delivery.customer}</strong><br>
-                        📍 ${delivery.address}<br>
-                        📅 ${dateStr} at ${timeStr}<br>
-                        💰 $${delivery.price} (${delivery.paymentMethod} - ${delivery.paymentStatus})
+                    <div onclick="selectDelivery('${delivery.id}')" style="cursor: pointer;">
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
+                        <div class="delivery-info">
+                            👤 ${delivery.customer}<br>
+                            📍 ${delivery.address}<br>
+                            📅 ${dateStr} at ${timeStr}<br>
+                            💰 $${delivery.price} - ${delivery.paymentMethod} (${delivery.paymentStatus})
+                        </div>
+                        ${stopsHtml}
                     </div>
-                    <button onclick="completeDelivery('${delivery.id}')" style="background: #10b981; color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.9rem; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                    <button onclick="showCompleteDeliveryModal('${delivery.id}')" class="complete-delivery-btn">
                         ✅ Mark Delivered
                     </button>
                 `;
-                
+
                 list.appendChild(deliveryCard);
             });
         }
 
-        function completeDelivery(deliveryId) {
-            pendingDeliveries = pendingDeliveries.filter(d => d.id !== deliveryId);
-            savePendingDeliveries();
-            renderPendingDeliveries();
+        function selectDelivery(deliveryId) {
+            if (editMode) {
+                selectedDeliveryId = selectedDeliveryId === deliveryId ? null : deliveryId;
+                renderPendingDeliveries();
+            }
         }
 
         function toggleEditMode() {
             editMode = !editMode;
             const btn = document.getElementById('edit-mode-btn');
-            
+
             if (editMode) {
-                btn.textContent = '💾 Done Editing';
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-                
-                if (pendingDeliveries.length > 0) {
-                    setTimeout(() => {
-                        alert('✨ Edit Mode Active!\n\n1. Select a delivery (tap it)\n2. Drag the small stop chips to reorder\n3. Use × to remove stops\n4. Click "Add Stop" to add more');
-                    }, 100);
-                }
+                btn.textContent = '💾 Done';
+                btn.style.background = '#10b981';
             } else {
-                btn.textContent = '✏️ Edit Trips';
-                btn.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+                btn.textContent = '✏️ Edit Routes';
+                btn.style.background = '#f59e0b';
                 selectedDeliveryId = null;
             }
-            
+
             renderPendingDeliveries();
         }
 
         function addStopToSelectedDelivery() {
             if (!selectedDeliveryId) {
-                alert('Please select a delivery first by tapping on it!');
+                alert('⚠️ Please select a delivery first!\n\n1. Click "Edit Routes"\n2. Click on a delivery card to select it\n3. Then click "Add Stop"');
                 return;
             }
-            
+
             const delivery = pendingDeliveries.find(d => d.id === selectedDeliveryId);
             if (!delivery) return;
-            
-            const stopName = prompt('Add a stop:\n\nJust enter the business name (e.g., Walmart, Walgreens, Gas Station)');
-            if (!stopName) return;
-            
+
+            const stopName = prompt('📍 Enter stop name:\n(e.g., Walmart, Gas Station, Home Depot)');
+            if (!stopName || stopName.trim() === '') return;
+
+            const instructions = prompt('📝 Add instructions (optional):\n(e.g., "Pick up screws", "Get cleaning supplies")') || '';
+
             const newStop = {
                 id: 'stop' + Date.now(),
-                name: stopName,
-                address: '',
-                purpose: 'pickup'
+                name: stopName.trim(),
+                instructions: instructions.trim(),
+                purpose: 'stop'
             };
-            
+
             if (!delivery.tripStops) {
                 delivery.tripStops = [];
             }
             delivery.tripStops.push(newStop);
-            
-            savePendingDeliveries();
+
+            saveData();
             renderPendingDeliveries();
+
+            // Success notification
+            alert(`✅ Stop added!\n\n📍 ${stopName}\n${instructions ? '📝 ' + instructions : ''}\n\nDrag to reorder when ready.`);
+        }
+
+        function removeStop(deliveryId, stopId) {
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!delivery) return;
+
+            delivery.tripStops = delivery.tripStops.filter(s => s.id !== stopId);
+            saveData();
+            renderPendingDeliveries();
+        }
+
+        // Drag and Drop for Route Stops
+        function handleStopDragStart(event, deliveryId, stopId) {
+            if (!editMode) return;
+            event.target.classList.add('dragging');
+            draggedStop = { deliveryId, stopId };
+        }
+
+        function handleStopDragOver(event) {
+            if (!editMode) return;
+            event.preventDefault();
+        }
+
+        function handleStopDrop(event, deliveryId, targetStopId) {
+            if (!editMode || !draggedStop) return;
+            event.preventDefault();
+
+            if (draggedStop.deliveryId !== deliveryId) return;
+            if (draggedStop.stopId === targetStopId) return;
+
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!delivery) return;
+
+            const draggedIndex = delivery.tripStops.findIndex(s => s.id === draggedStop.stopId);
+            const targetIndex = delivery.tripStops.findIndex(s => s.id === targetStopId);
+
+            if (draggedIndex === -1 || targetIndex === -1) return;
+
+            const [draggedItem] = delivery.tripStops.splice(draggedIndex, 1);
+            delivery.tripStops.splice(targetIndex, 0, draggedItem);
+
+            saveData();
+            renderPendingDeliveries();
+        }
+
+        function handleStopDragEnd(event) {
+            event.target.classList.remove('dragging');
+            draggedStop = null;
+        }
+
+        // Sales History
+        function renderSalesHistory() {
+            const list = document.getElementById('history-list');
+            const emptyState = document.getElementById('history-empty');
+
+            if (salesHistory.length === 0) {
+                list.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            list.innerHTML = '';
+
+            // Sort by completion date, newest first
+            const sorted = [...salesHistory].sort((a, b) =>
+                new Date(b.completedDate) - new Date(a.completedDate)
+            );
+
+            sorted.forEach(sale => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+
+                const completedDate = new Date(sale.completedDate);
+                const dateStr = completedDate.toLocaleDateString();
+
+                const profitClass = sale.profit >= 0 ? 'positive' : 'negative';
+
+                historyItem.innerHTML = `
+                    <div class="history-item-header">
+                        <div>
+                            <div class="history-item-title">${sale.item}</div>
+                            <div class="history-item-date">${dateStr} • ${sale.customer}</div>
+                        </div>
+                        <span class="profit-badge ${profitClass}">
+                            ${sale.profit >= 0 ? '+' : ''}$${sale.profit.toFixed(2)}
+                        </span>
+                    </div>
+                    <div class="cost-breakdown">
+                        <div class="cost-row">
+                            <span>Purchase:</span>
+                            <span>$${sale.purchasePrice.toFixed(2)}</span>
+                        </div>
+                        ${sale.travelCost ? `<div class="cost-row"><span>Travel:</span><span>$${sale.travelCost.toFixed(2)}</span></div>` : ''}
+                        ${sale.materialsCost ? `<div class="cost-row"><span>Materials:</span><span>$${sale.materialsCost.toFixed(2)}</span></div>` : ''}
+                        ${sale.repairCost ? `<div class="cost-row"><span>Repairs:</span><span>$${sale.repairCost.toFixed(2)}</span></div>` : ''}
+                        ${sale.deliveryMileageCost ? `<div class="cost-row"><span>Delivery (${sale.deliveryMileage} mi):</span><span>$${sale.deliveryMileageCost.toFixed(2)}</span></div>` : ''}
+                        <div class="cost-row total">
+                            <span>Total Cost:</span>
+                            <span>$${sale.totalCost.toFixed(2)}</span>
+                        </div>
+                        <div class="cost-row" style="color: #1e40af; font-weight: 600;">
+                            <span>Sale Price:</span>
+                            <span>$${sale.finalPrice.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    ${sale.notes ? `<div style="margin-top: 12px; color: #6b7280; font-size: 0.875rem; font-style: italic;">${sale.notes}</div>` : ''}
+                `;
+
+                list.appendChild(historyItem);
+            });
         }
 
         // PWA Service Worker Registration
@@ -1149,12 +1706,12 @@
                 URL.createObjectURL(new Blob([`
                     self.addEventListener('install', function(event) {
                         event.waitUntil(
-                            caches.open('uncozy-finance-v1').then(function(cache) {
+                            caches.open('cozy-capital-v1').then(function(cache) {
                                 return cache.addAll(['/']);
                             })
                         );
                     });
-                    
+
                     self.addEventListener('fetch', function(event) {
                         event.respondWith(
                             caches.match(event.request).then(function(response) {
@@ -1164,7 +1721,7 @@
                     });
                 `], { type: 'application/javascript' }))
             ).then(registration => {
-                console.log('Service Worker registered successfully');
+                console.log('Service Worker registered');
             }).catch(error => {
                 console.log('Service Worker registration failed:', error);
             });
