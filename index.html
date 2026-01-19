@@ -509,61 +509,157 @@
             line-height: 1.6;
         }
 
-        .trip-stops {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e5e7eb;
+        .route-container {
+            margin-top: 16px;
         }
 
-        .trip-stops-label {
+        .route-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .route-label {
             font-weight: 600;
             color: #374151;
             font-size: 0.875rem;
-            margin-bottom: 8px;
         }
 
-        .stop-chip {
-            display: inline-flex;
-            align-items: center;
-            background: #e0e7ff;
-            color: #1e40af;
+        .add-stop-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 4px;
             padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-right: 6px;
-            margin-bottom: 6px;
-            cursor: move;
+            cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .stop-chip:hover {
-            background: #c7d2fe;
+        .add-stop-btn:hover {
+            background: #059669;
         }
 
-        .stop-chip.dragging {
+        .stops-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stop-tile {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: grab;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stop-tile:hover {
+            border-color: #1e40af;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stop-tile.dragging {
             opacity: 0.5;
             cursor: grabbing;
         }
 
-        .stop-chip .remove-stop {
-            margin-left: 6px;
-            cursor: pointer;
-            color: #dc2626;
-            font-weight: bold;
+        .stop-tile.destination {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border-color: #1e40af;
+            color: white;
+            cursor: default;
+        }
+
+        .stop-tile.destination:hover {
+            border-color: #1e40af;
         }
 
         .stop-number {
             background: #1e40af;
             color: white;
-            width: 18px;
-            height: 18px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            margin-right: 6px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .stop-tile.destination .stop-number {
+            background: white;
+            color: #1e40af;
+        }
+
+        .stop-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .stop-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            word-wrap: break-word;
+        }
+
+        .stop-instructions {
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .stop-tile.destination .stop-instructions {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stop-actions {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .stop-icon-btn {
+            background: #f3f4f6;
+            border: none;
+            border-radius: 4px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .stop-icon-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .stop-icon-btn.delete:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .drag-handle {
+            color: #9ca3af;
+            font-size: 1.2rem;
+            cursor: grab;
+        }
+
+        .stop-tile.destination .drag-handle {
+            color: rgba(255, 255, 255, 0.6);
+            cursor: not-allowed;
         }
 
         .complete-delivery-btn {
@@ -717,15 +813,8 @@
                 <!-- Pending Deliveries -->
                 <div id="pending-deliveries" class="hidden delivery-section">
                     <div class="delivery-header">
-                        <h3>📦 Pending Deliveries</h3>
-                        <div class="delivery-actions">
-                            <button onclick="addStopToSelectedDelivery()" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;">
-                                ➕ Add Stop
-                            </button>
-                            <button onclick="toggleEditMode()" id="edit-mode-btn" class="btn" style="background: #f59e0b; color: white; padding: 6px 12px; font-size: 0.8rem;">
-                                ✏️ Edit Routes
-                            </button>
-                        </div>
+                        <h3>🚚 Pending Deliveries</h3>
+                        <span style="color: #6b7280; font-size: 0.875rem;">Drag stops to reorder your route</span>
                     </div>
                     <div id="deliveries-list">
                         <!-- Delivery requests will appear here -->
@@ -1008,7 +1097,29 @@
             loadData();
             renderAll();
             setupEventListeners();
+            requestNotificationPermission();
             console.log('Cozy Capital App Initialized');
+        }
+
+        // Notification System
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        }
+
+        function showNotification(title, body, icon = '📦') {
+            // Always show alert
+            alert(`${icon} ${title}\n\n${body}`);
+
+            // Also try browser notification
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: body,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">📦</text></svg>',
+                    badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">📦</text></svg>'
+                });
+            }
         }
 
         // Data Management
@@ -1360,7 +1471,11 @@
 
             // Success notification
             const deliveryDate = new Date(datetime);
-            alert(`✅ Delivery Created!\n\n📦 ${itemName}\n👤 ${customerName}\n📅 ${deliveryDate.toLocaleDateString()} at ${deliveryDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}\n\n💡 Use "Edit Routes" to add stops!`);
+            showNotification(
+                'Delivery Created!',
+                `${itemName} for ${customerName}\n${deliveryDate.toLocaleDateString()} at ${deliveryDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}\n\nUse "+ Add Stop" to plan your route!`,
+                '🚚'
+            );
         }
 
         function handleCompleteDelivery(e) {
@@ -1413,7 +1528,12 @@
             hideCompleteDeliveryModal();
 
             // Success notification
-            alert(`✅ Delivery Completed!\n\n📦 ${historyEntry.item}\n💰 Profit: $${profit.toFixed(2)}\n\n✨ Check the History tab to see details!`);
+            const profitStr = profit >= 0 ? `+$${profit.toFixed(2)}` : `-$${Math.abs(profit).toFixed(2)}`;
+            showNotification(
+                'Delivery Completed!',
+                `${historyEntry.item}\nProfit: ${profitStr}\n\nCheck the History tab for details!`,
+                '✅'
+            );
         }
 
         // Item Actions
@@ -1482,48 +1602,40 @@
             pendingDeliveries.forEach(delivery => {
                 const deliveryCard = document.createElement('div');
                 deliveryCard.className = 'delivery-card';
-                if (selectedDeliveryId === delivery.id) {
-                    deliveryCard.classList.add('selected');
-                }
 
                 const datetime = new Date(delivery.datetime);
                 const dateStr = datetime.toLocaleDateString();
                 const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-                let stopsHtml = '';
-                if (delivery.tripStops && delivery.tripStops.length > 0) {
-                    stopsHtml = `
-                        <div class="trip-stops">
-                            <div class="trip-stops-label">📍 Route Stops:</div>
-                            <div class="stops-container" data-delivery-id="${delivery.id}">
-                                ${delivery.tripStops.map((stop, index) => `
-                                    <span class="stop-chip" draggable="${editMode}" data-stop-id="${stop.id}"
-                                          ondragstart="handleStopDragStart(event, '${delivery.id}', '${stop.id}')"
-                                          ondragover="handleStopDragOver(event)"
-                                          ondrop="handleStopDrop(event, '${delivery.id}', '${stop.id}')"
-                                          ondragend="handleStopDragEnd(event)"
-                                          title="${stop.instructions ? stop.instructions : 'No instructions'}">
-                                        <span class="stop-number">${index + 1}</span>
-                                        ${stop.name}${stop.instructions ? ' 📝' : ''}
-                                        ${editMode ? `<span class="remove-stop" onclick="removeStop('${delivery.id}', '${stop.id}')">×</span>` : ''}
-                                    </span>
-                                `).join('')}
+                // Build route with all stops including destination
+                const allStops = [...(delivery.tripStops || [])];
+
+                let routeHtml = '';
+                if (allStops.length > 0 || delivery.address) {
+                    routeHtml = `
+                        <div class="route-container">
+                            <div class="route-header">
+                                <span class="route-label">🗺️ Delivery Route</span>
+                                <button class="add-stop-btn" onclick="addStopToDelivery('${delivery.id}')">
+                                    ➕ Add Stop
+                                </button>
+                            </div>
+                            <div class="stops-list" id="stops-${delivery.id}">
+                                ${allStops.map((stop, index) => createStopTileHTML(delivery.id, stop, index)).join('')}
+                                ${createDestinationTileHTML(delivery, allStops.length)}
                             </div>
                         </div>
                     `;
                 }
 
                 deliveryCard.innerHTML = `
-                    <div onclick="selectDelivery('${delivery.id}')" style="cursor: pointer;">
-                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
-                        <div class="delivery-info">
-                            👤 ${delivery.customer}<br>
-                            📍 ${delivery.address}<br>
-                            📅 ${dateStr} at ${timeStr}<br>
-                            💰 $${delivery.price} - ${delivery.paymentMethod} (${delivery.paymentStatus})
-                        </div>
-                        ${stopsHtml}
+                    <div style="font-weight: 600; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
+                    <div class="delivery-info">
+                        👤 ${delivery.customer}<br>
+                        📅 ${dateStr} at ${timeStr}<br>
+                        💰 $${delivery.price} - ${delivery.paymentMethod} (${delivery.paymentStatus})
                     </div>
+                    ${routeHtml}
                     <button onclick="showCompleteDeliveryModal('${delivery.id}')" class="complete-delivery-btn">
                         ✅ Mark Delivered
                     </button>
@@ -1533,36 +1645,47 @@
             });
         }
 
-        function selectDelivery(deliveryId) {
-            if (editMode) {
-                selectedDeliveryId = selectedDeliveryId === deliveryId ? null : deliveryId;
-                renderPendingDeliveries();
-            }
+        function createStopTileHTML(deliveryId, stop, index) {
+            return `
+                <div class="stop-tile" draggable="true"
+                     data-stop-id="${stop.id}"
+                     ondragstart="handleStopDragStart(event, '${deliveryId}', '${stop.id}')"
+                     ondragover="handleStopDragOver(event)"
+                     ondrop="handleStopDrop(event, '${deliveryId}', '${stop.id}')"
+                     ondragend="handleStopDragEnd(event)">
+                    <span class="drag-handle">⋮⋮</span>
+                    <div class="stop-number">${index + 1}</div>
+                    <div class="stop-content">
+                        <div class="stop-name">${stop.name}</div>
+                        ${stop.instructions ? `<div class="stop-instructions">${stop.instructions}</div>` : ''}
+                    </div>
+                    <div class="stop-actions">
+                        <button class="stop-icon-btn" onclick="editStop('${deliveryId}', '${stop.id}')" title="Edit">
+                            ✏️
+                        </button>
+                        <button class="stop-icon-btn delete" onclick="removeStop('${deliveryId}', '${stop.id}')" title="Remove">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            `;
         }
 
-        function toggleEditMode() {
-            editMode = !editMode;
-            const btn = document.getElementById('edit-mode-btn');
-
-            if (editMode) {
-                btn.textContent = '💾 Done';
-                btn.style.background = '#10b981';
-            } else {
-                btn.textContent = '✏️ Edit Routes';
-                btn.style.background = '#f59e0b';
-                selectedDeliveryId = null;
-            }
-
-            renderPendingDeliveries();
+        function createDestinationTileHTML(delivery, stopCount) {
+            return `
+                <div class="stop-tile destination">
+                    <span class="drag-handle">🎯</span>
+                    <div class="stop-number">${stopCount + 1}</div>
+                    <div class="stop-content">
+                        <div class="stop-name">Final Destination</div>
+                        <div class="stop-instructions">${delivery.address}</div>
+                    </div>
+                </div>
+            `;
         }
 
-        function addStopToSelectedDelivery() {
-            if (!selectedDeliveryId) {
-                alert('⚠️ Please select a delivery first!\n\n1. Click "Edit Routes"\n2. Click on a delivery card to select it\n3. Then click "Add Stop"');
-                return;
-            }
-
-            const delivery = pendingDeliveries.find(d => d.id === selectedDeliveryId);
+        function addStopToDelivery(deliveryId) {
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
             if (!delivery) return;
 
             const stopName = prompt('📍 Enter stop name:\n(e.g., Walmart, Gas Station, Home Depot)');
@@ -1573,8 +1696,7 @@
             const newStop = {
                 id: 'stop' + Date.now(),
                 name: stopName.trim(),
-                instructions: instructions.trim(),
-                purpose: 'stop'
+                instructions: instructions.trim()
             };
 
             if (!delivery.tripStops) {
@@ -1586,12 +1708,38 @@
             renderPendingDeliveries();
 
             // Success notification
-            alert(`✅ Stop added!\n\n📍 ${stopName}\n${instructions ? '📝 ' + instructions : ''}\n\nDrag to reorder when ready.`);
+            showNotification(
+                'Stop Added!',
+                `${stopName}\n${instructions || 'No instructions'}\n\nDrag to reorder.`,
+                '📍'
+            );
+        }
+
+        function editStop(deliveryId, stopId) {
+            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
+            if (!delivery) return;
+
+            const stop = delivery.tripStops.find(s => s.id === stopId);
+            if (!stop) return;
+
+            const newName = prompt('📍 Edit stop name:', stop.name);
+            if (!newName || newName.trim() === '') return;
+
+            const newInstructions = prompt('📝 Edit instructions:', stop.instructions || '');
+
+            stop.name = newName.trim();
+            stop.instructions = newInstructions.trim();
+
+            saveData();
+            renderPendingDeliveries();
         }
 
         function removeStop(deliveryId, stopId) {
             const delivery = pendingDeliveries.find(d => d.id === deliveryId);
             if (!delivery) return;
+
+            const stop = delivery.tripStops.find(s => s.id === stopId);
+            if (!confirm(`Remove stop: ${stop.name}?`)) return;
 
             delivery.tripStops = delivery.tripStops.filter(s => s.id !== stopId);
             saveData();
@@ -1600,18 +1748,16 @@
 
         // Drag and Drop for Route Stops
         function handleStopDragStart(event, deliveryId, stopId) {
-            if (!editMode) return;
             event.target.classList.add('dragging');
             draggedStop = { deliveryId, stopId };
         }
 
         function handleStopDragOver(event) {
-            if (!editMode) return;
             event.preventDefault();
         }
 
         function handleStopDrop(event, deliveryId, targetStopId) {
-            if (!editMode || !draggedStop) return;
+            if (!draggedStop) return;
             event.preventDefault();
 
             if (draggedStop.deliveryId !== deliveryId) return;
