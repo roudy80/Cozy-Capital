@@ -25,6 +25,13 @@
             color: #1f2937;
         }
 
+        body.dragging {
+            overflow: hidden;
+            touch-action: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -195,11 +202,18 @@
             border-radius: 4px;
         }
 
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
         .item-title {
             font-size: 1.125rem;
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 8px;
         }
 
         .item-description {
@@ -457,7 +471,313 @@
             line-height: 1.6;
         }
 
-        /* Delivery Section */
+        /* Route Stops Section */
+        .route-section {
+            background: #f0f4ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .route-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .route-header h3 {
+            color: #1e40af;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .quick-add-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .quick-add-btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-add-btn.errand {
+            background: #fed7aa;
+            color: #9a3412;
+        }
+
+        .quick-add-btn.errand:hover {
+            background: #fdba74;
+        }
+
+        .quick-add-btn.pickup {
+            background: #bbf7d0;
+            color: #166534;
+        }
+
+        .quick-add-btn.pickup:hover {
+            background: #86efac;
+        }
+
+        /* Route Cards */
+        .route-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .route-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            min-height: 72px;
+            transition: box-shadow 0.2s ease, opacity 0.2s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .route-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .route-card.dragging {
+            opacity: 0.6;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+        }
+
+        .route-card.completed {
+            opacity: 0.5;
+            background: #f9fafb;
+        }
+
+        .route-card.completed .route-card-title,
+        .route-card.completed .route-card-address {
+            text-decoration: line-through;
+        }
+
+        .route-card-color-bar {
+            width: 6px;
+            align-self: stretch;
+            flex-shrink: 0;
+        }
+
+        .type-delivery .route-card-color-bar { background: #1e40af; }
+        .type-errand .route-card-color-bar { background: #ea580c; }
+        .type-pickup .route-card-color-bar { background: #16a34a; }
+        .type-restock .route-card-color-bar { background: #7c3aed; }
+
+        .route-card-grab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            flex-shrink: 0;
+            cursor: grab;
+            color: #9ca3af;
+            font-size: 1.2rem;
+            align-self: stretch;
+            touch-action: none;
+        }
+
+        .route-card-grab:active {
+            cursor: grabbing;
+        }
+
+        .route-card-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+
+        .type-delivery .route-card-number { background: #1e40af; }
+        .type-errand .route-card-number { background: #ea580c; }
+        .type-pickup .route-card-number { background: #16a34a; }
+        .type-restock .route-card-number { background: #7c3aed; }
+
+        .route-card-body {
+            flex: 1;
+            padding: 10px 0;
+            min-width: 0;
+        }
+
+        .route-card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1f2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .route-card-address {
+            font-size: 0.8rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+
+        .route-card-time {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .route-card-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            flex-shrink: 0;
+            align-self: stretch;
+            cursor: pointer;
+        }
+
+        .route-card-check input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #16a34a;
+        }
+
+        .route-card-delete {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            flex-shrink: 0;
+            align-self: stretch;
+            cursor: pointer;
+            color: #d1d5db;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .route-card-delete:hover {
+            color: #ef4444;
+        }
+
+        .drag-placeholder {
+            border: 2px dashed #93c5fd;
+            border-radius: 8px;
+            min-height: 72px;
+            background: #eff6ff;
+            margin: 4px 0;
+        }
+
+        /* Status Pipeline */
+        .status-pipeline {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .status-pill {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .status-pill:hover {
+            background: #e5e7eb;
+        }
+
+        .status-pill.active {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.sourced { background: #dbeafe; color: #1e40af; }
+        .status-badge.fixing { background: #fef3c7; color: #92400e; }
+        .status-badge.listed { background: #d1fae5; color: #065f46; }
+        .status-badge.pending { background: #fce7f3; color: #9d174d; }
+
+        .category-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        /* Quick-Add Modal (minimal) */
+        .quick-modal .modal-content {
+            max-width: 400px;
+        }
+
+        /* Inventory button row */
+        .inventory-actions-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .inventory-actions-row .action-button {
+            margin-bottom: 0;
+        }
+
+        .quick-add-inventory-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .quick-add-inventory-btn:hover {
+            background: #059669;
+        }
+
+        /* Delivery Section (legacy compat) */
         .delivery-section {
             background: #fef2f2;
             border: 1px solid #fecaca;
@@ -479,91 +799,18 @@
             font-weight: 600;
         }
 
-        .delivery-actions {
-            display: flex;
-            gap: 8px;
-        }
-
         .delivery-card {
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 6px;
             padding: 16px;
             margin-bottom: 12px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .delivery-card:hover {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .delivery-card.selected {
-            border-color: #1e40af;
-            background: #eff6ff;
         }
 
         .delivery-info {
             color: #4b5563;
             font-size: 0.875rem;
             line-height: 1.6;
-        }
-
-        .trip-stops {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .trip-stops-label {
-            font-weight: 600;
-            color: #374151;
-            font-size: 0.875rem;
-            margin-bottom: 8px;
-        }
-
-        .stop-chip {
-            display: inline-flex;
-            align-items: center;
-            background: #e0e7ff;
-            color: #1e40af;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 6px;
-            margin-bottom: 6px;
-            cursor: move;
-            transition: all 0.2s ease;
-        }
-
-        .stop-chip:hover {
-            background: #c7d2fe;
-        }
-
-        .stop-chip.dragging {
-            opacity: 0.5;
-            cursor: grabbing;
-        }
-
-        .stop-chip .remove-stop {
-            margin-left: 6px;
-            cursor: pointer;
-            color: #dc2626;
-            font-weight: bold;
-        }
-
-        .stop-number {
-            background: #1e40af;
-            color: white;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            margin-right: 6px;
         }
 
         .complete-delivery-btn {
@@ -683,6 +930,14 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+
+            .inventory-actions-row {
+                flex-direction: column;
+            }
+
+            .route-card-title {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -714,21 +969,20 @@
             <div id="furniture-section">
                 <h2 class="section-title">Current Inventory</h2>
 
-                <!-- Pending Deliveries -->
-                <div id="pending-deliveries" class="hidden delivery-section">
-                    <div class="delivery-header">
-                        <h3>📦 Pending Deliveries</h3>
-                        <div class="delivery-actions">
-                            <button onclick="addStopToSelectedDelivery()" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;">
-                                ➕ Add Stop
-                            </button>
-                            <button onclick="toggleEditMode()" id="edit-mode-btn" class="btn" style="background: #f59e0b; color: white; padding: 6px 12px; font-size: 0.8rem;">
-                                ✏️ Edit Routes
-                            </button>
+                <!-- Route Stops -->
+                <div id="route-section" class="route-section hidden">
+                    <div class="route-header">
+                        <h3>🗺️ Today's Route</h3>
+                        <div class="quick-add-bar">
+                            <button class="quick-add-btn errand" onclick="showErrandModal()">+ Errand</button>
+                            <button class="quick-add-btn pickup" onclick="showPickupModal()">+ Pickup</button>
                         </div>
                     </div>
-                    <div id="deliveries-list">
-                        <!-- Delivery requests will appear here -->
+                    <div id="route-cards-list" class="route-cards-list">
+                        <!-- Route cards rendered here -->
+                    </div>
+                    <div id="route-empty" class="hidden" style="text-align:center; padding: 20px; color: #6b7280; font-size: 0.9rem;">
+                        No stops yet. Create a delivery or add an errand/pickup.
                     </div>
                 </div>
 
@@ -756,9 +1010,23 @@
                     </div>
                 </div>
 
-                <button class="action-button" onclick="showAddItemModal()">
-                    ➕ Add New Item
-                </button>
+                <!-- Status Pipeline -->
+                <div class="status-pipeline">
+                    <button class="status-pill active" onclick="filterByStatus('all')">All</button>
+                    <button class="status-pill" onclick="filterByStatus('sourced')">Sourced</button>
+                    <button class="status-pill" onclick="filterByStatus('fixing')">Fixing Up</button>
+                    <button class="status-pill" onclick="filterByStatus('listed')">Listed</button>
+                    <button class="status-pill" onclick="filterByStatus('pending')">Pending Sale</button>
+                </div>
+
+                <div class="inventory-actions-row">
+                    <button class="action-button" onclick="showAddItemModal()" style="flex:1;">
+                        ➕ Add New Item
+                    </button>
+                    <button class="quick-add-inventory-btn" onclick="showQuickAddModal()">
+                        📸 Quick Add
+                    </button>
+                </div>
 
                 <div id="furniture-inventory" class="inventory-grid">
                     <!-- Items will appear here -->
@@ -858,6 +1126,32 @@
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-status">Status</label>
+                        <select id="item-status">
+                            <option value="sourced">Sourced</option>
+                            <option value="fixing">Fixing Up</option>
+                            <option value="listed">Listed</option>
+                            <option value="pending">Pending Sale</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">Category</label>
+                        <select id="item-category">
+                            <option value="other">Other</option>
+                            <option value="couch">Couch/Sofa</option>
+                            <option value="table">Table</option>
+                            <option value="chair">Chair</option>
+                            <option value="dresser">Dresser/Cabinet</option>
+                            <option value="bed">Bed/Frame</option>
+                            <option value="desk">Desk</option>
+                            <option value="shelf">Shelf/Bookcase</option>
+                            <option value="decor">Decor</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="expense-section">
                     <h4>💸 Additional Costs</h4>
                     <div class="form-row">
@@ -888,6 +1182,94 @@
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="hideAddItemModal()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quick Add Item Modal (photo-first, minimal fields) -->
+    <div id="quick-add-modal" class="modal hidden quick-modal">
+        <div class="modal-content">
+            <h3>📸 Quick Add Item</h3>
+            <form id="quick-add-form">
+                <div class="form-group">
+                    <label>Take a Photo</label>
+                    <div class="photo-upload-area" onclick="document.getElementById('quick-photo').click()">
+                        <span class="upload-icon">📷</span>
+                        <span class="upload-text" id="quick-photo-text">Tap to open camera</span>
+                        <input type="file" id="quick-photo" accept="image/*" capture="environment" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quick-title">Title *</label>
+                    <input type="text" id="quick-title" required placeholder="e.g., Blue Dresser">
+                </div>
+
+                <div class="form-group">
+                    <label for="quick-price">Purchase Price *</label>
+                    <input type="number" id="quick-price" step="0.01" required placeholder="0.00">
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideQuickAddModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Errand Quick-Add Modal -->
+    <div id="errand-modal" class="modal hidden quick-modal">
+        <div class="modal-content">
+            <h3>🛒 Add Errand</h3>
+            <form id="errand-form">
+                <div class="form-group">
+                    <label for="errand-store">Store Name *</label>
+                    <input type="text" id="errand-store" required placeholder="e.g., Walmart, Home Depot">
+                </div>
+
+                <div class="form-group">
+                    <label for="errand-address">Address (optional)</label>
+                    <input type="text" id="errand-address" placeholder="123 Main St">
+                </div>
+
+                <div class="form-group">
+                    <label for="errand-list">Shopping List</label>
+                    <textarea id="errand-list" rows="3" placeholder="Towels, soap, screws..."></textarea>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideErrandModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="background: #ea580c;">Add Errand</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pickup Quick-Add Modal -->
+    <div id="pickup-modal" class="modal hidden quick-modal">
+        <div class="modal-content">
+            <h3>🚚 Add Pickup</h3>
+            <form id="pickup-form">
+                <div class="form-group">
+                    <label for="pickup-item">Item Name *</label>
+                    <input type="text" id="pickup-item" required placeholder="e.g., Free dresser from Craigslist">
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-address">Pickup Address *</label>
+                    <input type="text" id="pickup-address" required placeholder="456 Oak Ave">
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-notes">Notes</label>
+                    <textarea id="pickup-notes" rows="2" placeholder="Call when close, gate code, etc."></textarea>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hidePickupModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="background: #16a34a;">Add Pickup</button>
                 </div>
             </form>
         </div>
@@ -989,15 +1371,34 @@
         let currentTab = 'furniture';
         let furnitureItems = [];
         let pendingDeliveries = [];
+        let routeStops = [];
         let salesHistory = [];
         let currentDeliveryItem = null;
         let currentCompletingDelivery = null;
-        let editMode = false;
-        let selectedDeliveryId = null;
-        let draggedStop = null;
+        let currentStatusFilter = 'all';
+
+        // Drag state
+        let dragState = null; // { stopId, startY, cardEl, placeholder, startIndex }
 
         // Constants
-        const MILEAGE_RATE = 0.67; // IRS standard mileage rate
+        const MILEAGE_RATE = 0.67;
+
+        const TYPE_CONFIG = {
+            delivery: { color: '#1e40af', icon: '📦', label: 'Delivery' },
+            errand:   { color: '#ea580c', icon: '🛒', label: 'Errand' },
+            pickup:   { color: '#16a34a', icon: '🚚', label: 'Pickup' },
+            restock:  { color: '#7c3aed', icon: '📋', label: 'Restock' }
+        };
+
+        const CATEGORY_LABELS = {
+            other: 'Other', couch: 'Couch/Sofa', table: 'Table', chair: 'Chair',
+            dresser: 'Dresser/Cabinet', bed: 'Bed/Frame', desk: 'Desk',
+            shelf: 'Shelf/Bookcase', decor: 'Decor'
+        };
+
+        const STATUS_LABELS = {
+            sourced: 'Sourced', fixing: 'Fixing Up', listed: 'Listed', pending: 'Pending Sale'
+        };
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -1006,27 +1407,86 @@
 
         function initializeApp() {
             loadData();
+            migrateData();
             renderAll();
             setupEventListeners();
+            requestNotificationPermission();
             console.log('Cozy Capital App Initialized');
+        }
+
+        // Notifications
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        }
+
+        function sendNotification(title, body) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                try {
+                    new Notification(title, { body });
+                } catch (e) {
+                    // Fallback for environments that don't support Notification constructor
+                    console.log('Notification:', title, body);
+                }
+            }
         }
 
         // Data Management
         function loadData() {
             furnitureItems = JSON.parse(localStorage.getItem('furniture-items') || '[]');
             pendingDeliveries = JSON.parse(localStorage.getItem('pending-deliveries') || '[]');
+            routeStops = JSON.parse(localStorage.getItem('route-stops') || '[]');
             salesHistory = JSON.parse(localStorage.getItem('sales-history') || '[]');
         }
 
         function saveData() {
             localStorage.setItem('furniture-items', JSON.stringify(furnitureItems));
             localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
+            localStorage.setItem('route-stops', JSON.stringify(routeStops));
             localStorage.setItem('sales-history', JSON.stringify(salesHistory));
+        }
+
+        // Migration
+        function migrateData() {
+            let changed = false;
+
+            // Migrate existing pendingDeliveries to routeStops if routeStops is empty
+            if (routeStops.length === 0 && pendingDeliveries.length > 0) {
+                pendingDeliveries.forEach((delivery, i) => {
+                    routeStops.push({
+                        id: 'stop' + Date.now() + i,
+                        type: 'delivery',
+                        title: 'Deliver ' + delivery.item + ' to ' + delivery.customer,
+                        address: delivery.address,
+                        datetime: delivery.datetime,
+                        notes: '',
+                        deliveryId: delivery.id,
+                        completed: false,
+                        order: i
+                    });
+                });
+                changed = true;
+            }
+
+            // Migrate existing items: add status and category if missing
+            furnitureItems.forEach(item => {
+                if (!item.status) {
+                    item.status = 'listed';
+                    changed = true;
+                }
+                if (!item.category) {
+                    item.category = 'other';
+                    changed = true;
+                }
+            });
+
+            if (changed) saveData();
         }
 
         function renderAll() {
             renderFurnitureItems();
-            renderPendingDeliveries();
+            renderRouteStops();
             renderSalesHistory();
             updateStats();
         }
@@ -1041,14 +1501,23 @@
             event.target.classList.add('active');
 
             document.querySelectorAll('[id$="-section"]').forEach(section => {
-                section.classList.add('hidden');
+                if (['furniture-section','airbnb-section','history-section','finances-section'].includes(section.id)) {
+                    section.classList.add('hidden');
+                }
             });
             document.getElementById(tab + '-section').classList.remove('hidden');
         }
 
+        // Status Pipeline Filter
+        function filterByStatus(status) {
+            currentStatusFilter = status;
+            document.querySelectorAll('.status-pill').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderFurnitureItems();
+        }
+
         // Stats Updates
         function updateStats() {
-            // Current inventory stats
             const totalItems = furnitureItems.length;
             const totalInvested = furnitureItems.reduce((sum, item) => {
                 return sum + calculateTotalCost(item);
@@ -1064,7 +1533,6 @@
             const profitElement = document.getElementById('potential-profit');
             profitElement.style.color = potentialProfit >= 0 ? '#059669' : '#dc2626';
 
-            // Sales history stats
             const totalSold = salesHistory.length;
             const totalRevenue = salesHistory.reduce((sum, sale) => sum + sale.finalPrice, 0);
             const totalCosts = salesHistory.reduce((sum, sale) => sum + sale.totalCost, 0);
@@ -1092,16 +1560,28 @@
             const container = document.getElementById('furniture-inventory');
             const emptyState = document.getElementById('furniture-empty');
 
-            if (furnitureItems.length === 0) {
+            let items = furnitureItems;
+            if (currentStatusFilter !== 'all') {
+                items = items.filter(item => item.status === currentStatusFilter);
+            }
+
+            if (items.length === 0) {
                 container.innerHTML = '';
                 emptyState.classList.remove('hidden');
+                if (furnitureItems.length > 0 && currentStatusFilter !== 'all') {
+                    emptyState.querySelector('h3').textContent = 'No "' + STATUS_LABELS[currentStatusFilter] + '" Items';
+                    emptyState.querySelector('p').textContent = 'No items match this filter.';
+                } else {
+                    emptyState.querySelector('h3').textContent = 'No Items in Inventory';
+                    emptyState.querySelector('p').textContent = 'Start tracking your inventory by adding your first item with photos, costs, and pricing.';
+                }
                 return;
             }
 
             emptyState.classList.add('hidden');
             container.innerHTML = '';
 
-            furnitureItems.forEach(item => {
+            items.forEach(item => {
                 const card = createItemCard(item);
                 container.appendChild(card);
             });
@@ -1115,11 +1595,18 @@
             const profit = (item.salePrice || 0) - totalCost;
             const profitColor = profit >= 0 ? '#059669' : '#dc2626';
 
+            const statusBadge = item.status ? '<span class="status-badge ' + item.status + '">' + STATUS_LABELS[item.status] + '</span>' : '';
+            const categoryTag = item.category && item.category !== 'other' ? '<span class="category-tag">' + CATEGORY_LABELS[item.category] + '</span>' : '';
+
             card.innerHTML = `
                 <div class="item-image" onclick="viewPhoto('${item.id}')">
                     ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '📦'}
                 </div>
-                <div class="item-title">${item.title}</div>
+                <div class="item-header">
+                    <div class="item-title">${item.title}</div>
+                    ${statusBadge}
+                    ${categoryTag}
+                </div>
                 <div class="item-description">${item.description || 'No description'}</div>
                 <div class="cost-breakdown">
                     <div class="cost-row">
@@ -1168,7 +1655,264 @@
             return card;
         }
 
-        // Modal Management
+        // ========== ROUTE STOPS ==========
+
+        function renderRouteStops() {
+            const section = document.getElementById('route-section');
+            const list = document.getElementById('route-cards-list');
+            const emptyEl = document.getElementById('route-empty');
+
+            if (routeStops.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            section.classList.remove('hidden');
+
+            // Sort: incomplete first (by order), completed at bottom
+            const incomplete = routeStops.filter(s => !s.completed).sort((a, b) => a.order - b.order);
+            const completed = routeStops.filter(s => s.completed);
+            const sorted = [...incomplete, ...completed];
+
+            if (sorted.length === 0) {
+                list.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+            list.innerHTML = '';
+
+            let stopNum = 1;
+            sorted.forEach(stop => {
+                const card = document.createElement('div');
+                card.className = 'route-card type-' + stop.type + (stop.completed ? ' completed' : '');
+                card.dataset.stopId = stop.id;
+
+                const num = stop.completed ? '✓' : stopNum++;
+                const timeStr = stop.datetime ? formatTime(stop.datetime) : '';
+                const cfg = TYPE_CONFIG[stop.type] || TYPE_CONFIG.errand;
+
+                card.innerHTML = `
+                    <div class="route-card-color-bar"></div>
+                    <div class="route-card-grab" data-grab="true">☰</div>
+                    <div class="route-card-number">${num}</div>
+                    <div class="route-card-body">
+                        <div class="route-card-title">${cfg.icon} ${stop.title}</div>
+                        ${stop.address ? '<div class="route-card-address">' + stop.address + '</div>' : ''}
+                        ${timeStr ? '<div class="route-card-time">' + timeStr + '</div>' : ''}
+                        ${stop.notes ? '<div class="route-card-time">📝 ' + stop.notes + '</div>' : ''}
+                    </div>
+                    <div class="route-card-check">
+                        <input type="checkbox" ${stop.completed ? 'checked' : ''} onchange="toggleStopComplete('${stop.id}')">
+                    </div>
+                    <div class="route-card-delete" onclick="deleteRouteStop('${stop.id}')" title="Remove stop">✕</div>
+                `;
+
+                // Touch drag setup
+                const grabHandle = card.querySelector('[data-grab]');
+                grabHandle.addEventListener('touchstart', onTouchDragStart, { passive: false });
+                grabHandle.addEventListener('mousedown', onMouseDragStart);
+
+                list.appendChild(card);
+            });
+        }
+
+        function formatTime(datetime) {
+            try {
+                const d = new Date(datetime);
+                return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            } catch(e) { return ''; }
+        }
+
+        function toggleStopComplete(stopId) {
+            const stop = routeStops.find(s => s.id === stopId);
+            if (!stop) return;
+
+            if (!stop.completed && stop.type === 'delivery' && stop.deliveryId) {
+                // For delivery stops, open the complete delivery modal
+                const delivery = pendingDeliveries.find(d => d.id === stop.deliveryId);
+                if (delivery) {
+                    showCompleteDeliveryModal(delivery.id);
+                    // Re-render to uncheck the checkbox since completion happens via modal
+                    renderRouteStops();
+                    return;
+                }
+            }
+
+            stop.completed = !stop.completed;
+            if (stop.completed) {
+                stop.completedAt = new Date().toISOString();
+            } else {
+                delete stop.completedAt;
+            }
+            saveData();
+            renderRouteStops();
+        }
+
+        function deleteRouteStop(stopId) {
+            const stop = routeStops.find(s => s.id === stopId);
+            if (!stop) return;
+
+            const label = stop.title;
+            if (!confirm('Remove "' + label + '" from your route?')) return;
+
+            routeStops = routeStops.filter(s => s.id !== stopId);
+            // Reorder remaining
+            routeStops.filter(s => !s.completed).sort((a, b) => a.order - b.order).forEach((s, i) => s.order = i);
+            saveData();
+            renderRouteStops();
+        }
+
+        // ========== TOUCH DRAG & DROP ==========
+
+        function onTouchDragStart(e) {
+            e.preventDefault();
+            const card = e.target.closest('.route-card');
+            if (!card || card.classList.contains('completed')) return;
+
+            const touch = e.touches[0];
+            startDrag(card, touch.clientY);
+
+            document.addEventListener('touchmove', onTouchDragMove, { passive: false });
+            document.addEventListener('touchend', onTouchDragEnd);
+        }
+
+        function onTouchDragMove(e) {
+            e.preventDefault();
+            if (!dragState) return;
+            moveDrag(e.touches[0].clientY);
+        }
+
+        function onTouchDragEnd(e) {
+            document.removeEventListener('touchmove', onTouchDragMove);
+            document.removeEventListener('touchend', onTouchDragEnd);
+            endDrag();
+        }
+
+        function onMouseDragStart(e) {
+            const card = e.target.closest('.route-card');
+            if (!card || card.classList.contains('completed')) return;
+
+            e.preventDefault();
+            startDrag(card, e.clientY);
+
+            document.addEventListener('mousemove', onMouseDragMove);
+            document.addEventListener('mouseup', onMouseDragEnd);
+        }
+
+        function onMouseDragMove(e) {
+            if (!dragState) return;
+            moveDrag(e.clientY);
+        }
+
+        function onMouseDragEnd(e) {
+            document.removeEventListener('mousemove', onMouseDragMove);
+            document.removeEventListener('mouseup', onMouseDragEnd);
+            endDrag();
+        }
+
+        function startDrag(card, startY) {
+            document.body.classList.add('dragging');
+
+            const stopId = card.dataset.stopId;
+            const list = document.getElementById('route-cards-list');
+            const cards = Array.from(list.querySelectorAll('.route-card:not(.completed)'));
+            const startIndex = cards.indexOf(card);
+
+            // Create placeholder
+            const placeholder = document.createElement('div');
+            placeholder.className = 'drag-placeholder';
+            placeholder.style.height = card.offsetHeight + 'px';
+
+            // Position card for dragging
+            const rect = card.getBoundingClientRect();
+            card.classList.add('dragging');
+            card.style.position = 'fixed';
+            card.style.top = rect.top + 'px';
+            card.style.left = rect.left + 'px';
+            card.style.width = rect.width + 'px';
+            card.style.zIndex = '1001';
+
+            card.parentNode.insertBefore(placeholder, card);
+
+            dragState = {
+                stopId,
+                startY,
+                offsetY: startY - rect.top,
+                cardEl: card,
+                placeholder,
+                startIndex,
+                currentIndex: startIndex
+            };
+        }
+
+        function moveDrag(clientY) {
+            if (!dragState) return;
+
+            // Move the card
+            dragState.cardEl.style.top = (clientY - dragState.offsetY) + 'px';
+
+            // Determine new position
+            const list = document.getElementById('route-cards-list');
+            const siblings = Array.from(list.querySelectorAll('.route-card:not(.completed):not(.dragging), .drag-placeholder'));
+            const placeholderIndex = siblings.indexOf(dragState.placeholder);
+
+            for (let i = 0; i < siblings.length; i++) {
+                if (siblings[i] === dragState.placeholder) continue;
+                const rect = siblings[i].getBoundingClientRect();
+                const midY = rect.top + rect.height / 2;
+
+                if (clientY < midY && i < placeholderIndex) {
+                    list.insertBefore(dragState.placeholder, siblings[i]);
+                    dragState.currentIndex = i;
+                    break;
+                } else if (clientY > midY && i > placeholderIndex) {
+                    if (siblings[i].nextSibling) {
+                        list.insertBefore(dragState.placeholder, siblings[i].nextSibling);
+                    } else {
+                        list.appendChild(dragState.placeholder);
+                    }
+                    dragState.currentIndex = i;
+                    break;
+                }
+            }
+        }
+
+        function endDrag() {
+            if (!dragState) return;
+
+            document.body.classList.remove('dragging');
+
+            const { cardEl, placeholder, stopId } = dragState;
+
+            // Reset card styles
+            cardEl.classList.remove('dragging');
+            cardEl.style.position = '';
+            cardEl.style.top = '';
+            cardEl.style.left = '';
+            cardEl.style.width = '';
+            cardEl.style.zIndex = '';
+
+            // Insert card where placeholder is
+            placeholder.parentNode.insertBefore(cardEl, placeholder);
+            placeholder.remove();
+
+            // Read new order from DOM
+            const list = document.getElementById('route-cards-list');
+            const cardEls = Array.from(list.querySelectorAll('.route-card:not(.completed)'));
+            cardEls.forEach((el, i) => {
+                const stop = routeStops.find(s => s.id === el.dataset.stopId);
+                if (stop) stop.order = i;
+            });
+
+            dragState = null;
+            saveData();
+            renderRouteStops();
+        }
+
+        // ========== MODAL MANAGEMENT ==========
+
         function showAddItemModal() {
             document.getElementById('add-item-modal').classList.remove('hidden');
         }
@@ -1180,6 +1924,37 @@
             document.querySelector('#add-item-modal h3').textContent = 'Add New Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
             window.editingItemId = null;
+        }
+
+        function showQuickAddModal() {
+            document.getElementById('quick-add-modal').classList.remove('hidden');
+            // Reset
+            document.getElementById('quick-add-form').reset();
+            document.getElementById('quick-photo-text').textContent = 'Tap to open camera';
+            document.querySelector('#quick-add-modal .photo-upload-area').classList.remove('has-file');
+        }
+
+        function hideQuickAddModal() {
+            document.getElementById('quick-add-modal').classList.add('hidden');
+            document.getElementById('quick-add-form').reset();
+        }
+
+        function showErrandModal() {
+            document.getElementById('errand-modal').classList.remove('hidden');
+        }
+
+        function hideErrandModal() {
+            document.getElementById('errand-modal').classList.add('hidden');
+            document.getElementById('errand-form').reset();
+        }
+
+        function showPickupModal() {
+            document.getElementById('pickup-modal').classList.remove('hidden');
+        }
+
+        function hidePickupModal() {
+            document.getElementById('pickup-modal').classList.add('hidden');
+            document.getElementById('pickup-form').reset();
         }
 
         function showDeliveryModal(itemId) {
@@ -1199,7 +1974,6 @@
             if (!currentCompletingDelivery) return;
 
             const summary = document.getElementById('delivery-summary');
-            const datetime = new Date(currentCompletingDelivery.datetime);
             summary.innerHTML = `
                 <div style="font-weight: 600; margin-bottom: 8px;">📦 ${currentCompletingDelivery.item}</div>
                 <div style="color: #6b7280; font-size: 0.875rem; line-height: 1.6;">
@@ -1221,14 +1995,26 @@
         // Photo Upload
         function setupEventListeners() {
             const photoInput = document.getElementById('item-photo');
-            const uploadArea = document.querySelector('.photo-upload-area');
+            const uploadArea = document.querySelector('#add-item-modal .photo-upload-area');
 
             photoInput.addEventListener('change', function(e) {
                 if (e.target.files.length > 0) {
                     uploadArea.classList.add('has-file');
-                    uploadArea.querySelector('.upload-text').textContent = `📸 ${e.target.files[0].name}`;
+                    uploadArea.querySelector('.upload-text').textContent = '📸 ' + e.target.files[0].name;
                 } else {
                     resetPhotoUpload();
+                }
+            });
+
+            // Quick photo
+            document.getElementById('quick-photo').addEventListener('change', function(e) {
+                const area = document.querySelector('#quick-add-modal .photo-upload-area');
+                if (e.target.files.length > 0) {
+                    area.classList.add('has-file');
+                    document.getElementById('quick-photo-text').textContent = '📸 Photo added!';
+                } else {
+                    area.classList.remove('has-file');
+                    document.getElementById('quick-photo-text').textContent = 'Tap to open camera';
                 }
             });
 
@@ -1239,23 +2025,23 @@
                 document.getElementById('mileage-cost').textContent = cost.toFixed(2);
             });
 
-            // Add/Edit Item Form
+            // Form handlers
             document.getElementById('add-item-form').addEventListener('submit', handleAddEditItem);
-
-            // Delivery Form
             document.getElementById('delivery-form').addEventListener('submit', handleCreateDelivery);
-
-            // Complete Delivery Form
             document.getElementById('complete-delivery-form').addEventListener('submit', handleCompleteDelivery);
+            document.getElementById('quick-add-form').addEventListener('submit', handleQuickAdd);
+            document.getElementById('errand-form').addEventListener('submit', handleAddErrand);
+            document.getElementById('pickup-form').addEventListener('submit', handleAddPickup);
         }
 
         function resetPhotoUpload() {
-            const uploadArea = document.querySelector('.photo-upload-area');
+            const uploadArea = document.querySelector('#add-item-modal .photo-upload-area');
             uploadArea.classList.remove('has-file');
             uploadArea.querySelector('.upload-text').textContent = 'Click to add photo';
         }
 
-        // Form Handlers
+        // ========== FORM HANDLERS ==========
+
         function handleAddEditItem(e) {
             e.preventDefault();
 
@@ -1266,6 +2052,8 @@
             const travelCost = parseFloat(document.getElementById('travel-cost').value) || 0;
             const materialsCost = parseFloat(document.getElementById('materials-cost').value) || 0;
             const repairCost = parseFloat(document.getElementById('repair-cost').value) || 0;
+            const status = document.getElementById('item-status').value;
+            const category = document.getElementById('item-category').value;
             const photoFile = document.getElementById('item-photo').files[0];
 
             const itemData = {
@@ -1276,11 +2064,12 @@
                 travelCost,
                 materialsCost,
                 repairCost,
+                status,
+                category,
                 updatedAt: new Date().toISOString()
             };
 
             if (window.editingItemId) {
-                // Edit existing item
                 const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
                 if (itemIndex !== -1) {
                     furnitureItems[itemIndex] = { ...furnitureItems[itemIndex], ...itemData };
@@ -1301,7 +2090,6 @@
                     }
                 }
             } else {
-                // Add new item
                 const newItem = {
                     id: 'item' + Date.now(),
                     ...itemData,
@@ -1328,12 +2116,105 @@
             }
         }
 
+        function handleQuickAdd(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('quick-title').value;
+            const purchasePrice = parseFloat(document.getElementById('quick-price').value);
+            const photoFile = document.getElementById('quick-photo').files[0];
+
+            const newItem = {
+                id: 'item' + Date.now(),
+                title,
+                description: '',
+                purchasePrice,
+                salePrice: null,
+                travelCost: 0,
+                materialsCost: 0,
+                repairCost: 0,
+                status: 'sourced',
+                category: 'other',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                photo: null
+            };
+
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    newItem.photo = ev.target.result;
+                    furnitureItems.push(newItem);
+                    saveData();
+                    renderAll();
+                    hideQuickAddModal();
+                };
+                reader.readAsDataURL(photoFile);
+            } else {
+                furnitureItems.push(newItem);
+                saveData();
+                renderAll();
+                hideQuickAddModal();
+            }
+        }
+
+        function handleAddErrand(e) {
+            e.preventDefault();
+
+            const storeName = document.getElementById('errand-store').value;
+            const address = document.getElementById('errand-address').value;
+            const shoppingList = document.getElementById('errand-list').value;
+
+            const maxOrder = routeStops.filter(s => !s.completed).reduce((max, s) => Math.max(max, s.order), -1);
+
+            routeStops.push({
+                id: 'stop' + Date.now(),
+                type: 'errand',
+                title: storeName,
+                address: address,
+                datetime: null,
+                notes: shoppingList,
+                storeName: storeName,
+                shoppingList: shoppingList,
+                completed: false,
+                order: maxOrder + 1
+            });
+
+            saveData();
+            renderRouteStops();
+            hideErrandModal();
+        }
+
+        function handleAddPickup(e) {
+            e.preventDefault();
+
+            const itemName = document.getElementById('pickup-item').value;
+            const address = document.getElementById('pickup-address').value;
+            const notes = document.getElementById('pickup-notes').value;
+
+            const maxOrder = routeStops.filter(s => !s.completed).reduce((max, s) => Math.max(max, s.order), -1);
+
+            routeStops.push({
+                id: 'stop' + Date.now(),
+                type: 'pickup',
+                title: 'Pick up: ' + itemName,
+                address: address,
+                datetime: null,
+                notes: notes,
+                completed: false,
+                order: maxOrder + 1
+            });
+
+            saveData();
+            renderRouteStops();
+            hidePickupModal();
+        }
+
         function handleCreateDelivery(e) {
             e.preventDefault();
 
             const date = document.getElementById('delivery-date').value;
             const time = document.getElementById('delivery-time').value;
-            const datetime = new Date(`${date}T${time}`).toISOString();
+            const datetime = new Date(date + 'T' + time).toISOString();
 
             const customerName = document.getElementById('customer-name').value;
             const itemName = currentDeliveryItem.title;
@@ -1348,19 +2229,40 @@
                 price: parseFloat(document.getElementById('final-price').value),
                 paymentMethod: document.getElementById('payment-method').value,
                 paymentStatus: document.getElementById('payment-status').value,
-                tripStops: [],
                 sentAt: new Date().toISOString()
             };
 
             pendingDeliveries.push(deliveryRequest);
-            saveData();
-            renderPendingDeliveries();
 
+            // Auto-add to routeStops
+            const maxOrder = routeStops.filter(s => !s.completed).reduce((max, s) => Math.max(max, s.order), -1);
+            routeStops.push({
+                id: 'stop' + Date.now(),
+                type: 'delivery',
+                title: 'Deliver ' + itemName + ' to ' + customerName,
+                address: deliveryRequest.address,
+                datetime: datetime,
+                notes: '',
+                deliveryId: deliveryRequest.id,
+                completed: false,
+                order: maxOrder + 1
+            });
+
+            // Update item status to pending
+            const itemIndex = furnitureItems.findIndex(i => i.id === currentDeliveryItem.id);
+            if (itemIndex !== -1) {
+                furnitureItems[itemIndex].status = 'pending';
+            }
+
+            saveData();
+            renderAll();
             hideDeliveryModal();
 
-            // Success notification
             const deliveryDate = new Date(datetime);
-            alert(`✅ Delivery Created!\n\n📦 ${itemName}\n👤 ${customerName}\n📅 ${deliveryDate.toLocaleDateString()} at ${deliveryDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}\n\n💡 Use "Edit Routes" to add stops!`);
+            sendNotification(
+                'Delivery Created',
+                itemName + ' to ' + customerName + ' on ' + deliveryDate.toLocaleDateString()
+            );
         }
 
         function handleCompleteDelivery(e) {
@@ -1370,15 +2272,12 @@
             const mileageCost = mileage * MILEAGE_RATE;
             const notes = document.getElementById('delivery-notes').value;
 
-            // Find the item
             const item = furnitureItems.find(i => i.id === currentCompletingDelivery.itemId);
             if (!item) return;
 
-            // Calculate final costs
             const totalCost = calculateTotalCost(item) + mileageCost;
             const profit = currentCompletingDelivery.price - totalCost;
 
-            // Create history entry
             const historyEntry = {
                 id: 'history' + Date.now(),
                 item: currentCompletingDelivery.item,
@@ -1402,6 +2301,13 @@
 
             salesHistory.push(historyEntry);
 
+            // Mark route stop as completed
+            const routeStop = routeStops.find(s => s.deliveryId === currentCompletingDelivery.id);
+            if (routeStop) {
+                routeStop.completed = true;
+                routeStop.completedAt = new Date().toISOString();
+            }
+
             // Remove from pending deliveries
             pendingDeliveries = pendingDeliveries.filter(d => d.id !== currentCompletingDelivery.id);
 
@@ -1412,8 +2318,10 @@
             renderAll();
             hideCompleteDeliveryModal();
 
-            // Success notification
-            alert(`✅ Delivery Completed!\n\n📦 ${historyEntry.item}\n💰 Profit: $${profit.toFixed(2)}\n\n✨ Check the History tab to see details!`);
+            sendNotification(
+                'Delivery Complete',
+                historyEntry.item + ' - Profit: $' + profit.toFixed(2)
+            );
         }
 
         // Item Actions
@@ -1428,6 +2336,8 @@
             document.getElementById('travel-cost').value = item.travelCost || '';
             document.getElementById('materials-cost').value = item.materialsCost || '';
             document.getElementById('repair-cost').value = item.repairCost || '';
+            document.getElementById('item-status').value = item.status || 'sourced';
+            document.getElementById('item-category').value = item.category || 'other';
 
             document.querySelector('#add-item-modal h3').textContent = 'Edit Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
@@ -1438,7 +2348,7 @@
 
         function deleteItem(itemId) {
             const item = furnitureItems.find(item => item.id === itemId);
-            if (confirm(`Delete "${item.title}"? This cannot be undone.`)) {
+            if (confirm('Delete "' + item.title + '"? This cannot be undone.')) {
                 furnitureItems = furnitureItems.filter(item => item.id !== itemId);
                 saveData();
                 renderAll();
@@ -1466,177 +2376,6 @@
             }
         }
 
-        // Delivery Management
-        function renderPendingDeliveries() {
-            const container = document.getElementById('pending-deliveries');
-            const list = document.getElementById('deliveries-list');
-
-            if (pendingDeliveries.length === 0) {
-                container.classList.add('hidden');
-                return;
-            }
-
-            container.classList.remove('hidden');
-            list.innerHTML = '';
-
-            pendingDeliveries.forEach(delivery => {
-                const deliveryCard = document.createElement('div');
-                deliveryCard.className = 'delivery-card';
-                if (selectedDeliveryId === delivery.id) {
-                    deliveryCard.classList.add('selected');
-                }
-
-                const datetime = new Date(delivery.datetime);
-                const dateStr = datetime.toLocaleDateString();
-                const timeStr = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-
-                let stopsHtml = '';
-                if (delivery.tripStops && delivery.tripStops.length > 0) {
-                    stopsHtml = `
-                        <div class="trip-stops">
-                            <div class="trip-stops-label">📍 Route Stops:</div>
-                            <div class="stops-container" data-delivery-id="${delivery.id}">
-                                ${delivery.tripStops.map((stop, index) => `
-                                    <span class="stop-chip" draggable="${editMode}" data-stop-id="${stop.id}"
-                                          ondragstart="handleStopDragStart(event, '${delivery.id}', '${stop.id}')"
-                                          ondragover="handleStopDragOver(event)"
-                                          ondrop="handleStopDrop(event, '${delivery.id}', '${stop.id}')"
-                                          ondragend="handleStopDragEnd(event)"
-                                          title="${stop.instructions ? stop.instructions : 'No instructions'}">
-                                        <span class="stop-number">${index + 1}</span>
-                                        ${stop.name}${stop.instructions ? ' 📝' : ''}
-                                        ${editMode ? `<span class="remove-stop" onclick="removeStop('${delivery.id}', '${stop.id}')">×</span>` : ''}
-                                    </span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                deliveryCard.innerHTML = `
-                    <div onclick="selectDelivery('${delivery.id}')" style="cursor: pointer;">
-                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 8px;">📦 ${delivery.item}</div>
-                        <div class="delivery-info">
-                            👤 ${delivery.customer}<br>
-                            📍 ${delivery.address}<br>
-                            📅 ${dateStr} at ${timeStr}<br>
-                            💰 $${delivery.price} - ${delivery.paymentMethod} (${delivery.paymentStatus})
-                        </div>
-                        ${stopsHtml}
-                    </div>
-                    <button onclick="showCompleteDeliveryModal('${delivery.id}')" class="complete-delivery-btn">
-                        ✅ Mark Delivered
-                    </button>
-                `;
-
-                list.appendChild(deliveryCard);
-            });
-        }
-
-        function selectDelivery(deliveryId) {
-            if (editMode) {
-                selectedDeliveryId = selectedDeliveryId === deliveryId ? null : deliveryId;
-                renderPendingDeliveries();
-            }
-        }
-
-        function toggleEditMode() {
-            editMode = !editMode;
-            const btn = document.getElementById('edit-mode-btn');
-
-            if (editMode) {
-                btn.textContent = '💾 Done';
-                btn.style.background = '#10b981';
-            } else {
-                btn.textContent = '✏️ Edit Routes';
-                btn.style.background = '#f59e0b';
-                selectedDeliveryId = null;
-            }
-
-            renderPendingDeliveries();
-        }
-
-        function addStopToSelectedDelivery() {
-            if (!selectedDeliveryId) {
-                alert('⚠️ Please select a delivery first!\n\n1. Click "Edit Routes"\n2. Click on a delivery card to select it\n3. Then click "Add Stop"');
-                return;
-            }
-
-            const delivery = pendingDeliveries.find(d => d.id === selectedDeliveryId);
-            if (!delivery) return;
-
-            const stopName = prompt('📍 Enter stop name:\n(e.g., Walmart, Gas Station, Home Depot)');
-            if (!stopName || stopName.trim() === '') return;
-
-            const instructions = prompt('📝 Add instructions (optional):\n(e.g., "Pick up screws", "Get cleaning supplies")') || '';
-
-            const newStop = {
-                id: 'stop' + Date.now(),
-                name: stopName.trim(),
-                instructions: instructions.trim(),
-                purpose: 'stop'
-            };
-
-            if (!delivery.tripStops) {
-                delivery.tripStops = [];
-            }
-            delivery.tripStops.push(newStop);
-
-            saveData();
-            renderPendingDeliveries();
-
-            // Success notification
-            alert(`✅ Stop added!\n\n📍 ${stopName}\n${instructions ? '📝 ' + instructions : ''}\n\nDrag to reorder when ready.`);
-        }
-
-        function removeStop(deliveryId, stopId) {
-            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
-            if (!delivery) return;
-
-            delivery.tripStops = delivery.tripStops.filter(s => s.id !== stopId);
-            saveData();
-            renderPendingDeliveries();
-        }
-
-        // Drag and Drop for Route Stops
-        function handleStopDragStart(event, deliveryId, stopId) {
-            if (!editMode) return;
-            event.target.classList.add('dragging');
-            draggedStop = { deliveryId, stopId };
-        }
-
-        function handleStopDragOver(event) {
-            if (!editMode) return;
-            event.preventDefault();
-        }
-
-        function handleStopDrop(event, deliveryId, targetStopId) {
-            if (!editMode || !draggedStop) return;
-            event.preventDefault();
-
-            if (draggedStop.deliveryId !== deliveryId) return;
-            if (draggedStop.stopId === targetStopId) return;
-
-            const delivery = pendingDeliveries.find(d => d.id === deliveryId);
-            if (!delivery) return;
-
-            const draggedIndex = delivery.tripStops.findIndex(s => s.id === draggedStop.stopId);
-            const targetIndex = delivery.tripStops.findIndex(s => s.id === targetStopId);
-
-            if (draggedIndex === -1 || targetIndex === -1) return;
-
-            const [draggedItem] = delivery.tripStops.splice(draggedIndex, 1);
-            delivery.tripStops.splice(targetIndex, 0, draggedItem);
-
-            saveData();
-            renderPendingDeliveries();
-        }
-
-        function handleStopDragEnd(event) {
-            event.target.classList.remove('dragging');
-            draggedStop = null;
-        }
-
         // Sales History
         function renderSalesHistory() {
             const list = document.getElementById('history-list');
@@ -1651,7 +2390,6 @@
             emptyState.classList.add('hidden');
             list.innerHTML = '';
 
-            // Sort by completion date, newest first
             const sorted = [...salesHistory].sort((a, b) =>
                 new Date(b.completedDate) - new Date(a.completedDate)
             );
@@ -1680,10 +2418,10 @@
                             <span>Purchase:</span>
                             <span>$${sale.purchasePrice.toFixed(2)}</span>
                         </div>
-                        ${sale.travelCost ? `<div class="cost-row"><span>Travel:</span><span>$${sale.travelCost.toFixed(2)}</span></div>` : ''}
-                        ${sale.materialsCost ? `<div class="cost-row"><span>Materials:</span><span>$${sale.materialsCost.toFixed(2)}</span></div>` : ''}
-                        ${sale.repairCost ? `<div class="cost-row"><span>Repairs:</span><span>$${sale.repairCost.toFixed(2)}</span></div>` : ''}
-                        ${sale.deliveryMileageCost ? `<div class="cost-row"><span>Delivery (${sale.deliveryMileage} mi):</span><span>$${sale.deliveryMileageCost.toFixed(2)}</span></div>` : ''}
+                        ${sale.travelCost ? '<div class="cost-row"><span>Travel:</span><span>$' + sale.travelCost.toFixed(2) + '</span></div>' : ''}
+                        ${sale.materialsCost ? '<div class="cost-row"><span>Materials:</span><span>$' + sale.materialsCost.toFixed(2) + '</span></div>' : ''}
+                        ${sale.repairCost ? '<div class="cost-row"><span>Repairs:</span><span>$' + sale.repairCost.toFixed(2) + '</span></div>' : ''}
+                        ${sale.deliveryMileageCost ? '<div class="cost-row"><span>Delivery (' + sale.deliveryMileage + ' mi):</span><span>$' + sale.deliveryMileageCost.toFixed(2) + '</span></div>' : ''}
                         <div class="cost-row total">
                             <span>Total Cost:</span>
                             <span>$${sale.totalCost.toFixed(2)}</span>
@@ -1693,7 +2431,7 @@
                             <span>$${sale.finalPrice.toFixed(2)}</span>
                         </div>
                     </div>
-                    ${sale.notes ? `<div style="margin-top: 12px; color: #6b7280; font-size: 0.875rem; font-style: italic;">${sale.notes}</div>` : ''}
+                    ${sale.notes ? '<div style="margin-top: 12px; color: #6b7280; font-size: 0.875rem; font-style: italic;">' + sale.notes + '</div>' : ''}
                 `;
 
                 list.appendChild(historyItem);
