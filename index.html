@@ -1563,7 +1563,14 @@
             }
 
             .airbnb-subtabs {
-                grid-template-columns: repeat(3, 1fr) !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 6px !important;
+            }
+            .airbnb-subtab {
+                flex: 1 1 calc(33% - 6px) !important;
+                font-size: 0.75rem !important;
+                padding: 8px 4px !important;
             }
 
             .trip-card {
@@ -2524,6 +2531,12 @@
         // Drag state
         let dragState = null; // { stopId, startY, cardEl, placeholder, startIndex }
 
+        // Utility
+        function esc(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
         // Constants
         const MILEAGE_RATE = 0.67;
 
@@ -2628,7 +2641,7 @@
                 changed = true;
             }
 
-            // Migrate existing items: add status and category if missing
+            // Migrate existing items: add status, category, photos, listings if missing
             furnitureItems.forEach(item => {
                 if (!item.status) {
                     item.status = 'listed';
@@ -2636,6 +2649,19 @@
                 }
                 if (!item.category) {
                     item.category = 'other';
+                    changed = true;
+                }
+                if (!item.photos) {
+                    item.photos = item.photo ? [{ id: 'ph' + Date.now() + Math.random(), photo: item.photo, caption: '', order: 0 }] : [];
+                    if (item.photos.length > 0) item.primaryPhotoId = item.photos[0].id;
+                    changed = true;
+                }
+                if (!item.listings) {
+                    item.listings = [];
+                    changed = true;
+                }
+                if (!item.createdAt) {
+                    item.createdAt = item.updatedAt || new Date().toISOString();
                     changed = true;
                 }
             });
@@ -2799,21 +2825,21 @@
             let listingHtml = '';
             if (listings.length > 0) {
                 listingHtml = '<div class="listing-badges">' + listings.map((l, idx) =>
-                    `<span class="listing-badge ${l.status === 'sold' ? 'sold' : l.status === 'delisted' ? 'delisted' : ''}">${l.platform}${l.status === 'sold' ? ' ✓' : ''}<span onclick="event.stopPropagation(); deleteListing('${item.id}', ${idx})" style="cursor:pointer; margin-left:4px; opacity:0.6;">✕</span></span>`
+                    `<span class="listing-badge ${l.status === 'sold' ? 'sold' : l.status === 'delisted' ? 'delisted' : ''}" onclick="event.stopPropagation(); cycleListingStatus('${item.id}', ${idx})" style="cursor:pointer;" title="Tap to change status">${l.platform}${l.status === 'sold' ? ' ✓' : l.status === 'delisted' ? ' ✗' : ''}<span onclick="event.stopPropagation(); deleteListing('${item.id}', ${idx})" style="cursor:pointer; margin-left:4px; opacity:0.6;">✕</span></span>`
                 ).join('') + '</div>';
             }
 
             card.innerHTML = `
                 <div class="item-image photo-gallery-container" onclick="openItemGallery('${item.id}')">
-                    ${primaryPhoto ? `<img src="${primaryPhoto}" alt="${item.title}">` : '📦'}
+                    ${primaryPhoto ? `<img src="${primaryPhoto}" alt="${esc(item.title)}">` : '📦'}
                     ${photoCountBadge}
                 </div>
                 <div class="item-header">
-                    <div class="item-title">${item.title} ${agingBadge}</div>
+                    <div class="item-title">${esc(item.title)} ${agingBadge}</div>
                     ${statusBadge}
                     ${categoryTag}
                 </div>
-                <div class="item-description">${item.description || 'No description'}</div>
+                <div class="item-description">${esc(item.description) || 'No description'}</div>
                 ${listingHtml}
                 <div class="cost-breakdown">
                     <div class="cost-row">
@@ -3698,8 +3724,8 @@
                 historyItem.innerHTML = `
                     <div class="history-item-header">
                         <div>
-                            <div class="history-item-title">${sale.item}</div>
-                            <div class="history-item-date">${dateStr} • ${sale.customer}</div>
+                            <div class="history-item-title">${esc(sale.item)}</div>
+                            <div class="history-item-date">${dateStr} • ${esc(sale.customer)}</div>
                         </div>
                         <span class="profit-badge ${profitClass}">
                             ${sale.profit >= 0 ? '+' : ''}$${sale.profit.toFixed(2)}
@@ -3723,7 +3749,7 @@
                             <span>$${sale.finalPrice.toFixed(2)}</span>
                         </div>
                     </div>
-                    ${sale.notes ? '<div style="margin-top: 12px; color: #6b7280; font-size: 0.875rem; font-style: italic;">' + sale.notes + '</div>' : ''}
+                    ${sale.notes ? '<div style="margin-top: 12px; color: #6b7280; font-size: 0.875rem; font-style: italic;">' + esc(sale.notes) + '</div>' : ''}
                 `;
 
                 list.appendChild(historyItem);
@@ -4426,7 +4452,7 @@
                 card.innerHTML = `
                     <div class="maint-header">
                         <div>
-                            <span class="maint-issue">${m.issue}</span>
+                            <span class="maint-issue">${esc(m.issue)}</span>
                             <span class="maint-status-badge ${m.status}">${statusLabels[m.status] || m.status}</span>
                         </div>
                         <div>
@@ -4436,7 +4462,7 @@
                         </div>
                     </div>
                     <div class="maint-meta">${m.date} ${m.vendor ? '• ' + m.vendor : ''}</div>
-                    ${m.description ? `<div style="font-size: 0.85rem; color: #374151; margin-top: 4px;">${m.description}</div>` : ''}
+                    ${m.description ? `<div style="font-size: 0.85rem; color: #374151; margin-top: 4px;">${esc(m.description)}</div>` : ''}
                     ${m.photo ? `<img src="${m.photo}" class="maint-photo" style="margin-top: 8px;" onclick="viewMaintenancePhoto('${m.id}')">` : ''}
                 `;
                 list.appendChild(card);
@@ -4700,8 +4726,8 @@
                 card.className = 'trip-card';
                 card.innerHTML = `
                     <div class="trip-info">
-                        <div class="trip-route">${trip.fromLocation} → ${trip.toLocation}</div>
-                        <div class="trip-details">${trip.date} • ${purposeLabels[trip.purpose] || trip.purpose}${trip.notes ? ' • ' + trip.notes : ''}</div>
+                        <div class="trip-route">${esc(trip.fromLocation)} → ${esc(trip.toLocation)}</div>
+                        <div class="trip-details">${trip.date} • ${purposeLabels[trip.purpose] || trip.purpose}${trip.notes ? ' • ' + esc(trip.notes) : ''}</div>
                     </div>
                     <div class="trip-miles">${trip.miles} mi</div>
                     <div style="margin-left: 12px; display: flex; gap: 4px;">
@@ -4831,6 +4857,16 @@
             const item = furnitureItems.find(i => i.id === itemId);
             if (!item || !item.listings) return;
             item.listings.splice(listingIndex, 1);
+            saveData();
+            renderFurnitureItems();
+        }
+
+        function cycleListingStatus(itemId, listingIndex) {
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (!item || !item.listings || !item.listings[listingIndex]) return;
+            const statuses = ['active', 'sold', 'delisted'];
+            const current = statuses.indexOf(item.listings[listingIndex].status);
+            item.listings[listingIndex].status = statuses[(current + 1) % statuses.length];
             saveData();
             renderFurnitureItems();
         }
