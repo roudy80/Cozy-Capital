@@ -2798,8 +2798,8 @@
             const listings = item.listings || [];
             let listingHtml = '';
             if (listings.length > 0) {
-                listingHtml = '<div class="listing-badges">' + listings.map(l =>
-                    `<span class="listing-badge ${l.status === 'sold' ? 'sold' : l.status === 'delisted' ? 'delisted' : ''}">${l.platform}${l.status === 'sold' ? ' ✓' : ''}</span>`
+                listingHtml = '<div class="listing-badges">' + listings.map((l, idx) =>
+                    `<span class="listing-badge ${l.status === 'sold' ? 'sold' : l.status === 'delisted' ? 'delisted' : ''}">${l.platform}${l.status === 'sold' ? ' ✓' : ''}<span onclick="event.stopPropagation(); deleteListing('${item.id}', ${idx})" style="cursor:pointer; margin-left:4px; opacity:0.6;">✕</span></span>`
                 ).join('') + '</div>';
             }
 
@@ -3297,6 +3297,9 @@
             document.getElementById('add-maintenance-form').addEventListener('submit', handleAddMaintenance);
             document.getElementById('add-trip-form').addEventListener('submit', handleAddTrip);
             document.getElementById('add-listing-form').addEventListener('submit', handleAddListing);
+            document.getElementById('add-supply-form').addEventListener('submit', handleAddSupply);
+            document.getElementById('cleaning-template-form').addEventListener('submit', handleSaveCleaningTemplate);
+            document.getElementById('msg-template-form').addEventListener('submit', handleSaveMessageTemplate);
         }
 
         function resetPhotoUpload() {
@@ -3402,19 +3405,21 @@
                 category: 'other',
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString(),
-                photo: null
+                photo: null,
+                photos: [],
+                listings: []
             };
 
             if (photoFile) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    newItem.photo = ev.target.result;
+                compressPhoto(photoFile, 800, 0.75).then(compressed => {
+                    newItem.photo = compressed;
+                    newItem.photos = [{ id: 'ph' + Date.now(), photo: compressed, caption: '', order: 0 }];
+                    newItem.primaryPhotoId = newItem.photos[0].id;
                     furnitureItems.push(newItem);
                     saveData();
                     renderAll();
                     hideQuickAddModal();
-                };
-                reader.readAsDataURL(photoFile);
+                });
             } else {
                 furnitureItems.push(newItem);
                 saveData();
@@ -3595,6 +3600,9 @@
             const item = furnitureItems.find(item => item.id === itemId);
             if (!item) return;
 
+            pendingItemPhotos = [];
+            resetPhotoUpload();
+
             document.getElementById('item-title').value = item.title;
             document.getElementById('item-description').value = item.description || '';
             document.getElementById('item-purchase-price').value = item.purchasePrice;
@@ -3605,11 +3613,46 @@
             document.getElementById('item-status').value = item.status || 'sourced';
             document.getElementById('item-category').value = item.category || 'other';
 
+            // Show existing photos
+            const previewContainer = document.getElementById('item-photo-previews');
+            previewContainer.innerHTML = '';
+            const photos = getItemPhotos(item);
+            photos.forEach((p, i) => {
+                const wrapper = document.createElement('div');
+                wrapper.style.cssText = 'position: relative; display: inline-block;';
+                const thumb = document.createElement('img');
+                thumb.src = p.photo;
+                thumb.className = 'photo-gallery-thumb';
+                thumb.style.cssText = 'width: 50px; height: 50px;';
+                wrapper.appendChild(thumb);
+                const delBtn = document.createElement('button');
+                delBtn.textContent = '✕';
+                delBtn.style.cssText = 'position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; cursor: pointer; line-height: 1;';
+                delBtn.onclick = (e) => { e.stopPropagation(); removeItemPhoto(itemId, p.id); };
+                wrapper.appendChild(delBtn);
+                previewContainer.appendChild(wrapper);
+            });
+
             document.querySelector('#add-item-modal h3').textContent = 'Edit Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Update Item';
 
             window.editingItemId = itemId;
             showAddItemModal();
+        }
+
+        function removeItemPhoto(itemId, photoId) {
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (!item || !item.photos) return;
+            item.photos = item.photos.filter(p => p.id !== photoId);
+            if (item.photos.length > 0) {
+                item.photo = item.photos[0].photo;
+                item.primaryPhotoId = item.photos[0].id;
+            } else {
+                item.photo = null;
+                item.primaryPhotoId = null;
+            }
+            saveData();
+            editItem(itemId); // Re-render edit modal
         }
 
         function deleteItem(itemId) {
@@ -4027,6 +4070,8 @@
                 const div = document.createElement('div');
                 div.className = 'cleaning-log-item';
                 const photoCount = (log.photos || []).length;
+                div.style.cursor = photoCount > 0 ? 'pointer' : 'default';
+                if (photoCount > 0) div.onclick = () => viewCleaningLogPhotos(log.id);
                 div.innerHTML = `
                     <div class="log-info">${tmpl ? tmpl.name : 'Unknown Template'} — ${checkedCount}/${log.items.length} items${photoCount > 0 ? ' • 📸 ' + photoCount + ' photos' : ''}</div>
                     <div class="log-date">${dateStr} ${log.completed ? '✅' : '⏳'}</div>
@@ -4782,6 +4827,14 @@
             hideListingModal();
         }
 
+        function deleteListing(itemId, listingIndex) {
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (!item || !item.listings) return;
+            item.listings.splice(listingIndex, 1);
+            saveData();
+            renderFurnitureItems();
+        }
+
         // ========== MULTI-PHOTO GALLERY ==========
 
         function openItemGallery(itemId) {
@@ -4909,6 +4962,18 @@
             galleryCurrentPhotos = [{ photo: photo.photo, caption: photo.room + ' - ' + new Date(photo.timestamp).toLocaleString() }];
             galleryCurrentIndex = 0;
             showGalleryModal('Cleaning Photo');
+        }
+
+        function viewCleaningLogPhotos(logId) {
+            const log = cleaningLogs.find(l => l.id === logId);
+            if (!log || !log.photos || log.photos.length === 0) return;
+            galleryCurrentPhotos = log.photos.map(p => ({
+                photo: p.photo,
+                caption: p.room + ' - ' + new Date(p.timestamp).toLocaleString()
+            }));
+            galleryCurrentIndex = 0;
+            const tmpl = cleaningTemplates.find(t => t.id === log.templateId);
+            showGalleryModal((tmpl ? tmpl.name : 'Cleaning') + ' Photos');
         }
 
         // ========== EXPORT REPORTS WITH PHOTOS ==========
