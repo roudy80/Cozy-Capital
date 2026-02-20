@@ -902,6 +902,617 @@
             display: none;
         }
 
+        /* ========== AIRBNB SUB-TABS ========== */
+        .airbnb-subtabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .airbnb-subtab {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .airbnb-subtab:hover {
+            background: #e5e7eb;
+        }
+
+        .airbnb-subtab.active {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+        }
+
+        /* ========== LOW-STOCK BANNER ========== */
+        .low-stock-banner {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-left: 4px solid #ef4444;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #991b1b;
+        }
+
+        .low-stock-banner .banner-icon {
+            font-size: 1.25rem;
+        }
+
+        /* ========== SUPPLY CARDS ========== */
+        .supply-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .supply-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .supply-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #1e40af;
+        }
+
+        .supply-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .supply-card-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .supply-card-category {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .supply-qty-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .supply-qty-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .supply-qty-display.ok { color: #059669; }
+        .supply-qty-display.low { color: #d97706; }
+        .supply-qty-display.critical { color: #dc2626; }
+
+        .supply-par {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #f9fafb;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .qty-btn:hover {
+            background: #e5e7eb;
+            border-color: #1e40af;
+        }
+
+        .supply-card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .supply-card-actions button {
+            flex: 1;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* ========== CLEANING CHECKLIST ========== */
+        .template-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .template-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .template-card:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            border-color: #1e40af;
+        }
+
+        .template-card-info h4 {
+            font-size: 1rem;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .template-card-info p {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .template-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .checklist-room-header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1e40af;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checklist-item.checked label {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .checklist-item-note {
+            width: 100%;
+            padding: 4px 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 30px;
+            margin-top: 4px;
+        }
+
+        .cleaning-log-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cleaning-log-item .log-info {
+            font-size: 0.9rem;
+            color: #1f2937;
+        }
+
+        .cleaning-log-item .log-date {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        /* ========== MESSAGE TEMPLATES ========== */
+        .msg-template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .msg-template-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .msg-template-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #1e40af;
+        }
+
+        .msg-template-card h4 {
+            font-size: 1rem;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .msg-template-card .msg-category-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #dbeafe;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .msg-template-card .msg-preview {
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .msg-template-card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .msg-template-card-actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .placeholder-field {
+            margin-bottom: 12px;
+        }
+
+        .placeholder-field label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .placeholder-field input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .msg-preview-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #1f2937;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* ========== EXPORT BTN ========== */
+        .export-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .export-btn:hover {
+            background: #059669;
+        }
+
+        /* ========== AGING / DEATH PILE BADGES ========== */
+        .aging-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+        .aging-badge.green { background: #d1fae5; color: #065f46; }
+        .aging-badge.yellow { background: #fef3c7; color: #92400e; }
+        .aging-badge.red { background: #fee2e2; color: #991b1b; }
+
+        /* ========== SOURCING TRIPS ========== */
+        .trip-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .trip-card .trip-info { flex: 1; }
+        .trip-card .trip-route { font-weight: 600; color: #1f2937; }
+        .trip-card .trip-details { font-size: 0.8rem; color: #6b7280; }
+        .trip-card .trip-miles { font-weight: 700; color: #1e40af; font-size: 1.1rem; white-space: nowrap; margin-left: 12px; }
+
+        /* ========== LISTINGS / CROSS-LIST TRACKER ========== */
+        .listing-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .listing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .listing-badge.sold { background: #d1fae5; color: #065f46; }
+        .listing-badge.delisted { background: #f3f4f6; color: #6b7280; text-decoration: line-through; }
+
+        /* ========== MAINTENANCE LOG ========== */
+        .maint-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+        }
+        .maint-card .maint-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .maint-card .maint-issue { font-weight: 600; color: #1f2937; }
+        .maint-card .maint-meta { font-size: 0.8rem; color: #6b7280; }
+        .maint-status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .maint-status-badge.reported { background: #fee2e2; color: #991b1b; }
+        .maint-status-badge.in-progress { background: #fef3c7; color: #92400e; }
+        .maint-status-badge.fixed { background: #d1fae5; color: #065f46; }
+        .maint-status-badge.awaiting-parts { background: #dbeafe; color: #1e40af; }
+        .maint-photo { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; }
+
+        /* ========== GUEST GUIDEBOOK ========== */
+        .guidebook-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .guidebook-section h4 { font-size: 1rem; color: #1e40af; margin-bottom: 8px; cursor: move; }
+        .guidebook-section .guidebook-content {
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+        .guidebook-edit-area {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        /* ========== MULTI-PHOTO GALLERY ========== */
+        .photo-gallery-container { position: relative; }
+        .photo-gallery-main {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .photo-gallery-count {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .photo-gallery-thumbs {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+            overflow-x: auto;
+        }
+        .photo-gallery-thumb {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+        .photo-gallery-thumb.active { border-color: #1e40af; }
+        .gallery-modal-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .gallery-nav button {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* ========== CLEANING PHOTO VERIFICATION ========== */
+        .room-photo-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        .room-photo-btn.has-photo { background: #d1fae5; color: #065f46; border-color: #10b981; }
+        .room-photo-thumb {
+            width: 60px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        /* ========== FINANCE SECTION BLOCK (reused) ========== */
+        .finance-section-block {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .finance-section-block h3 {
+            font-size: 1.125rem;
+            color: #1f2937;
+            margin-bottom: 16px;
+            font-weight: 600;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .checklist-template-items-editor {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .checklist-template-item-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .checklist-template-item-row input[type="text"] {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .checklist-template-item-row select {
+            width: 120px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .checklist-template-item-row .remove-item-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 4px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -938,6 +1549,29 @@
             .route-card-title {
                 font-size: 0.9rem;
             }
+
+            .supply-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .msg-template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checklist-template-item-row select {
+                width: 90px;
+            }
+
+            .airbnb-subtabs {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+
+            .trip-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .trip-card .trip-miles { margin-left: 0; }
         }
     </style>
 </head>
@@ -1026,6 +1660,9 @@
                     <button class="quick-add-inventory-btn" onclick="showQuickAddModal()">
                         📸 Quick Add
                     </button>
+                    <button class="export-btn" onclick="showExportReportModal()" style="padding: 10px 16px;">
+                        📥 Export
+                    </button>
                 </div>
 
                 <div id="furniture-inventory" class="inventory-grid">
@@ -1041,11 +1678,195 @@
 
             <!-- Airbnb Section -->
             <div id="airbnb-section" class="hidden">
-                <h2 class="section-title">Airbnb Supplies</h2>
-                <div class="empty-state">
-                    <div class="empty-icon">🛏️</div>
-                    <h3>Airbnb Management Coming Soon</h3>
-                    <p>Track towels, sheets, cleaning supplies, and get low-stock alerts with expense tracking and tax calculations.</p>
+                <h2 class="section-title">Airbnb Management</h2>
+
+                <!-- Sub-tabs -->
+                <div class="airbnb-subtabs" style="grid-template-columns: repeat(6, 1fr);">
+                    <button class="airbnb-subtab active" onclick="switchAirbnbSubtab('supplies', this)">🧴 Supplies</button>
+                    <button class="airbnb-subtab" onclick="switchAirbnbSubtab('cleaning', this)">🧹 Cleaning</button>
+                    <button class="airbnb-subtab" onclick="switchAirbnbSubtab('messages', this)">💬 Messages</button>
+                    <button class="airbnb-subtab" onclick="switchAirbnbSubtab('maintenance', this)">🔧 Maintenance</button>
+                    <button class="airbnb-subtab" onclick="switchAirbnbSubtab('guidebook', this)">📖 Guide</button>
+                    <button class="airbnb-subtab" onclick="switchAirbnbSubtab('trips', this)">🚗 Trips</button>
+                </div>
+
+                <!-- === SUPPLIES SUB-TAB === -->
+                <div id="airbnb-supplies-sub" class="airbnb-sub-content">
+                    <div id="low-stock-banner" class="low-stock-banner hidden">
+                        <span class="banner-icon">⚠️</span>
+                        <span id="low-stock-text">0 items below par level</span>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📦</div>
+                            <div class="stat-value" id="supply-total-items">0</div>
+                            <div class="stat-label">Total Items</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⚠️</div>
+                            <div class="stat-value" id="supply-below-par">0</div>
+                            <div class="stat-label">Below Par</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📂</div>
+                            <div class="stat-value" id="supply-categories">0</div>
+                            <div class="stat-label">Categories</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="action-button" onclick="showAddSupplyModal()" style="flex:1; margin-bottom:0;">➕ Add Supply</button>
+                        <button class="action-button" onclick="generateShoppingList()" style="flex:1; margin-bottom:0; background: #10b981;">🛒 Shopping List</button>
+                    </div>
+
+                    <div class="status-pipeline" id="supply-category-filter">
+                        <button class="status-pill active" onclick="filterSupplyCategory('all', this)">All</button>
+                        <button class="status-pill" onclick="filterSupplyCategory('bathroom', this)">Bathroom</button>
+                        <button class="status-pill" onclick="filterSupplyCategory('kitchen', this)">Kitchen</button>
+                        <button class="status-pill" onclick="filterSupplyCategory('cleaning', this)">Cleaning</button>
+                        <button class="status-pill" onclick="filterSupplyCategory('linens', this)">Linens</button>
+                        <button class="status-pill" onclick="filterSupplyCategory('other', this)">Other</button>
+                    </div>
+
+                    <div id="supply-grid" class="supply-grid"></div>
+                    <div id="supply-empty" class="empty-state">
+                        <div class="empty-icon">🧴</div>
+                        <h3>No Supplies Tracked</h3>
+                        <p>Add your first supply item to start tracking inventory and get low-stock alerts.</p>
+                    </div>
+                </div>
+
+                <!-- === CLEANING SUB-TAB === -->
+                <div id="airbnb-cleaning-sub" class="airbnb-sub-content hidden">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="action-button" onclick="showCreateCleaningTemplateModal()" style="flex:1; margin-bottom:0;">➕ Create Template</button>
+                    </div>
+
+                    <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: #1f2937;">Cleaning Templates</h3>
+                    <div id="cleaning-templates-list" class="template-list"></div>
+                    <div id="cleaning-templates-empty" class="empty-state">
+                        <div class="empty-icon">🧹</div>
+                        <h3>No Cleaning Templates</h3>
+                        <p>A default template will be created automatically.</p>
+                    </div>
+
+                    <div id="active-checklist-area" class="hidden" style="margin-top: 24px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: #1e40af;">Active Checklist</h3>
+                        <div id="active-checklist-content"></div>
+                        <div style="margin-top: 16px; display: flex; gap: 12px;">
+                            <button class="btn btn-primary" onclick="completeActiveChecklist()">✅ Complete Checklist</button>
+                            <button class="btn btn-secondary" onclick="cancelActiveChecklist()">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div id="cleaning-log-area" style="margin-top: 24px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: #1f2937;">Recent Cleaning Log</h3>
+                        <div id="cleaning-log-list"></div>
+                    </div>
+                </div>
+
+                <!-- === MESSAGES SUB-TAB === -->
+                <div id="airbnb-messages-sub" class="airbnb-sub-content hidden">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="action-button" onclick="showAddMessageTemplateModal()" style="flex:1; margin-bottom:0;">➕ Add Template</button>
+                    </div>
+
+                    <div class="status-pipeline" id="msg-category-filter">
+                        <button class="status-pill active" onclick="filterMsgCategory('all', this)">All</button>
+                        <button class="status-pill" onclick="filterMsgCategory('checkin', this)">Check-in</button>
+                        <button class="status-pill" onclick="filterMsgCategory('checkout', this)">Checkout</button>
+                        <button class="status-pill" onclick="filterMsgCategory('welcome', this)">Welcome</button>
+                        <button class="status-pill" onclick="filterMsgCategory('review', this)">Review</button>
+                        <button class="status-pill" onclick="filterMsgCategory('problem', this)">Problem</button>
+                        <button class="status-pill" onclick="filterMsgCategory('other', this)">Other</button>
+                    </div>
+
+                    <div id="msg-template-grid" class="msg-template-grid"></div>
+                    <div id="msg-templates-empty" class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <h3>No Message Templates</h3>
+                        <p>Starter templates will be created automatically.</p>
+                    </div>
+                </div>
+
+                <!-- === MAINTENANCE SUB-TAB === -->
+                <div id="airbnb-maintenance-sub" class="airbnb-sub-content hidden">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="action-button" onclick="showAddMaintenanceModal()" style="flex:1; margin-bottom:0;">➕ Report Issue</button>
+                    </div>
+
+                    <div class="status-pipeline" id="maint-status-filter">
+                        <button class="status-pill active" onclick="filterMaintenanceStatus('all', this)">All</button>
+                        <button class="status-pill" onclick="filterMaintenanceStatus('reported', this)">Reported</button>
+                        <button class="status-pill" onclick="filterMaintenanceStatus('in-progress', this)">In Progress</button>
+                        <button class="status-pill" onclick="filterMaintenanceStatus('awaiting-parts', this)">Awaiting Parts</button>
+                        <button class="status-pill" onclick="filterMaintenanceStatus('fixed', this)">Fixed</button>
+                    </div>
+
+                    <div id="maintenance-list"></div>
+                    <div id="maintenance-empty" class="empty-state">
+                        <div class="empty-icon">🔧</div>
+                        <h3>No Maintenance Issues</h3>
+                        <p>Report property maintenance issues to track repairs and costs.</p>
+                    </div>
+                </div>
+
+                <!-- === GUEST GUIDEBOOK SUB-TAB === -->
+                <div id="airbnb-guidebook-sub" class="airbnb-sub-content hidden">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
+                        <button class="action-button" onclick="addGuidebookSection()" style="flex:1; margin-bottom:0;">➕ Add Section</button>
+                        <button class="action-button" onclick="toggleGuidebookEdit()" id="guidebook-edit-toggle" style="flex:1; margin-bottom:0; background: #6b7280;">✏️ Edit Mode</button>
+                        <button class="export-btn" onclick="exportGuidebook()" style="margin-bottom:0;">📥 Print / Export</button>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label for="guidebook-property-name" style="font-weight: 600;">Property Name</label>
+                        <input type="text" id="guidebook-property-name" placeholder="e.g., Cozy Downtown Loft" oninput="saveGuidebook()">
+                    </div>
+
+                    <div id="guidebook-sections"></div>
+                    <div id="guidebook-empty" class="empty-state">
+                        <div class="empty-icon">📖</div>
+                        <h3>No Guidebook Sections</h3>
+                        <p>Create a digital house manual for your guests with WiFi info, house rules, and more.</p>
+                    </div>
+                </div>
+
+                <!-- === SOURCING TRIPS SUB-TAB === -->
+                <div id="airbnb-trips-sub" class="airbnb-sub-content hidden">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="action-button" onclick="showAddTripModal()" style="flex:1; margin-bottom:0;">➕ Log Trip</button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🚗</div>
+                            <div class="stat-value" id="total-trips">0</div>
+                            <div class="stat-label">Total Trips</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📏</div>
+                            <div class="stat-value" id="total-miles">0</div>
+                            <div class="stat-label">Total Miles</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-value" id="total-mileage-deduction">$0</div>
+                            <div class="stat-label">Tax Deduction</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right; margin-bottom: 12px;">
+                        <button class="export-btn" onclick="exportTripsCSV()">📥 Export Trips CSV</button>
+                    </div>
+
+                    <div id="trips-list"></div>
+                    <div id="trips-empty" class="empty-state">
+                        <div class="empty-icon">🚗</div>
+                        <h3>No Sourcing Trips Logged</h3>
+                        <p>Track your mileage for sourcing trips to maximize tax deductions.</p>
+                    </div>
                 </div>
             </div>
 
@@ -1171,12 +1992,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Photo</label>
+                    <label>Photos (up to 5)</label>
                     <div class="photo-upload-area" onclick="document.getElementById('item-photo').click()">
                         <span class="upload-icon">📸</span>
-                        <span class="upload-text">Click to add photo</span>
-                        <input type="file" id="item-photo" accept="image/*" style="display: none;">
+                        <span class="upload-text">Click to add photos</span>
+                        <input type="file" id="item-photo" accept="image/*" multiple style="display: none;">
                     </div>
+                    <div id="item-photo-previews" class="photo-gallery-thumbs" style="margin-top: 8px;"></div>
                 </div>
 
                 <div class="modal-buttons">
@@ -1366,6 +2188,305 @@
         </div>
     </div>
 
+    <!-- Add Supply Modal -->
+    <div id="add-supply-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="supply-modal-title">Add Supply</h3>
+            <form id="add-supply-form">
+                <div class="form-group">
+                    <label for="supply-name">Item Name *</label>
+                    <input type="text" id="supply-name" required placeholder="e.g., Bath Towels">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="supply-category">Category</label>
+                        <select id="supply-category">
+                            <option value="bathroom">Bathroom</option>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="cleaning">Cleaning</option>
+                            <option value="linens">Linens</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="supply-unit">Unit</label>
+                        <input type="text" id="supply-unit" placeholder="e.g., rolls, bottles">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="supply-qty">Current Qty *</label>
+                        <input type="number" id="supply-qty" required min="0" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="supply-par">Par Level *</label>
+                        <input type="number" id="supply-par" required min="1" placeholder="5">
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideAddSupplyModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="supply-submit-btn">Add Supply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shopping List Modal -->
+    <div id="shopping-list-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>🛒 Shopping List</h3>
+            <div id="shopping-list-content"></div>
+            <div class="modal-buttons" style="margin-top: 16px;">
+                <button type="button" class="btn btn-secondary" onclick="hideShoppingListModal()">Close</button>
+                <button type="button" class="btn btn-primary" onclick="copyShoppingList()">📋 Copy List</button>
+            </div>
+            <div style="margin-top: 8px; text-align: center;">
+                <button type="button" class="btn btn-primary" onclick="addShoppingListToRoute()" style="background: #ea580c; width: 100%;">🗺️ Add to Route</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Cleaning Template Modal -->
+    <div id="cleaning-template-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="cleaning-template-modal-title">Create Cleaning Template</h3>
+            <form id="cleaning-template-form">
+                <div class="form-group">
+                    <label for="ct-name">Template Name *</label>
+                    <input type="text" id="ct-name" required placeholder="e.g., Standard Turnover">
+                </div>
+                <div class="form-group">
+                    <label>Checklist Items</label>
+                    <div id="ct-items-editor" class="checklist-template-items-editor"></div>
+                    <button type="button" class="btn btn-secondary" onclick="addCleaningTemplateItem()" style="margin-top: 8px; width: 100%;">+ Add Item</button>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideCleaningTemplateModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Template</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Message Template Modal -->
+    <div id="msg-template-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="msg-template-modal-title">Add Message Template</h3>
+            <form id="msg-template-form">
+                <div class="form-group">
+                    <label for="mt-name">Template Name *</label>
+                    <input type="text" id="mt-name" required placeholder="e.g., Check-in Instructions">
+                </div>
+                <div class="form-group">
+                    <label for="mt-category">Category</label>
+                    <select id="mt-category">
+                        <option value="checkin">Check-in</option>
+                        <option value="checkout">Checkout</option>
+                        <option value="welcome">Welcome</option>
+                        <option value="review">Review</option>
+                        <option value="problem">Problem</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mt-body">Message Body *</label>
+                    <textarea id="mt-body" rows="8" required placeholder="Use [PLACEHOLDER] for dynamic values, e.g. [GUEST_NAME], [WIFI_PASSWORD]"></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideMessageTemplateModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="mt-submit-btn">Add Template</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Use Message Template Modal -->
+    <div id="use-msg-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="use-msg-title">Use Template</h3>
+            <div id="use-msg-placeholders"></div>
+            <div class="form-group" style="margin-top: 16px;">
+                <label>Preview</label>
+                <div id="use-msg-preview" class="msg-preview-box"></div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="hideUseMsgModal()">Close</button>
+                <button type="button" class="btn btn-primary" onclick="copyMessageToClipboard()">📋 Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Maintenance Issue Modal -->
+    <div id="add-maintenance-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="maint-modal-title">Report Maintenance Issue</h3>
+            <form id="add-maintenance-form">
+                <div class="form-group">
+                    <label for="maint-issue">Issue *</label>
+                    <input type="text" id="maint-issue" required placeholder="e.g., Broken sink faucet">
+                </div>
+                <div class="form-group">
+                    <label for="maint-description">Description</label>
+                    <textarea id="maint-description" rows="3" placeholder="Details about the issue..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="maint-status-select">Status</label>
+                        <select id="maint-status-select">
+                            <option value="reported">Reported</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="awaiting-parts">Awaiting Parts</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maint-cost">Cost ($)</label>
+                        <input type="number" id="maint-cost" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maint-vendor">Vendor / Contractor</label>
+                    <input type="text" id="maint-vendor" placeholder="e.g., Joe's Plumbing">
+                </div>
+                <div class="form-group">
+                    <label>Photo</label>
+                    <div class="photo-upload-area" onclick="document.getElementById('maint-photo-input').click()">
+                        <span class="upload-icon">📸</span>
+                        <span class="upload-text" id="maint-photo-text">Click to add photo</span>
+                        <input type="file" id="maint-photo-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideMaintenanceModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="maint-submit-btn">Report Issue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Sourcing Trip Modal -->
+    <div id="add-trip-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="trip-modal-title">Log Sourcing Trip</h3>
+            <form id="add-trip-form">
+                <div class="form-group">
+                    <label for="trip-date">Date *</label>
+                    <input type="date" id="trip-date" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trip-from">From *</label>
+                        <input type="text" id="trip-from" required placeholder="e.g., Home">
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-to">To *</label>
+                        <input type="text" id="trip-to" required placeholder="e.g., Estate Sale on Main St">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trip-miles">Miles *</label>
+                        <input type="number" id="trip-miles" step="0.1" required placeholder="0.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-purpose">Purpose</label>
+                        <select id="trip-purpose">
+                            <option value="sourcing">Sourcing</option>
+                            <option value="pickup">Pickup</option>
+                            <option value="delivery">Delivery</option>
+                            <option value="supplies">Supplies Run</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trip-notes">Notes</label>
+                    <textarea id="trip-notes" rows="2" placeholder="What you found, stores visited..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideTripModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="trip-submit-btn">Log Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Listing Modal -->
+    <div id="add-listing-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Add Listing</h3>
+            <form id="add-listing-form">
+                <input type="hidden" id="listing-item-id">
+                <div class="form-group">
+                    <label for="listing-platform">Platform *</label>
+                    <select id="listing-platform" required>
+                        <option value="Facebook Marketplace">Facebook Marketplace</option>
+                        <option value="OfferUp">OfferUp</option>
+                        <option value="Craigslist">Craigslist</option>
+                        <option value="Nextdoor">Nextdoor</option>
+                        <option value="eBay">eBay</option>
+                        <option value="Local Only">Local Only</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="listing-price">List Price</label>
+                        <input type="number" id="listing-price" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="listing-status">Status</label>
+                        <select id="listing-status">
+                            <option value="active">Active</option>
+                            <option value="sold">Sold</option>
+                            <option value="delisted">Delisted</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="listing-url">Listing URL (optional)</label>
+                    <input type="url" id="listing-url" placeholder="https://...">
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideListingModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Listing</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Modal -->
+    <div id="photo-gallery-modal" class="modal hidden">
+        <div class="modal-content" style="max-width: 600px;">
+            <h3 id="gallery-modal-title">Photos</h3>
+            <div style="text-align: center;">
+                <img id="gallery-modal-img" class="gallery-modal-img" src="" alt="">
+                <div id="gallery-modal-caption" style="margin-top: 8px; color: #6b7280; font-size: 0.85rem;"></div>
+            </div>
+            <div class="gallery-nav">
+                <button onclick="galleryPrev()">←</button>
+                <span id="gallery-modal-counter">1 / 1</span>
+                <button onclick="galleryNext()">→</button>
+            </div>
+            <div id="gallery-modal-thumbs" class="photo-gallery-thumbs" style="justify-content: center; margin-top: 12px;"></div>
+            <div class="modal-buttons" style="margin-top: 16px;">
+                <button type="button" class="btn btn-secondary" onclick="hideGalleryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Report Modal -->
+    <div id="export-report-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Export Inventory Report</h3>
+            <p style="color: #6b7280; margin-bottom: 16px;">Generate a printable report of your inventory with photos and cost breakdowns.</p>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="hideExportReportModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="generateExportReport()">📥 Generate Report</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // App State
         let currentTab = 'furniture';
@@ -1376,6 +2497,29 @@
         let currentDeliveryItem = null;
         let currentCompletingDelivery = null;
         let currentStatusFilter = 'all';
+
+        // Airbnb State
+        let airbnbSupplies = [];
+        let cleaningTemplates = [];
+        let cleaningLogs = [];
+        let messageTemplates = [];
+        let maintenanceLog = [];
+        let guestGuidebook = { propertyName: '', sections: [] };
+        let sourcingTrips = [];
+        let currentAirbnbSubtab = 'supplies';
+        let currentSupplyCategoryFilter = 'all';
+        let currentMsgCategoryFilter = 'all';
+        let currentMaintStatusFilter = 'all';
+        let activeChecklistLog = null;
+        let editingSupplyId = null;
+        let editingMsgTemplateId = null;
+        let editingMaintenanceId = null;
+        let editingTripId = null;
+        let currentUseMsgTemplate = null;
+        let guidebookEditMode = false;
+        let galleryCurrentIndex = 0;
+        let galleryCurrentPhotos = [];
+        let pendingItemPhotos = [];
 
         // Drag state
         let dragState = null; // { stopId, startY, cardEl, placeholder, startIndex }
@@ -1408,6 +2552,7 @@
         function initializeApp() {
             loadData();
             migrateData();
+            seedAirbnbDefaults();
             renderAll();
             setupEventListeners();
             requestNotificationPermission();
@@ -1438,6 +2583,13 @@
             pendingDeliveries = JSON.parse(localStorage.getItem('pending-deliveries') || '[]');
             routeStops = JSON.parse(localStorage.getItem('route-stops') || '[]');
             salesHistory = JSON.parse(localStorage.getItem('sales-history') || '[]');
+            airbnbSupplies = JSON.parse(localStorage.getItem('airbnb-supplies') || '[]');
+            cleaningTemplates = JSON.parse(localStorage.getItem('cleaning-templates') || '[]');
+            cleaningLogs = JSON.parse(localStorage.getItem('cleaning-logs') || '[]');
+            messageTemplates = JSON.parse(localStorage.getItem('message-templates') || '[]');
+            maintenanceLog = JSON.parse(localStorage.getItem('maintenance-log') || '[]');
+            guestGuidebook = JSON.parse(localStorage.getItem('guest-guidebook') || '{"propertyName":"","sections":[]}');
+            sourcingTrips = JSON.parse(localStorage.getItem('sourcing-trips') || '[]');
         }
 
         function saveData() {
@@ -1445,6 +2597,13 @@
             localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
             localStorage.setItem('route-stops', JSON.stringify(routeStops));
             localStorage.setItem('sales-history', JSON.stringify(salesHistory));
+            localStorage.setItem('airbnb-supplies', JSON.stringify(airbnbSupplies));
+            localStorage.setItem('cleaning-templates', JSON.stringify(cleaningTemplates));
+            localStorage.setItem('cleaning-logs', JSON.stringify(cleaningLogs));
+            localStorage.setItem('message-templates', JSON.stringify(messageTemplates));
+            localStorage.setItem('maintenance-log', JSON.stringify(maintenanceLog));
+            localStorage.setItem('guest-guidebook', JSON.stringify(guestGuidebook));
+            localStorage.setItem('sourcing-trips', JSON.stringify(sourcingTrips));
         }
 
         // Migration
@@ -1489,6 +2648,13 @@
             renderRouteStops();
             renderSalesHistory();
             updateStats();
+            renderAirbnbSupplies();
+            renderCleaningTemplates();
+            renderCleaningLogs();
+            renderMessageTemplates();
+            renderMaintenanceLog();
+            renderGuidebook();
+            renderSourcingTrips();
         }
 
         // Tab Management
@@ -1587,6 +2753,30 @@
             });
         }
 
+        function getAgingInfo(item) {
+            if (!item.createdAt) return { days: 0, cls: 'green', label: 'New' };
+            const days = Math.floor((Date.now() - new Date(item.createdAt).getTime()) / 86400000);
+            if (days >= 60) return { days, cls: 'red', label: days + 'd' };
+            if (days >= 30) return { days, cls: 'yellow', label: days + 'd' };
+            return { days, cls: 'green', label: days + 'd' };
+        }
+
+        function getItemPhotos(item) {
+            if (item.photos && item.photos.length > 0) return item.photos;
+            if (item.photo) return [{ id: 'legacy', photo: item.photo, caption: '', order: 0 }];
+            return [];
+        }
+
+        function getPrimaryPhoto(item) {
+            const photos = getItemPhotos(item);
+            if (photos.length === 0) return null;
+            if (item.primaryPhotoId) {
+                const primary = photos.find(p => p.id === item.primaryPhotoId);
+                if (primary) return primary.photo;
+            }
+            return photos[0].photo;
+        }
+
         function createItemCard(item) {
             const card = document.createElement('div');
             card.className = 'item-card';
@@ -1598,16 +2788,33 @@
             const statusBadge = item.status ? '<span class="status-badge ' + item.status + '">' + STATUS_LABELS[item.status] + '</span>' : '';
             const categoryTag = item.category && item.category !== 'other' ? '<span class="category-tag">' + CATEGORY_LABELS[item.category] + '</span>' : '';
 
+            const aging = getAgingInfo(item);
+            const agingBadge = '<span class="aging-badge ' + aging.cls + '">' + aging.label + '</span>';
+
+            const photos = getItemPhotos(item);
+            const primaryPhoto = getPrimaryPhoto(item);
+            const photoCountBadge = photos.length > 1 ? `<span class="photo-gallery-count">${photos.length} photos</span>` : '';
+
+            const listings = item.listings || [];
+            let listingHtml = '';
+            if (listings.length > 0) {
+                listingHtml = '<div class="listing-badges">' + listings.map(l =>
+                    `<span class="listing-badge ${l.status === 'sold' ? 'sold' : l.status === 'delisted' ? 'delisted' : ''}">${l.platform}${l.status === 'sold' ? ' ✓' : ''}</span>`
+                ).join('') + '</div>';
+            }
+
             card.innerHTML = `
-                <div class="item-image" onclick="viewPhoto('${item.id}')">
-                    ${item.photo ? `<img src="${item.photo}" alt="${item.title}">` : '📦'}
+                <div class="item-image photo-gallery-container" onclick="openItemGallery('${item.id}')">
+                    ${primaryPhoto ? `<img src="${primaryPhoto}" alt="${item.title}">` : '📦'}
+                    ${photoCountBadge}
                 </div>
                 <div class="item-header">
-                    <div class="item-title">${item.title}</div>
+                    <div class="item-title">${item.title} ${agingBadge}</div>
                     ${statusBadge}
                     ${categoryTag}
                 </div>
                 <div class="item-description">${item.description || 'No description'}</div>
+                ${listingHtml}
                 <div class="cost-breakdown">
                     <div class="cost-row">
                         <span>Purchase:</span>
@@ -1642,6 +2849,9 @@
                 <div class="item-actions">
                     <button class="action-btn send-btn" onclick="showDeliveryModal('${item.id}')">
                         📦 Deliver
+                    </button>
+                    <button class="action-btn edit-btn" onclick="showAddListingModal('${item.id}')" title="Add listing">
+                        📍 List
                     </button>
                     <button class="action-btn edit-btn" onclick="editItem('${item.id}')">
                         ✏️ Edit
@@ -1921,6 +3131,8 @@
             document.getElementById('add-item-modal').classList.add('hidden');
             document.getElementById('add-item-form').reset();
             resetPhotoUpload();
+            document.getElementById('item-photo-previews').innerHTML = '';
+            pendingItemPhotos = [];
             document.querySelector('#add-item-modal h3').textContent = 'Add New Item';
             document.querySelector('#add-item-form button[type="submit"]').textContent = 'Add Item';
             window.editingItemId = null;
@@ -1993,14 +3205,52 @@
         }
 
         // Photo Upload
+        function compressPhoto(file, maxWidth, quality) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width, h = img.height;
+                        if (w > maxWidth) {
+                            h = Math.round(h * maxWidth / w);
+                            w = maxWidth;
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
         function setupEventListeners() {
             const photoInput = document.getElementById('item-photo');
             const uploadArea = document.querySelector('#add-item-modal .photo-upload-area');
 
-            photoInput.addEventListener('change', function(e) {
+            photoInput.addEventListener('change', async function(e) {
                 if (e.target.files.length > 0) {
                     uploadArea.classList.add('has-file');
-                    uploadArea.querySelector('.upload-text').textContent = '📸 ' + e.target.files[0].name;
+                    const count = Math.min(e.target.files.length, 5);
+                    uploadArea.querySelector('.upload-text').textContent = '📸 ' + count + ' photo(s) selected';
+                    pendingItemPhotos = [];
+                    const previewContainer = document.getElementById('item-photo-previews');
+                    previewContainer.innerHTML = '';
+                    for (let i = 0; i < count; i++) {
+                        const compressed = await compressPhoto(e.target.files[i], 800, 0.75);
+                        pendingItemPhotos.push(compressed);
+                        const thumb = document.createElement('img');
+                        thumb.src = compressed;
+                        thumb.className = 'photo-gallery-thumb';
+                        thumb.style.width = '50px';
+                        thumb.style.height = '50px';
+                        previewContainer.appendChild(thumb);
+                    }
                 } else {
                     resetPhotoUpload();
                 }
@@ -2018,6 +3268,18 @@
                 }
             });
 
+            // Maintenance photo
+            document.getElementById('maint-photo-input').addEventListener('change', function(e) {
+                const area = document.querySelector('#add-maintenance-modal .photo-upload-area');
+                if (e.target.files.length > 0) {
+                    area.classList.add('has-file');
+                    document.getElementById('maint-photo-text').textContent = '📸 ' + e.target.files[0].name;
+                } else {
+                    area.classList.remove('has-file');
+                    document.getElementById('maint-photo-text').textContent = 'Click to add photo';
+                }
+            });
+
             // Mileage cost calculator
             document.getElementById('delivery-mileage').addEventListener('input', function(e) {
                 const miles = parseFloat(e.target.value) || 0;
@@ -2032,6 +3294,9 @@
             document.getElementById('quick-add-form').addEventListener('submit', handleQuickAdd);
             document.getElementById('errand-form').addEventListener('submit', handleAddErrand);
             document.getElementById('pickup-form').addEventListener('submit', handleAddPickup);
+            document.getElementById('add-maintenance-form').addEventListener('submit', handleAddMaintenance);
+            document.getElementById('add-trip-form').addEventListener('submit', handleAddTrip);
+            document.getElementById('add-listing-form').addEventListener('submit', handleAddListing);
         }
 
         function resetPhotoUpload() {
@@ -2054,7 +3319,6 @@
             const repairCost = parseFloat(document.getElementById('repair-cost').value) || 0;
             const status = document.getElementById('item-status').value;
             const category = document.getElementById('item-category').value;
-            const photoFile = document.getElementById('item-photo').files[0];
 
             const itemData = {
                 title,
@@ -2073,46 +3337,48 @@
                 const itemIndex = furnitureItems.findIndex(item => item.id === window.editingItemId);
                 if (itemIndex !== -1) {
                     furnitureItems[itemIndex] = { ...furnitureItems[itemIndex], ...itemData };
-
-                    if (photoFile) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            furnitureItems[itemIndex].photo = e.target.result;
-                            saveData();
-                            renderAll();
-                            hideAddItemModal();
-                        };
-                        reader.readAsDataURL(photoFile);
-                    } else {
-                        saveData();
-                        renderAll();
-                        hideAddItemModal();
+                    if (pendingItemPhotos.length > 0) {
+                        const newPhotos = pendingItemPhotos.map((p, i) => ({
+                            id: 'ph' + Date.now() + i,
+                            photo: p,
+                            caption: '',
+                            order: (furnitureItems[itemIndex].photos || []).length + i
+                        }));
+                        furnitureItems[itemIndex].photos = (furnitureItems[itemIndex].photos || []).concat(newPhotos);
+                        if (!furnitureItems[itemIndex].primaryPhotoId) {
+                            furnitureItems[itemIndex].primaryPhotoId = newPhotos[0].id;
+                        }
+                        furnitureItems[itemIndex].photo = furnitureItems[itemIndex].photos[0].photo;
                     }
+                    saveData();
+                    renderAll();
+                    hideAddItemModal();
                 }
             } else {
                 const newItem = {
                     id: 'item' + Date.now(),
                     ...itemData,
                     createdAt: new Date().toISOString(),
-                    photo: null
+                    photo: null,
+                    photos: [],
+                    listings: []
                 };
 
-                if (photoFile) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        newItem.photo = e.target.result;
-                        furnitureItems.push(newItem);
-                        saveData();
-                        renderAll();
-                        hideAddItemModal();
-                    };
-                    reader.readAsDataURL(photoFile);
-                } else {
-                    furnitureItems.push(newItem);
-                    saveData();
-                    renderAll();
-                    hideAddItemModal();
+                if (pendingItemPhotos.length > 0) {
+                    newItem.photos = pendingItemPhotos.map((p, i) => ({
+                        id: 'ph' + Date.now() + i,
+                        photo: p,
+                        caption: '',
+                        order: i
+                    }));
+                    newItem.photo = newItem.photos[0].photo;
+                    newItem.primaryPhotoId = newItem.photos[0].id;
                 }
+
+                furnitureItems.push(newItem);
+                saveData();
+                renderAll();
+                hideAddItemModal();
             }
         }
 
@@ -2356,24 +3622,7 @@
         }
 
         function viewPhoto(itemId) {
-            const item = furnitureItems.find(item => item.id === itemId);
-            if (item.photo) {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.innerHTML = `
-                    <div class="modal-content" style="max-width: 90vw; padding: 24px;">
-                        <h3>${item.title}</h3>
-                        <img src="${item.photo}" style="width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 6px; margin-top: 16px;">
-                        <div style="text-align: center; margin-top: 20px;">
-                            <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
-                        </div>
-                    </div>
-                `;
-                modal.onclick = (e) => {
-                    if (e.target === modal) modal.remove();
-                };
-                document.body.appendChild(modal);
-            }
+            openItemGallery(itemId);
         }
 
         // Sales History
@@ -2436,6 +3685,1312 @@
 
                 list.appendChild(historyItem);
             });
+        }
+
+        // ========== AIRBNB: SEED DEFAULTS ==========
+
+        function seedAirbnbDefaults() {
+            if (cleaningTemplates.length === 0) {
+                cleaningTemplates.push({
+                    id: 'ct' + Date.now(),
+                    name: 'Standard Turnover',
+                    items: [
+                        { id: 'ci1', text: 'Wash all dishes and put away', room: 'Kitchen' },
+                        { id: 'ci2', text: 'Wipe countertops and stovetop', room: 'Kitchen' },
+                        { id: 'ci3', text: 'Clean microwave inside and out', room: 'Kitchen' },
+                        { id: 'ci4', text: 'Empty and clean refrigerator', room: 'Kitchen' },
+                        { id: 'ci5', text: 'Scrub toilet, sink, and tub/shower', room: 'Bathroom' },
+                        { id: 'ci6', text: 'Replace towels and bath mat', room: 'Bathroom' },
+                        { id: 'ci7', text: 'Refill soap, shampoo, toilet paper', room: 'Bathroom' },
+                        { id: 'ci8', text: 'Clean mirror', room: 'Bathroom' },
+                        { id: 'ci9', text: 'Strip and remake bed with fresh linens', room: 'Bedroom' },
+                        { id: 'ci10', text: 'Dust nightstands and surfaces', room: 'Bedroom' },
+                        { id: 'ci11', text: 'Check under bed for left items', room: 'Bedroom' },
+                        { id: 'ci12', text: 'Vacuum/mop all floors', room: 'General' },
+                        { id: 'ci13', text: 'Empty all trash cans', room: 'General' },
+                        { id: 'ci14', text: 'Wipe light switches and door handles', room: 'General' },
+                        { id: 'ci15', text: 'Check all lights working', room: 'General' }
+                    ]
+                });
+                saveData();
+            }
+
+            if (messageTemplates.length === 0) {
+                messageTemplates = [
+                    {
+                        id: 'mt1',
+                        name: 'Check-in Instructions',
+                        category: 'checkin',
+                        body: 'Hi [GUEST_NAME]! Welcome to our place. Here are your check-in details:\n\nAddress: [ADDRESS]\nDoor Code: [DOOR_CODE]\nWiFi Network: [WIFI_NAME]\nWiFi Password: [WIFI_PASSWORD]\nParking: [PARKING_INFO]\n\nCheck-in is at [CHECKIN_TIME]. Let me know if you need anything!'
+                    },
+                    {
+                        id: 'mt2',
+                        name: 'Welcome Message',
+                        category: 'welcome',
+                        body: 'Hi [GUEST_NAME]! Just wanted to welcome you and make sure you got settled in okay. Everything in the house should be ready for you.\n\nFeel free to reach out if you have any questions. Enjoy your stay!'
+                    },
+                    {
+                        id: 'mt3',
+                        name: 'Checkout Reminder',
+                        category: 'checkout',
+                        body: 'Hi [GUEST_NAME]! Just a friendly reminder that checkout is at [CHECKOUT_TIME] tomorrow.\n\nBefore you leave, please:\n- Start a load of towels in the washer\n- Take out any trash\n- Lock the door behind you\n\nThank you for staying with us! Safe travels.'
+                    },
+                    {
+                        id: 'mt4',
+                        name: 'Post-Stay Review Request',
+                        category: 'review',
+                        body: 'Hi [GUEST_NAME]! Thank you so much for staying with us. We hope you had a wonderful time!\n\nIf you enjoyed your stay, we would really appreciate a review on Airbnb. It helps us a lot as hosts.\n\nWe have already left you a 5-star review. Hope to host you again!'
+                    },
+                    {
+                        id: 'mt5',
+                        name: 'Problem Response',
+                        category: 'problem',
+                        body: 'Hi [GUEST_NAME], I am so sorry to hear about [ISSUE]. That is definitely not the experience we want you to have.\n\nI am [ACTION_PLAN]. In the meantime, please [INTERIM_SOLUTION].\n\nThank you for your patience and I will keep you updated.'
+                    }
+                ];
+                saveData();
+            }
+        }
+
+        // ========== AIRBNB: SUB-TAB SWITCHING ==========
+
+        function switchAirbnbSubtab(subtab, btn) {
+            currentAirbnbSubtab = subtab;
+            document.querySelectorAll('.airbnb-subtab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.airbnb-sub-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('airbnb-' + subtab + '-sub').classList.remove('hidden');
+        }
+
+        // ========== AIRBNB: SUPPLY INVENTORY ==========
+
+        const SUPPLY_CATEGORY_LABELS = {
+            bathroom: 'Bathroom', kitchen: 'Kitchen', cleaning: 'Cleaning', linens: 'Linens', other: 'Other'
+        };
+
+        function renderAirbnbSupplies() {
+            const grid = document.getElementById('supply-grid');
+            const empty = document.getElementById('supply-empty');
+            const banner = document.getElementById('low-stock-banner');
+
+            let items = airbnbSupplies;
+            if (currentSupplyCategoryFilter !== 'all') {
+                items = items.filter(s => s.category === currentSupplyCategoryFilter);
+            }
+
+            // Low-stock banner
+            const belowPar = airbnbSupplies.filter(s => s.currentQty < s.parLevel);
+            if (belowPar.length > 0) {
+                banner.classList.remove('hidden');
+                document.getElementById('low-stock-text').textContent = belowPar.length + ' item' + (belowPar.length > 1 ? 's' : '') + ' below par level';
+            } else {
+                banner.classList.add('hidden');
+            }
+
+            // Stats
+            document.getElementById('supply-total-items').textContent = airbnbSupplies.length;
+            document.getElementById('supply-below-par').textContent = belowPar.length;
+            const cats = new Set(airbnbSupplies.map(s => s.category));
+            document.getElementById('supply-categories').textContent = cats.size;
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = '';
+
+            items.forEach(supply => {
+                const card = document.createElement('div');
+                card.className = 'supply-card';
+                const ratio = supply.parLevel > 0 ? supply.currentQty / supply.parLevel : 1;
+                const qtyClass = ratio >= 1 ? 'ok' : ratio >= 0.5 ? 'low' : 'critical';
+
+                card.innerHTML = `
+                    <div class="supply-card-header">
+                        <div class="supply-card-name">${supply.name}</div>
+                        <span class="supply-card-category">${SUPPLY_CATEGORY_LABELS[supply.category] || supply.category}</span>
+                    </div>
+                    <div class="supply-qty-row">
+                        <button class="qty-btn" onclick="adjustSupplyQty('${supply.id}', -1)">−</button>
+                        <div class="supply-qty-display ${qtyClass}">${supply.currentQty}</div>
+                        <button class="qty-btn" onclick="adjustSupplyQty('${supply.id}', 1)">+</button>
+                        <span class="supply-par">/ ${supply.parLevel} ${supply.unit || ''}</span>
+                    </div>
+                    <div class="supply-card-actions">
+                        <button style="background: #f59e0b; color: white;" onclick="editSupply('${supply.id}')">✏️ Edit</button>
+                        <button style="background: #ef4444; color: white;" onclick="deleteSupply('${supply.id}')">🗑️</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSupplyCategory(cat, btn) {
+            currentSupplyCategoryFilter = cat;
+            document.querySelectorAll('#supply-category-filter .status-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderAirbnbSupplies();
+        }
+
+        function adjustSupplyQty(id, delta) {
+            const supply = airbnbSupplies.find(s => s.id === id);
+            if (!supply) return;
+            supply.currentQty = Math.max(0, supply.currentQty + delta);
+            if (delta > 0) {
+                supply.lastRestocked = new Date().toISOString();
+            }
+            saveData();
+            renderAirbnbSupplies();
+        }
+
+        function showAddSupplyModal() {
+            editingSupplyId = null;
+            document.getElementById('supply-modal-title').textContent = 'Add Supply';
+            document.getElementById('supply-submit-btn').textContent = 'Add Supply';
+            document.getElementById('add-supply-form').reset();
+            document.getElementById('add-supply-modal').classList.remove('hidden');
+        }
+
+        function hideAddSupplyModal() {
+            document.getElementById('add-supply-modal').classList.add('hidden');
+            document.getElementById('add-supply-form').reset();
+            editingSupplyId = null;
+        }
+
+        function editSupply(id) {
+            const supply = airbnbSupplies.find(s => s.id === id);
+            if (!supply) return;
+            editingSupplyId = id;
+            document.getElementById('supply-modal-title').textContent = 'Edit Supply';
+            document.getElementById('supply-submit-btn').textContent = 'Update Supply';
+            document.getElementById('supply-name').value = supply.name;
+            document.getElementById('supply-category').value = supply.category;
+            document.getElementById('supply-unit').value = supply.unit || '';
+            document.getElementById('supply-qty').value = supply.currentQty;
+            document.getElementById('supply-par').value = supply.parLevel;
+            document.getElementById('add-supply-modal').classList.remove('hidden');
+        }
+
+        function deleteSupply(id) {
+            const supply = airbnbSupplies.find(s => s.id === id);
+            if (!supply) return;
+            if (!confirm('Delete "' + supply.name + '"?')) return;
+            airbnbSupplies = airbnbSupplies.filter(s => s.id !== id);
+            saveData();
+            renderAirbnbSupplies();
+        }
+
+        function handleAddSupply(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('supply-name').value,
+                category: document.getElementById('supply-category').value,
+                unit: document.getElementById('supply-unit').value,
+                currentQty: parseInt(document.getElementById('supply-qty').value) || 0,
+                parLevel: parseInt(document.getElementById('supply-par').value) || 1,
+                lastRestocked: new Date().toISOString()
+            };
+
+            if (editingSupplyId) {
+                const idx = airbnbSupplies.findIndex(s => s.id === editingSupplyId);
+                if (idx !== -1) {
+                    airbnbSupplies[idx] = { ...airbnbSupplies[idx], ...data };
+                }
+            } else {
+                airbnbSupplies.push({
+                    id: 'sup' + Date.now(),
+                    ...data,
+                    restockHistory: []
+                });
+            }
+
+            saveData();
+            renderAirbnbSupplies();
+            hideAddSupplyModal();
+        }
+
+        // ========== AIRBNB: SHOPPING LIST ==========
+
+        function generateShoppingList() {
+            const belowPar = airbnbSupplies.filter(s => s.currentQty < s.parLevel);
+            const content = document.getElementById('shopping-list-content');
+
+            if (belowPar.length === 0) {
+                content.innerHTML = '<div style="text-align:center; padding: 20px; color: #6b7280;">All supplies are at or above par level!</div>';
+            } else {
+                let html = '<div style="margin-bottom: 12px; font-size: 0.9rem; color: #6b7280;">' + belowPar.length + ' item(s) to restock:</div>';
+                belowPar.forEach(s => {
+                    const need = s.parLevel - s.currentQty;
+                    html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6;">
+                        <span style="font-weight: 600;">${s.name}</span>
+                        <span style="color: #6b7280; font-size: 0.85rem;">Have: ${s.currentQty} | Need: ${need} | Par: ${s.parLevel}</span>
+                    </div>`;
+                });
+                content.innerHTML = html;
+            }
+
+            document.getElementById('shopping-list-modal').classList.remove('hidden');
+        }
+
+        function hideShoppingListModal() {
+            document.getElementById('shopping-list-modal').classList.add('hidden');
+        }
+
+        function copyShoppingList() {
+            const belowPar = airbnbSupplies.filter(s => s.currentQty < s.parLevel);
+            if (belowPar.length === 0) return;
+            const text = 'Shopping List:\n' + belowPar.map(s => {
+                const need = s.parLevel - s.currentQty;
+                return '- ' + s.name + ' (need ' + need + ' ' + (s.unit || 'units') + ')';
+            }).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Shopping list copied to clipboard!');
+            });
+        }
+
+        function addShoppingListToRoute() {
+            const belowPar = airbnbSupplies.filter(s => s.currentQty < s.parLevel);
+            if (belowPar.length === 0) return;
+            const notes = belowPar.map(s => {
+                const need = s.parLevel - s.currentQty;
+                return s.name + ' (need ' + need + ')';
+            }).join(', ');
+
+            const maxOrder = routeStops.filter(s => !s.completed).reduce((max, s) => Math.max(max, s.order), -1);
+            routeStops.push({
+                id: 'stop' + Date.now(),
+                type: 'errand',
+                title: 'Airbnb Supply Restock',
+                address: '',
+                datetime: null,
+                notes: notes,
+                completed: false,
+                order: maxOrder + 1
+            });
+
+            saveData();
+            renderRouteStops();
+            hideShoppingListModal();
+            alert('Added "Airbnb Supply Restock" to your route!');
+        }
+
+        // ========== AIRBNB: CLEANING CHECKLISTS ==========
+
+        function renderCleaningTemplates() {
+            const list = document.getElementById('cleaning-templates-list');
+            const empty = document.getElementById('cleaning-templates-empty');
+
+            if (cleaningTemplates.length === 0) {
+                list.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            list.innerHTML = '';
+
+            cleaningTemplates.forEach(tmpl => {
+                const card = document.createElement('div');
+                card.className = 'template-card';
+                card.innerHTML = `
+                    <div class="template-card-info">
+                        <h4>${tmpl.name}</h4>
+                        <p>${tmpl.items.length} items</p>
+                    </div>
+                    <div class="template-card-actions">
+                        <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem;" onclick="startChecklist('${tmpl.id}')">▶ Start</button>
+                        <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;" onclick="editCleaningTemplate('${tmpl.id}')">✏️</button>
+                        <button style="padding: 6px 14px; font-size: 0.85rem; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer;" onclick="deleteCleaningTemplate('${tmpl.id}')">🗑️</button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function renderCleaningLogs() {
+            const list = document.getElementById('cleaning-log-list');
+            const recent = [...cleaningLogs].sort((a, b) => new Date(b.completedAt || b.date) - new Date(a.completedAt || a.date)).slice(0, 10);
+
+            if (recent.length === 0) {
+                list.innerHTML = '<div style="text-align:center; padding: 16px; color: #6b7280; font-size: 0.9rem;">No cleaning logs yet.</div>';
+                return;
+            }
+
+            list.innerHTML = '';
+            recent.forEach(log => {
+                const tmpl = cleaningTemplates.find(t => t.id === log.templateId);
+                const dateStr = new Date(log.completedAt || log.date).toLocaleDateString();
+                const checkedCount = log.items.filter(i => i.checked).length;
+                const div = document.createElement('div');
+                div.className = 'cleaning-log-item';
+                const photoCount = (log.photos || []).length;
+                div.innerHTML = `
+                    <div class="log-info">${tmpl ? tmpl.name : 'Unknown Template'} — ${checkedCount}/${log.items.length} items${photoCount > 0 ? ' • 📸 ' + photoCount + ' photos' : ''}</div>
+                    <div class="log-date">${dateStr} ${log.completed ? '✅' : '⏳'}</div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function showCreateCleaningTemplateModal() {
+            window.editingCleaningTemplateId = null;
+            document.getElementById('cleaning-template-modal-title').textContent = 'Create Cleaning Template';
+            document.getElementById('ct-name').value = '';
+            const editor = document.getElementById('ct-items-editor');
+            editor.innerHTML = '';
+            addCleaningTemplateItem();
+            addCleaningTemplateItem();
+            addCleaningTemplateItem();
+            document.getElementById('cleaning-template-modal').classList.remove('hidden');
+        }
+
+        function hideCleaningTemplateModal() {
+            document.getElementById('cleaning-template-modal').classList.add('hidden');
+        }
+
+        function addCleaningTemplateItem() {
+            const editor = document.getElementById('ct-items-editor');
+            const row = document.createElement('div');
+            row.className = 'checklist-template-item-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Task description" required>
+                <select>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Bedroom">Bedroom</option>
+                    <option value="Living Room">Living Room</option>
+                    <option value="General">General</option>
+                </select>
+                <button type="button" class="remove-item-btn" onclick="this.parentElement.remove()">✕</button>
+            `;
+            editor.appendChild(row);
+        }
+
+        function editCleaningTemplate(id) {
+            const tmpl = cleaningTemplates.find(t => t.id === id);
+            if (!tmpl) return;
+            window.editingCleaningTemplateId = id;
+            document.getElementById('cleaning-template-modal-title').textContent = 'Edit Cleaning Template';
+            document.getElementById('ct-name').value = tmpl.name;
+            const editor = document.getElementById('ct-items-editor');
+            editor.innerHTML = '';
+            tmpl.items.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'checklist-template-item-row';
+                row.innerHTML = `
+                    <input type="text" value="${item.text}" required>
+                    <select>
+                        <option value="Kitchen" ${item.room === 'Kitchen' ? 'selected' : ''}>Kitchen</option>
+                        <option value="Bathroom" ${item.room === 'Bathroom' ? 'selected' : ''}>Bathroom</option>
+                        <option value="Bedroom" ${item.room === 'Bedroom' ? 'selected' : ''}>Bedroom</option>
+                        <option value="Living Room" ${item.room === 'Living Room' ? 'selected' : ''}>Living Room</option>
+                        <option value="General" ${item.room === 'General' ? 'selected' : ''}>General</option>
+                    </select>
+                    <button type="button" class="remove-item-btn" onclick="this.parentElement.remove()">✕</button>
+                `;
+                editor.appendChild(row);
+            });
+            document.getElementById('cleaning-template-modal').classList.remove('hidden');
+        }
+
+        function handleSaveCleaningTemplate(e) {
+            e.preventDefault();
+            const name = document.getElementById('ct-name').value;
+            const rows = document.querySelectorAll('#ct-items-editor .checklist-template-item-row');
+            const items = [];
+            rows.forEach((row, i) => {
+                const text = row.querySelector('input').value.trim();
+                const room = row.querySelector('select').value;
+                if (text) {
+                    items.push({ id: 'ci' + Date.now() + i, text, room });
+                }
+            });
+
+            if (items.length === 0) {
+                alert('Add at least one checklist item.');
+                return;
+            }
+
+            if (window.editingCleaningTemplateId) {
+                const idx = cleaningTemplates.findIndex(t => t.id === window.editingCleaningTemplateId);
+                if (idx !== -1) {
+                    cleaningTemplates[idx].name = name;
+                    cleaningTemplates[idx].items = items;
+                }
+            } else {
+                cleaningTemplates.push({ id: 'ct' + Date.now(), name, items });
+            }
+
+            saveData();
+            renderCleaningTemplates();
+            hideCleaningTemplateModal();
+        }
+
+        function deleteCleaningTemplate(id) {
+            if (!confirm('Delete this cleaning template?')) return;
+            cleaningTemplates = cleaningTemplates.filter(t => t.id !== id);
+            saveData();
+            renderCleaningTemplates();
+        }
+
+        function startChecklist(templateId) {
+            const tmpl = cleaningTemplates.find(t => t.id === templateId);
+            if (!tmpl) return;
+
+            activeChecklistLog = {
+                id: 'cl' + Date.now(),
+                templateId: templateId,
+                date: new Date().toISOString(),
+                items: tmpl.items.map(item => ({ id: item.id, checked: false, note: '' })),
+                completed: false,
+                completedAt: null,
+                notes: '',
+                photos: []
+            };
+
+            renderActiveChecklistWithPhotos();
+            document.getElementById('active-checklist-area').classList.remove('hidden');
+        }
+
+        function renderActiveChecklist(tmpl) {
+            renderActiveChecklistWithPhotos();
+        }
+
+        function toggleChecklistItem(itemId) {
+            if (!activeChecklistLog) return;
+            const logItem = activeChecklistLog.items.find(i => i.id === itemId);
+            if (logItem) {
+                logItem.checked = !logItem.checked;
+                renderActiveChecklistWithPhotos();
+            }
+        }
+
+        function updateChecklistNote(itemId, note) {
+            if (!activeChecklistLog) return;
+            const logItem = activeChecklistLog.items.find(i => i.id === itemId);
+            if (logItem) logItem.note = note;
+        }
+
+        function completeActiveChecklist() {
+            if (!activeChecklistLog) return;
+            activeChecklistLog.completed = true;
+            activeChecklistLog.completedAt = new Date().toISOString();
+            cleaningLogs.push(activeChecklistLog);
+            activeChecklistLog = null;
+            saveData();
+            document.getElementById('active-checklist-area').classList.add('hidden');
+            renderCleaningLogs();
+        }
+
+        function cancelActiveChecklist() {
+            activeChecklistLog = null;
+            document.getElementById('active-checklist-area').classList.add('hidden');
+        }
+
+        // ========== AIRBNB: MESSAGE TEMPLATES ==========
+
+        const MSG_CATEGORY_LABELS = {
+            checkin: 'Check-in', checkout: 'Checkout', welcome: 'Welcome',
+            review: 'Review', problem: 'Problem', other: 'Other'
+        };
+
+        function renderMessageTemplates() {
+            const grid = document.getElementById('msg-template-grid');
+            const empty = document.getElementById('msg-templates-empty');
+
+            let items = messageTemplates;
+            if (currentMsgCategoryFilter !== 'all') {
+                items = items.filter(t => t.category === currentMsgCategoryFilter);
+            }
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = '';
+
+            items.forEach(tmpl => {
+                const card = document.createElement('div');
+                card.className = 'msg-template-card';
+                card.innerHTML = `
+                    <h4>${tmpl.name}</h4>
+                    <span class="msg-category-tag">${MSG_CATEGORY_LABELS[tmpl.category] || tmpl.category}</span>
+                    <div class="msg-preview">${tmpl.body}</div>
+                    <div class="msg-template-card-actions">
+                        <button style="background: #1e40af; color: white;" onclick="event.stopPropagation(); useMessageTemplate('${tmpl.id}')">📋 Use</button>
+                        <button style="background: #f59e0b; color: white;" onclick="event.stopPropagation(); editMessageTemplate('${tmpl.id}')">✏️</button>
+                        <button style="background: #ef4444; color: white;" onclick="event.stopPropagation(); deleteMessageTemplate('${tmpl.id}')">🗑️</button>
+                    </div>
+                `;
+                card.onclick = () => useMessageTemplate(tmpl.id);
+                grid.appendChild(card);
+            });
+        }
+
+        function filterMsgCategory(cat, btn) {
+            currentMsgCategoryFilter = cat;
+            document.querySelectorAll('#msg-category-filter .status-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMessageTemplates();
+        }
+
+        function showAddMessageTemplateModal() {
+            editingMsgTemplateId = null;
+            document.getElementById('msg-template-modal-title').textContent = 'Add Message Template';
+            document.getElementById('mt-submit-btn').textContent = 'Add Template';
+            document.getElementById('msg-template-form').reset();
+            document.getElementById('msg-template-modal').classList.remove('hidden');
+        }
+
+        function hideMessageTemplateModal() {
+            document.getElementById('msg-template-modal').classList.add('hidden');
+            editingMsgTemplateId = null;
+        }
+
+        function editMessageTemplate(id) {
+            const tmpl = messageTemplates.find(t => t.id === id);
+            if (!tmpl) return;
+            editingMsgTemplateId = id;
+            document.getElementById('msg-template-modal-title').textContent = 'Edit Message Template';
+            document.getElementById('mt-submit-btn').textContent = 'Update Template';
+            document.getElementById('mt-name').value = tmpl.name;
+            document.getElementById('mt-category').value = tmpl.category;
+            document.getElementById('mt-body').value = tmpl.body;
+            document.getElementById('msg-template-modal').classList.remove('hidden');
+        }
+
+        function deleteMessageTemplate(id) {
+            if (!confirm('Delete this message template?')) return;
+            messageTemplates = messageTemplates.filter(t => t.id !== id);
+            saveData();
+            renderMessageTemplates();
+        }
+
+        function handleSaveMessageTemplate(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('mt-name').value,
+                category: document.getElementById('mt-category').value,
+                body: document.getElementById('mt-body').value
+            };
+
+            if (editingMsgTemplateId) {
+                const idx = messageTemplates.findIndex(t => t.id === editingMsgTemplateId);
+                if (idx !== -1) {
+                    messageTemplates[idx] = { ...messageTemplates[idx], ...data };
+                }
+            } else {
+                messageTemplates.push({ id: 'mt' + Date.now(), ...data });
+            }
+
+            saveData();
+            renderMessageTemplates();
+            hideMessageTemplateModal();
+        }
+
+        function useMessageTemplate(id) {
+            const tmpl = messageTemplates.find(t => t.id === id);
+            if (!tmpl) return;
+            currentUseMsgTemplate = tmpl;
+
+            document.getElementById('use-msg-title').textContent = tmpl.name;
+
+            // Extract placeholders
+            const placeholders = [];
+            const regex = /\[([A-Z_]+)\]/g;
+            let match;
+            const seen = new Set();
+            while ((match = regex.exec(tmpl.body)) !== null) {
+                if (!seen.has(match[1])) {
+                    placeholders.push(match[1]);
+                    seen.add(match[1]);
+                }
+            }
+
+            const container = document.getElementById('use-msg-placeholders');
+            if (placeholders.length === 0) {
+                container.innerHTML = '<p style="color: #6b7280; font-size: 0.9rem;">No placeholders in this template.</p>';
+            } else {
+                container.innerHTML = placeholders.map(p => `
+                    <div class="placeholder-field">
+                        <label>${p.replace(/_/g, ' ')}</label>
+                        <input type="text" data-placeholder="${p}" oninput="updateMsgPreview()" placeholder="Enter ${p.replace(/_/g, ' ').toLowerCase()}">
+                    </div>
+                `).join('');
+            }
+
+            updateMsgPreview();
+            document.getElementById('use-msg-modal').classList.remove('hidden');
+        }
+
+        function updateMsgPreview() {
+            if (!currentUseMsgTemplate) return;
+            let body = currentUseMsgTemplate.body;
+            const inputs = document.querySelectorAll('#use-msg-placeholders input[data-placeholder]');
+            inputs.forEach(input => {
+                const ph = input.dataset.placeholder;
+                const val = input.value || '[' + ph + ']';
+                body = body.split('[' + ph + ']').join(val);
+            });
+            document.getElementById('use-msg-preview').textContent = body;
+        }
+
+        function hideUseMsgModal() {
+            document.getElementById('use-msg-modal').classList.add('hidden');
+            currentUseMsgTemplate = null;
+        }
+
+        function copyMessageToClipboard() {
+            const text = document.getElementById('use-msg-preview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Message copied to clipboard!');
+            });
+        }
+
+        // ========== MAINTENANCE LOG ==========
+
+        function renderMaintenanceLog() {
+            const list = document.getElementById('maintenance-list');
+            const empty = document.getElementById('maintenance-empty');
+
+            let items = maintenanceLog;
+            if (currentMaintStatusFilter !== 'all') {
+                items = items.filter(m => m.status === currentMaintStatusFilter);
+            }
+
+            if (items.length === 0) {
+                list.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            list.innerHTML = '';
+
+            const sorted = [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
+            sorted.forEach(m => {
+                const statusLabels = { reported: 'Reported', 'in-progress': 'In Progress', fixed: 'Fixed', 'awaiting-parts': 'Awaiting Parts' };
+                const card = document.createElement('div');
+                card.className = 'maint-card';
+                card.innerHTML = `
+                    <div class="maint-header">
+                        <div>
+                            <span class="maint-issue">${m.issue}</span>
+                            <span class="maint-status-badge ${m.status}">${statusLabels[m.status] || m.status}</span>
+                        </div>
+                        <div>
+                            ${m.cost ? `<span style="font-weight: 600; color: #dc2626; margin-right: 8px;">$${m.cost.toFixed(2)}</span>` : ''}
+                            <button style="background: #dbeafe; color: #1e40af; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem; margin-right: 4px;" onclick="editMaintenance('${m.id}')">✏️</button>
+                            <button style="background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem;" onclick="deleteMaintenance('${m.id}')">✕</button>
+                        </div>
+                    </div>
+                    <div class="maint-meta">${m.date} ${m.vendor ? '• ' + m.vendor : ''}</div>
+                    ${m.description ? `<div style="font-size: 0.85rem; color: #374151; margin-top: 4px;">${m.description}</div>` : ''}
+                    ${m.photo ? `<img src="${m.photo}" class="maint-photo" style="margin-top: 8px;" onclick="viewMaintenancePhoto('${m.id}')">` : ''}
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function filterMaintenanceStatus(status, btn) {
+            currentMaintStatusFilter = status;
+            document.querySelectorAll('#maint-status-filter .status-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMaintenanceLog();
+        }
+
+        function showAddMaintenanceModal() {
+            editingMaintenanceId = null;
+            document.getElementById('add-maintenance-form').reset();
+            document.getElementById('maint-modal-title').textContent = 'Report Maintenance Issue';
+            document.getElementById('maint-submit-btn').textContent = 'Report Issue';
+            document.getElementById('maint-photo-text').textContent = 'Click to add photo';
+            document.querySelector('#add-maintenance-modal .photo-upload-area').classList.remove('has-file');
+            document.getElementById('add-maintenance-modal').classList.remove('hidden');
+        }
+
+        function hideMaintenanceModal() {
+            document.getElementById('add-maintenance-modal').classList.add('hidden');
+            editingMaintenanceId = null;
+        }
+
+        function editMaintenance(id) {
+            const m = maintenanceLog.find(x => x.id === id);
+            if (!m) return;
+            editingMaintenanceId = id;
+            document.getElementById('maint-issue').value = m.issue;
+            document.getElementById('maint-description').value = m.description || '';
+            document.getElementById('maint-status-select').value = m.status;
+            document.getElementById('maint-cost').value = m.cost || '';
+            document.getElementById('maint-vendor').value = m.vendor || '';
+            document.getElementById('maint-modal-title').textContent = 'Edit Maintenance Issue';
+            document.getElementById('maint-submit-btn').textContent = 'Update Issue';
+            document.getElementById('add-maintenance-modal').classList.remove('hidden');
+        }
+
+        async function handleAddMaintenance(e) {
+            e.preventDefault();
+            const data = {
+                issue: document.getElementById('maint-issue').value,
+                description: document.getElementById('maint-description').value,
+                status: document.getElementById('maint-status-select').value,
+                cost: parseFloat(document.getElementById('maint-cost').value) || 0,
+                vendor: document.getElementById('maint-vendor').value
+            };
+
+            const photoFile = document.getElementById('maint-photo-input').files[0];
+            let photo = null;
+            if (photoFile) {
+                photo = await compressPhoto(photoFile, 600, 0.7);
+            }
+
+            if (editingMaintenanceId) {
+                const idx = maintenanceLog.findIndex(m => m.id === editingMaintenanceId);
+                if (idx !== -1) {
+                    maintenanceLog[idx] = { ...maintenanceLog[idx], ...data };
+                    if (photo) maintenanceLog[idx].photo = photo;
+                }
+            } else {
+                maintenanceLog.push({
+                    id: 'maint' + Date.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    ...data,
+                    photo: photo,
+                    completedDate: null
+                });
+            }
+
+            saveData();
+            renderMaintenanceLog();
+            hideMaintenanceModal();
+        }
+
+        function deleteMaintenance(id) {
+            if (!confirm('Delete this maintenance issue?')) return;
+            maintenanceLog = maintenanceLog.filter(m => m.id !== id);
+            saveData();
+            renderMaintenanceLog();
+        }
+
+        function viewMaintenancePhoto(id) {
+            const m = maintenanceLog.find(x => x.id === id);
+            if (!m || !m.photo) return;
+            galleryCurrentPhotos = [{ photo: m.photo, caption: m.issue }];
+            galleryCurrentIndex = 0;
+            showGalleryModal(m.issue);
+        }
+
+        // ========== GUEST GUIDEBOOK ==========
+
+        const DEFAULT_GUIDEBOOK_SECTIONS = [
+            { title: 'WiFi & Internet', content: 'Network: \nPassword: ' },
+            { title: 'Thermostat', content: 'How to adjust the thermostat...' },
+            { title: 'Appliances', content: 'Washer/Dryer instructions...\nDishwasher instructions...\nCoffee maker...' },
+            { title: 'House Rules', content: '1. No smoking\n2. No parties\n3. Quiet hours: 10pm - 8am\n4. Lock up when leaving' },
+            { title: 'Local Recommendations', content: 'Restaurants:\n\nGrocery Stores:\n\nAttractions:\n' },
+            { title: 'Emergency Contacts', content: 'Host: \nMaintenance: \nEmergency: 911' }
+        ];
+
+        function renderGuidebook() {
+            const container = document.getElementById('guidebook-sections');
+            const empty = document.getElementById('guidebook-empty');
+            const nameInput = document.getElementById('guidebook-property-name');
+
+            nameInput.value = guestGuidebook.propertyName || '';
+
+            if (guestGuidebook.sections.length === 0) {
+                container.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            container.innerHTML = '';
+
+            guestGuidebook.sections.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach((section, i) => {
+                const div = document.createElement('div');
+                div.className = 'guidebook-section';
+                if (guidebookEditMode) {
+                    div.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <input type="text" value="${section.title}" onchange="updateGuidebookTitle('${section.id}', this.value)" style="font-size: 1rem; font-weight: 600; color: #1e40af; border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; flex: 1;">
+                            <div style="display: flex; gap: 4px; margin-left: 8px;">
+                                ${i > 0 ? `<button onclick="moveGuidebookSection('${section.id}', -1)" style="background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; cursor: pointer;">↑</button>` : ''}
+                                ${i < guestGuidebook.sections.length - 1 ? `<button onclick="moveGuidebookSection('${section.id}', 1)" style="background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; cursor: pointer;">↓</button>` : ''}
+                                <button onclick="deleteGuidebookSection('${section.id}')" style="background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer;">✕</button>
+                            </div>
+                        </div>
+                        <textarea class="guidebook-edit-area" onchange="updateGuidebookContent('${section.id}', this.value)">${section.content}</textarea>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <h4>${section.title}</h4>
+                        <div class="guidebook-content">${section.content}</div>
+                    `;
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function toggleGuidebookEdit() {
+            guidebookEditMode = !guidebookEditMode;
+            const btn = document.getElementById('guidebook-edit-toggle');
+            btn.textContent = guidebookEditMode ? '👁️ View Mode' : '✏️ Edit Mode';
+            btn.style.background = guidebookEditMode ? '#1e40af' : '#6b7280';
+            renderGuidebook();
+        }
+
+        function addGuidebookSection() {
+            if (guestGuidebook.sections.length === 0) {
+                DEFAULT_GUIDEBOOK_SECTIONS.forEach((s, i) => {
+                    guestGuidebook.sections.push({
+                        id: 'gs' + Date.now() + i,
+                        title: s.title,
+                        content: s.content,
+                        order: i
+                    });
+                });
+            } else {
+                guestGuidebook.sections.push({
+                    id: 'gs' + Date.now(),
+                    title: 'New Section',
+                    content: '',
+                    order: guestGuidebook.sections.length
+                });
+            }
+            guidebookEditMode = true;
+            document.getElementById('guidebook-edit-toggle').textContent = '👁️ View Mode';
+            document.getElementById('guidebook-edit-toggle').style.background = '#1e40af';
+            saveData();
+            renderGuidebook();
+        }
+
+        function updateGuidebookTitle(id, val) {
+            const s = guestGuidebook.sections.find(x => x.id === id);
+            if (s) { s.title = val; saveData(); }
+        }
+
+        function updateGuidebookContent(id, val) {
+            const s = guestGuidebook.sections.find(x => x.id === id);
+            if (s) { s.content = val; saveData(); }
+        }
+
+        function moveGuidebookSection(id, delta) {
+            const idx = guestGuidebook.sections.findIndex(x => x.id === id);
+            const newIdx = idx + delta;
+            if (newIdx < 0 || newIdx >= guestGuidebook.sections.length) return;
+            const temp = guestGuidebook.sections[idx];
+            guestGuidebook.sections[idx] = guestGuidebook.sections[newIdx];
+            guestGuidebook.sections[newIdx] = temp;
+            guestGuidebook.sections.forEach((s, i) => s.order = i);
+            saveData();
+            renderGuidebook();
+        }
+
+        function deleteGuidebookSection(id) {
+            if (!confirm('Delete this section?')) return;
+            guestGuidebook.sections = guestGuidebook.sections.filter(s => s.id !== id);
+            guestGuidebook.sections.forEach((s, i) => s.order = i);
+            saveData();
+            renderGuidebook();
+        }
+
+        function saveGuidebook() {
+            guestGuidebook.propertyName = document.getElementById('guidebook-property-name').value;
+            saveData();
+        }
+
+        function exportGuidebook() {
+            const name = guestGuidebook.propertyName || 'Guest Guidebook';
+            let html = `<!DOCTYPE html><html><head><title>${name}</title><style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; color: #1f2937; }
+                h1 { color: #1e40af; border-bottom: 2px solid #1e40af; padding-bottom: 8px; }
+                h2 { color: #1e40af; margin-top: 24px; }
+                .section { background: #f9fafb; padding: 16px; border-radius: 8px; margin-bottom: 16px; white-space: pre-wrap; line-height: 1.6; }
+                @media print { body { margin: 20px; } }
+            </style></head><body>`;
+            html += `<h1>${name}</h1>`;
+            guestGuidebook.sections.forEach(s => {
+                html += `<h2>${s.title}</h2><div class="section">${s.content}</div>`;
+            });
+            html += '</body></html>';
+            const w = window.open('', '_blank');
+            w.document.write(html);
+            w.document.close();
+        }
+
+        // ========== SOURCING TRIPS ==========
+
+        function renderSourcingTrips() {
+            const list = document.getElementById('trips-list');
+            const empty = document.getElementById('trips-empty');
+
+            if (sourcingTrips.length === 0) {
+                list.innerHTML = '';
+                empty.classList.remove('hidden');
+                document.getElementById('total-trips').textContent = '0';
+                document.getElementById('total-miles').textContent = '0';
+                document.getElementById('total-mileage-deduction').textContent = '$0';
+                return;
+            }
+
+            empty.classList.add('hidden');
+
+            const totalMiles = sourcingTrips.reduce((sum, t) => sum + (t.miles || 0), 0);
+            document.getElementById('total-trips').textContent = sourcingTrips.length;
+            document.getElementById('total-miles').textContent = totalMiles.toFixed(1);
+            document.getElementById('total-mileage-deduction').textContent = '$' + (totalMiles * MILEAGE_RATE).toFixed(2);
+
+            list.innerHTML = '';
+            const sorted = [...sourcingTrips].sort((a, b) => new Date(b.date) - new Date(a.date));
+            sorted.forEach(trip => {
+                const purposeLabels = { sourcing: 'Sourcing', pickup: 'Pickup', delivery: 'Delivery', supplies: 'Supplies', other: 'Other' };
+                const card = document.createElement('div');
+                card.className = 'trip-card';
+                card.innerHTML = `
+                    <div class="trip-info">
+                        <div class="trip-route">${trip.fromLocation} → ${trip.toLocation}</div>
+                        <div class="trip-details">${trip.date} • ${purposeLabels[trip.purpose] || trip.purpose}${trip.notes ? ' • ' + trip.notes : ''}</div>
+                    </div>
+                    <div class="trip-miles">${trip.miles} mi</div>
+                    <div style="margin-left: 12px; display: flex; gap: 4px;">
+                        <button style="background: #dbeafe; color: #1e40af; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem;" onclick="editTrip('${trip.id}')">✏️</button>
+                        <button style="background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem;" onclick="deleteTrip('${trip.id}')">✕</button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function showAddTripModal() {
+            editingTripId = null;
+            document.getElementById('add-trip-form').reset();
+            document.getElementById('trip-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('trip-modal-title').textContent = 'Log Sourcing Trip';
+            document.getElementById('trip-submit-btn').textContent = 'Log Trip';
+            document.getElementById('add-trip-modal').classList.remove('hidden');
+        }
+
+        function hideTripModal() {
+            document.getElementById('add-trip-modal').classList.add('hidden');
+            editingTripId = null;
+        }
+
+        function editTrip(id) {
+            const t = sourcingTrips.find(x => x.id === id);
+            if (!t) return;
+            editingTripId = id;
+            document.getElementById('trip-date').value = t.date;
+            document.getElementById('trip-from').value = t.fromLocation;
+            document.getElementById('trip-to').value = t.toLocation;
+            document.getElementById('trip-miles').value = t.miles;
+            document.getElementById('trip-purpose').value = t.purpose;
+            document.getElementById('trip-notes').value = t.notes || '';
+            document.getElementById('trip-modal-title').textContent = 'Edit Trip';
+            document.getElementById('trip-submit-btn').textContent = 'Update Trip';
+            document.getElementById('add-trip-modal').classList.remove('hidden');
+        }
+
+        function handleAddTrip(e) {
+            e.preventDefault();
+            const data = {
+                date: document.getElementById('trip-date').value,
+                fromLocation: document.getElementById('trip-from').value,
+                toLocation: document.getElementById('trip-to').value,
+                miles: parseFloat(document.getElementById('trip-miles').value) || 0,
+                purpose: document.getElementById('trip-purpose').value,
+                notes: document.getElementById('trip-notes').value
+            };
+
+            if (editingTripId) {
+                const idx = sourcingTrips.findIndex(t => t.id === editingTripId);
+                if (idx !== -1) sourcingTrips[idx] = { ...sourcingTrips[idx], ...data };
+            } else {
+                sourcingTrips.push({ id: 'trip' + Date.now(), ...data });
+            }
+
+            saveData();
+            renderSourcingTrips();
+            hideTripModal();
+        }
+
+        function deleteTrip(id) {
+            if (!confirm('Delete this trip?')) return;
+            sourcingTrips = sourcingTrips.filter(t => t.id !== id);
+            saveData();
+            renderSourcingTrips();
+        }
+
+        function exportTripsCSV() {
+            let csv = 'Date,From,To,Miles,Purpose,Notes,Deduction\n';
+            sourcingTrips.forEach(t => {
+                csv += `${t.date},"${t.fromLocation}","${t.toLocation}",${t.miles},${t.purpose},"${t.notes || ''}",${(t.miles * MILEAGE_RATE).toFixed(2)}\n`;
+            });
+            const totalMiles = sourcingTrips.reduce((s, t) => s + (t.miles || 0), 0);
+            csv += `\nTotal,,,"${totalMiles.toFixed(1)}",,,"${(totalMiles * MILEAGE_RATE).toFixed(2)}"\n`;
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sourcing-trips-' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ========== MARKETPLACE CROSS-LIST TRACKER ==========
+
+        function showAddListingModal(itemId) {
+            document.getElementById('listing-item-id').value = itemId;
+            document.getElementById('add-listing-form').reset();
+            document.getElementById('listing-item-id').value = itemId;
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (item && item.salePrice) {
+                document.getElementById('listing-price').value = item.salePrice;
+            }
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function hideListingModal() {
+            document.getElementById('add-listing-modal').classList.add('hidden');
+        }
+
+        function handleAddListing(e) {
+            e.preventDefault();
+            const itemId = document.getElementById('listing-item-id').value;
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            if (!item.listings) item.listings = [];
+            item.listings.push({
+                id: 'list' + Date.now(),
+                platform: document.getElementById('listing-platform').value,
+                price: parseFloat(document.getElementById('listing-price').value) || 0,
+                status: document.getElementById('listing-status').value,
+                url: document.getElementById('listing-url').value,
+                listingDate: new Date().toISOString().split('T')[0]
+            });
+
+            saveData();
+            renderFurnitureItems();
+            hideListingModal();
+        }
+
+        // ========== MULTI-PHOTO GALLERY ==========
+
+        function openItemGallery(itemId) {
+            const item = furnitureItems.find(i => i.id === itemId);
+            if (!item) return;
+            const photos = getItemPhotos(item);
+            if (photos.length === 0) return;
+            galleryCurrentPhotos = photos;
+            galleryCurrentIndex = 0;
+            showGalleryModal(item.title);
+        }
+
+        function showGalleryModal(title) {
+            document.getElementById('gallery-modal-title').textContent = title;
+            updateGalleryDisplay();
+            document.getElementById('photo-gallery-modal').classList.remove('hidden');
+        }
+
+        function hideGalleryModal() {
+            document.getElementById('photo-gallery-modal').classList.add('hidden');
+        }
+
+        function updateGalleryDisplay() {
+            const photo = galleryCurrentPhotos[galleryCurrentIndex];
+            document.getElementById('gallery-modal-img').src = photo.photo;
+            document.getElementById('gallery-modal-caption').textContent = photo.caption || '';
+            document.getElementById('gallery-modal-counter').textContent = (galleryCurrentIndex + 1) + ' / ' + galleryCurrentPhotos.length;
+
+            const thumbs = document.getElementById('gallery-modal-thumbs');
+            thumbs.innerHTML = '';
+            galleryCurrentPhotos.forEach((p, i) => {
+                const img = document.createElement('img');
+                img.src = p.photo;
+                img.className = 'photo-gallery-thumb' + (i === galleryCurrentIndex ? ' active' : '');
+                img.onclick = () => { galleryCurrentIndex = i; updateGalleryDisplay(); };
+                thumbs.appendChild(img);
+            });
+        }
+
+        function galleryPrev() {
+            galleryCurrentIndex = (galleryCurrentIndex - 1 + galleryCurrentPhotos.length) % galleryCurrentPhotos.length;
+            updateGalleryDisplay();
+        }
+
+        function galleryNext() {
+            galleryCurrentIndex = (galleryCurrentIndex + 1) % galleryCurrentPhotos.length;
+            updateGalleryDisplay();
+        }
+
+        // ========== CLEANING PHOTO VERIFICATION ==========
+
+        function captureCleaningPhoto(room) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.capture = 'environment';
+            input.onchange = async function(e) {
+                if (e.target.files.length > 0) {
+                    const compressed = await compressPhoto(e.target.files[0], 600, 0.7);
+                    if (!activeChecklistLog.photos) activeChecklistLog.photos = [];
+                    activeChecklistLog.photos.push({
+                        id: 'cp' + Date.now(),
+                        room: room,
+                        photo: compressed,
+                        timestamp: new Date().toISOString()
+                    });
+                    renderActiveChecklistWithPhotos();
+                }
+            };
+            input.click();
+        }
+
+        function renderActiveChecklistWithPhotos() {
+            if (!activeChecklistLog) return;
+            const container = document.getElementById('active-checklist-content');
+            const tmpl = cleaningTemplates.find(t => t.id === activeChecklistLog.templateId);
+            if (!tmpl) return;
+
+            const rooms = {};
+            tmpl.items.forEach(item => {
+                if (!rooms[item.room]) rooms[item.room] = [];
+                rooms[item.room].push(item);
+            });
+
+            let html = '';
+            Object.keys(rooms).forEach(room => {
+                const roomPhotos = (activeChecklistLog.photos || []).filter(p => p.room === room);
+                html += `<div class="checklist-room-group">
+                    <div class="checklist-room-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>${room}</span>
+                        <button class="room-photo-btn ${roomPhotos.length > 0 ? 'has-photo' : ''}" onclick="captureCleaningPhoto('${room}')">
+                            📸 ${roomPhotos.length > 0 ? roomPhotos.length + ' photo(s)' : 'Add Photo'}
+                        </button>
+                    </div>`;
+                rooms[room].forEach(item => {
+                    const logItem = activeChecklistLog.items.find(li => li.id === item.id);
+                    const checked = logItem ? logItem.checked : false;
+                    const note = logItem ? (logItem.note || '') : '';
+                    html += `
+                        <div class="checklist-item">
+                            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleChecklistItem('${item.id}')">
+                            <span class="${checked ? 'completed' : ''}">${item.text}</span>
+                        </div>
+                        <div style="margin-left: 28px; margin-bottom: 8px;">
+                            <input type="text" value="${note}" placeholder="Notes..." onchange="updateChecklistNote('${item.id}', this.value)"
+                                style="width: 100%; padding: 4px 8px; font-size: 0.8rem; border: 1px solid #e5e7eb; border-radius: 4px;">
+                        </div>`;
+                });
+                if (roomPhotos.length > 0) {
+                    html += '<div style="display: flex; gap: 4px; margin: 4px 0 8px 0;">';
+                    roomPhotos.forEach(p => {
+                        html += `<img src="${p.photo}" class="room-photo-thumb" onclick="viewCleaningPhoto('${p.id}')">`;
+                    });
+                    html += '</div>';
+                }
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function viewCleaningPhoto(photoId) {
+            if (!activeChecklistLog || !activeChecklistLog.photos) return;
+            const photo = activeChecklistLog.photos.find(p => p.id === photoId);
+            if (!photo) return;
+            galleryCurrentPhotos = [{ photo: photo.photo, caption: photo.room + ' - ' + new Date(photo.timestamp).toLocaleString() }];
+            galleryCurrentIndex = 0;
+            showGalleryModal('Cleaning Photo');
+        }
+
+        // ========== EXPORT REPORTS WITH PHOTOS ==========
+
+        function showExportReportModal() {
+            document.getElementById('export-report-modal').classList.remove('hidden');
+        }
+
+        function hideExportReportModal() {
+            document.getElementById('export-report-modal').classList.add('hidden');
+        }
+
+        function generateExportReport() {
+            let html = `<!DOCTYPE html><html><head><title>Cozy Capital Inventory Report</title><style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; color: #1f2937; }
+                h1 { color: #1e40af; border-bottom: 2px solid #1e40af; padding-bottom: 8px; }
+                .item { page-break-inside: avoid; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+                .item h3 { color: #1e40af; margin-bottom: 8px; }
+                .item img { max-width: 200px; max-height: 150px; border-radius: 4px; margin-right: 8px; margin-bottom: 8px; }
+                .photos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+                .cost-row { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.9rem; }
+                .cost-row.total { font-weight: 700; border-top: 1px solid #e5e7eb; padding-top: 4px; margin-top: 4px; }
+                .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-left: 8px; }
+                .summary { background: #f9fafb; padding: 16px; border-radius: 8px; margin-bottom: 24px; }
+                .summary .row { display: flex; justify-content: space-between; padding: 4px 0; }
+                @media print { body { margin: 10px; } .item { border: 1px solid #ccc; } }
+            </style></head><body>`;
+
+            html += `<h1>Cozy Capital Inventory Report</h1>`;
+            html += `<p style="color: #6b7280;">Generated: ${new Date().toLocaleDateString()}</p>`;
+
+            const totalItems = furnitureItems.length;
+            const totalInvested = furnitureItems.reduce((s, i) => s + calculateTotalCost(i), 0);
+            const totalRevenue = furnitureItems.reduce((s, i) => s + (i.salePrice || 0), 0);
+
+            html += `<div class="summary">
+                <div class="row"><span>Total Items:</span><span>${totalItems}</span></div>
+                <div class="row"><span>Total Invested:</span><span>$${totalInvested.toFixed(2)}</span></div>
+                <div class="row"><span>Potential Revenue:</span><span>$${totalRevenue.toFixed(2)}</span></div>
+                <div class="row" style="font-weight: 700;"><span>Expected Profit:</span><span style="color: ${totalRevenue - totalInvested >= 0 ? '#059669' : '#dc2626'}">$${(totalRevenue - totalInvested).toFixed(2)}</span></div>
+            </div>`;
+
+            furnitureItems.forEach(item => {
+                const totalCost = calculateTotalCost(item);
+                const photos = getItemPhotos(item);
+                const aging = getAgingInfo(item);
+
+                html += `<div class="item">`;
+                html += `<h3>${item.title} <span class="badge" style="background: ${aging.cls === 'green' ? '#d1fae5' : aging.cls === 'yellow' ? '#fef3c7' : '#fee2e2'};">${aging.label}</span></h3>`;
+
+                if (photos.length > 0) {
+                    html += '<div class="photos">';
+                    photos.forEach(p => { html += `<img src="${p.photo}" alt="">`; });
+                    html += '</div>';
+                }
+
+                if (item.description) html += `<p style="color: #6b7280; margin-bottom: 8px;">${item.description}</p>`;
+
+                const listings = item.listings || [];
+                if (listings.length > 0) {
+                    html += '<p style="font-size: 0.85rem; margin-bottom: 8px;">Listed on: ' + listings.map(l => l.platform + ' (' + l.status + ')').join(', ') + '</p>';
+                }
+
+                html += `<div class="cost-row"><span>Purchase:</span><span>$${item.purchasePrice.toFixed(2)}</span></div>`;
+                if (item.travelCost) html += `<div class="cost-row"><span>Travel:</span><span>$${item.travelCost.toFixed(2)}</span></div>`;
+                if (item.materialsCost) html += `<div class="cost-row"><span>Materials:</span><span>$${item.materialsCost.toFixed(2)}</span></div>`;
+                if (item.repairCost) html += `<div class="cost-row"><span>Repairs:</span><span>$${item.repairCost.toFixed(2)}</span></div>`;
+                html += `<div class="cost-row total"><span>Total Cost:</span><span>$${totalCost.toFixed(2)}</span></div>`;
+                if (item.salePrice) {
+                    const profit = item.salePrice - totalCost;
+                    html += `<div class="cost-row"><span>Sale Price:</span><span>$${item.salePrice.toFixed(2)}</span></div>`;
+                    html += `<div class="cost-row" style="color: ${profit >= 0 ? '#059669' : '#dc2626'};"><span>Expected Profit:</span><span>$${profit.toFixed(2)}</span></div>`;
+                }
+                html += '</div>';
+            });
+
+            html += '</body></html>';
+
+            const w = window.open('', '_blank');
+            w.document.write(html);
+            w.document.close();
+            hideExportReportModal();
         }
 
         // PWA Service Worker Registration
