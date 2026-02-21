@@ -1580,14 +1580,87 @@
             }
             .trip-card .trip-miles { margin-left: 0; }
         }
+
+        /* Financial Dashboard */
+        .finance-dashboard { display: flex; flex-direction: column; gap: 24px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+        .kpi-card {
+            background: white; border-radius: 8px; padding: 20px; text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-top: 3px solid #1e40af;
+        }
+        .kpi-card.green { border-top-color: #059669; }
+        .kpi-card.red { border-top-color: #dc2626; }
+        .kpi-card.purple { border-top-color: #7c3aed; }
+        .kpi-label { font-size: 0.8rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .kpi-value { font-size: 1.5rem; font-weight: 700; color: #1f2937; }
+        .kpi-value.positive { color: #059669; }
+        .kpi-value.negative { color: #dc2626; }
+
+        .finance-section {
+            background: white; border-radius: 8px; padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .finance-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+
+        .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 180px; padding-top: 8px; overflow-x: auto; }
+        .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 60px; height: 100%; justify-content: flex-end; }
+        .bar-stack { display: flex; gap: 3px; align-items: flex-end; width: 100%; justify-content: center; }
+        .bar {
+            width: 20px; border-radius: 3px 3px 0 0; min-height: 2px;
+            transition: height 0.3s ease; position: relative;
+        }
+        .bar.revenue { background: #3b82f6; }
+        .bar.cost { background: #ef4444; }
+        .bar.profit { background: #10b981; }
+        .bar.category { background: #6366f1; }
+        .bar.mileage { background: #f59e0b; }
+        .bar-label { font-size: 0.65rem; color: #6b7280; margin-top: 4px; text-align: center; white-space: nowrap; }
+        .bar-value { font-size: 0.6rem; color: #6b7280; margin-bottom: 2px; text-align: center; }
+
+        .chart-legend { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.75rem; color: #6b7280; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+        .flip-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .flip-table h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+        .flip-table h4.best { color: #059669; }
+        .flip-table h4.worst { color: #dc2626; }
+        .flip-table table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .flip-table th { text-align: left; padding: 6px 8px; border-bottom: 2px solid #e5e7eb; color: #6b7280; font-weight: 600; }
+        .flip-table td { padding: 6px 8px; border-bottom: 1px solid #f3f4f6; }
+
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #6b7280; font-size: 0.85rem; }
+        .stat-value { font-weight: 600; font-size: 0.85rem; }
+
+        .insight-cards { display: flex; flex-direction: column; gap: 10px; }
+        .insight-card {
+            background: #f0fdf4; border-left: 3px solid #10b981; padding: 12px 16px;
+            border-radius: 0 6px 6px 0; font-size: 0.85rem; color: #1f2937;
+        }
+        .insight-card.warn { background: #fef3c7; border-left-color: #f59e0b; }
+        .insight-card.info { background: #eff6ff; border-left-color: #3b82f6; }
+
+        @media (max-width: 600px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .flip-tables { grid-template-columns: 1fr; }
+            .bar-chart { height: 140px; }
+            .kpi-value { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🏢 Cozy Capital</h1>
-            <div class="subtitle">Professional Inventory & Delivery Management</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                    <h1>🏢 Cozy Capital</h1>
+                    <div class="subtitle">Professional Inventory & Delivery Management</div>
+                </div>
+                <button onclick="showNtfySettings()" style="background:none;border:none;font-size:1.4rem;cursor:pointer;padding:4px 8px;opacity:0.6" title="Notification Settings">⚙️</button>
+            </div>
             <div class="main-tabs">
                 <button class="main-tab active" onclick="switchTab('furniture')">
                     📦 Inventory
@@ -1918,11 +1991,7 @@
             <!-- Finances Section -->
             <div id="finances-section" class="hidden">
                 <h2 class="section-title">Financial Dashboard</h2>
-                <div class="empty-state">
-                    <div class="empty-icon">📊</div>
-                    <h3>Financial Analytics Coming Soon</h3>
-                    <p>Detailed charts showing monthly income vs expenses, profit margins, and tax calculations.</p>
-                </div>
+                <div id="finance-dashboard-container"></div>
             </div>
         </div>
     </div>
@@ -2494,6 +2563,23 @@
         </div>
     </div>
 
+    <!-- Ntfy Settings Modal -->
+    <div id="ntfy-settings-modal" class="modal hidden">
+        <div class="modal-content" style="max-width:420px">
+            <h3>🔔 Push Notifications</h3>
+            <p style="color:#6b7280;font-size:0.85rem;margin-bottom:16px">Get notified on your phone when deliveries are completed or routes are created. Both you and your wife should install the <strong>ntfy app</strong> and subscribe to the same topic below.</p>
+            <div class="form-group">
+                <label for="ntfy-topic-input">ntfy Topic Name</label>
+                <input type="text" id="ntfy-topic-input" placeholder="e.g., cozy-capital-smith-2026">
+                <small style="color:#9ca3af;font-size:0.75rem">Use something unique — anyone with the topic name can see notifications</small>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="hideNtfySettings()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveNtfySettings()">Save & Test</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // App State
         let currentTab = 'furniture';
@@ -2576,6 +2662,42 @@
         function requestNotificationPermission() {
             if ('Notification' in window && Notification.permission === 'default') {
                 Notification.requestPermission();
+            }
+        }
+
+        function getNtfyTopic() {
+            return localStorage.getItem('ntfy-topic') || '';
+        }
+
+        function setNtfyTopic(topic) {
+            localStorage.setItem('ntfy-topic', topic);
+        }
+
+        function sendNtfyNotification(title, body, tags) {
+            const topic = getNtfyTopic();
+            if (!topic) return;
+            fetch('https://ntfy.sh/' + encodeURIComponent(topic), {
+                method: 'POST',
+                headers: { 'Title': title, 'Tags': tags || 'loudspeaker' },
+                body: body
+            }).catch(err => console.log('ntfy error:', err));
+        }
+
+        function showNtfySettings() {
+            document.getElementById('ntfy-settings-modal').classList.remove('hidden');
+            document.getElementById('ntfy-topic-input').value = getNtfyTopic();
+        }
+
+        function hideNtfySettings() {
+            document.getElementById('ntfy-settings-modal').classList.add('hidden');
+        }
+
+        function saveNtfySettings() {
+            const topic = document.getElementById('ntfy-topic-input').value.trim();
+            setNtfyTopic(topic);
+            hideNtfySettings();
+            if (topic) {
+                sendNtfyNotification('Cozy Capital', 'Notifications are connected!', 'white_check_mark');
             }
         }
 
@@ -2666,6 +2788,18 @@
                 }
             });
 
+            // Migrate sales history: add category and createdAt if missing
+            salesHistory.forEach(sale => {
+                if (!sale.category) {
+                    sale.category = 'other';
+                    changed = true;
+                }
+                if (!('createdAt' in sale)) {
+                    sale.createdAt = null;
+                    changed = true;
+                }
+            });
+
             if (changed) saveData();
         }
 
@@ -2674,6 +2808,7 @@
             renderRouteStops();
             renderSalesHistory();
             updateStats();
+            renderFinancialDashboard();
             renderAirbnbSupplies();
             renderCleaningTemplates();
             renderCleaningLogs();
@@ -2745,6 +2880,268 @@
                    (item.materialsCost || 0) +
                    (item.repairCost || 0) +
                    (item.deliveryMileageCost || 0);
+        }
+
+        // Financial Dashboard
+        function getMonthKey(dateStr) {
+            if (!dateStr) return null;
+            const d = new Date(dateStr);
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        }
+
+        function getMonthLabel(key) {
+            const [y, m] = key.split('-');
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            return months[parseInt(m) - 1] + ' ' + y.slice(2);
+        }
+
+        function buildBarChart(items, maxVal, labelFn, barsFn, unit) {
+            if (maxVal <= 0) maxVal = 1;
+            const prefix = unit === 'mi' ? '' : '$';
+            const suffix = unit === 'mi' ? ' mi' : '';
+            let html = '<div class="bar-chart">';
+            items.forEach(item => {
+                html += '<div class="bar-group"><div class="bar-stack">';
+                const bars = barsFn(item);
+                bars.forEach(b => {
+                    const h = Math.max(2, (Math.abs(b.value) / maxVal) * 150);
+                    const display = b.value < 0 ? '-' + prefix + Math.abs(b.value).toFixed(0) + suffix : prefix + Math.abs(b.value).toFixed(0) + suffix;
+                    html += `<div style="display:flex;flex-direction:column;align-items:center"><div class="bar-value">${display}</div><div class="bar ${b.cls}" style="height:${h}px" title="${b.label}: ${prefix}${b.value.toFixed(2)}${suffix}"></div></div>`;
+                });
+                html += `</div><div class="bar-label">${labelFn(item)}</div></div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderFinancialDashboard() {
+            const container = document.getElementById('finance-dashboard-container');
+            if (!container) return;
+
+            if (salesHistory.length === 0 && furnitureItems.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><h3>No Data Yet</h3><p>Complete sales and add inventory to see your financial analytics.</p></div>';
+                return;
+            }
+
+            const totalRevenue = salesHistory.reduce((s, x) => s + x.finalPrice, 0);
+            const totalCosts = salesHistory.reduce((s, x) => s + x.totalCost, 0);
+            const netProfit = totalRevenue - totalCosts;
+            const avgProfit = salesHistory.length > 0 ? netProfit / salesHistory.length : 0;
+
+            let html = '<div class="finance-dashboard">';
+
+            // 1. KPI Cards
+            html += '<div class="kpi-grid">';
+            html += `<div class="kpi-card"><div class="kpi-label">Total Revenue</div><div class="kpi-value">$${totalRevenue.toFixed(2)}</div></div>`;
+            html += `<div class="kpi-card red"><div class="kpi-label">Total Costs</div><div class="kpi-value">$${totalCosts.toFixed(2)}</div></div>`;
+            html += `<div class="kpi-card green"><div class="kpi-label">Net Profit</div><div class="kpi-value ${netProfit >= 0 ? 'positive' : 'negative'}">$${netProfit.toFixed(2)}</div></div>`;
+            html += `<div class="kpi-card purple"><div class="kpi-label">Avg Profit/Flip</div><div class="kpi-value ${avgProfit >= 0 ? 'positive' : 'negative'}">$${avgProfit.toFixed(2)}</div></div>`;
+            html += '</div>';
+
+            // 2. Monthly Income vs Expenses
+            const monthlyData = {};
+            salesHistory.forEach(sale => {
+                const key = getMonthKey(sale.completedDate);
+                if (!key) return;
+                if (!monthlyData[key]) monthlyData[key] = { revenue: 0, costs: 0 };
+                monthlyData[key].revenue += sale.finalPrice;
+                monthlyData[key].costs += sale.totalCost;
+            });
+            const monthKeys = Object.keys(monthlyData).sort();
+
+            if (monthKeys.length > 0) {
+                const maxMonthly = Math.max(...monthKeys.map(k => Math.max(monthlyData[k].revenue, monthlyData[k].costs)));
+                html += '<div class="finance-section"><h3>Monthly Income vs Expenses</h3>';
+                html += '<div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Revenue</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Costs</div><div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Profit</div></div>';
+                html += buildBarChart(monthKeys, maxMonthly, k => getMonthLabel(k), k => {
+                    const d = monthlyData[k];
+                    return [
+                        { value: d.revenue, cls: 'revenue', label: 'Revenue' },
+                        { value: d.costs, cls: 'cost', label: 'Costs' },
+                        { value: d.revenue - d.costs, cls: 'profit', label: 'Profit' }
+                    ];
+                });
+                html += '</div>';
+            }
+
+            // 3. Category Performance
+            const catData = {};
+            salesHistory.forEach(sale => {
+                const cat = sale.category || 'other';
+                if (!catData[cat]) catData[cat] = { totalProfit: 0, count: 0 };
+                catData[cat].totalProfit += sale.profit;
+                catData[cat].count++;
+            });
+            const catEntries = Object.entries(catData).map(([k, v]) => ({ cat: k, avg: v.totalProfit / v.count, count: v.count })).sort((a, b) => b.avg - a.avg);
+
+            if (catEntries.length > 0) {
+                const maxCat = Math.max(...catEntries.map(c => Math.abs(c.avg)));
+                html += '<div class="finance-section"><h3>Avg Profit by Category</h3>';
+                html += buildBarChart(catEntries, maxCat, c => (CATEGORY_LABELS[c.cat] || c.cat) + ' (' + c.count + ')', c => [
+                    { value: c.avg, cls: 'category', label: CATEGORY_LABELS[c.cat] || c.cat }
+                ]);
+                html += '</div>';
+            }
+
+            // 4. Best/Worst Flips
+            if (salesHistory.length > 0) {
+                const sorted = [...salesHistory].sort((a, b) => b.profit - a.profit);
+                const best = sorted.slice(0, 5);
+                const worst = sorted.slice(-5).reverse();
+
+                html += '<div class="finance-section"><h3>Best & Worst Flips</h3><div class="flip-tables">';
+                html += '<div class="flip-table"><h4 class="best">Top 5 Best</h4><table><tr><th>Item</th><th>Profit</th></tr>';
+                best.forEach(s => {
+                    html += `<tr><td>${s.item}</td><td class="${s.profit >= 0 ? 'positive' : 'negative'}" style="color:${s.profit >= 0 ? '#059669' : '#dc2626'}; font-weight:600">$${s.profit.toFixed(2)}</td></tr>`;
+                });
+                html += '</table></div>';
+
+                html += '<div class="flip-table"><h4 class="worst">Top 5 Worst</h4><table><tr><th>Item</th><th>Profit</th></tr>';
+                worst.forEach(s => {
+                    html += `<tr><td>${s.item}</td><td style="color:${s.profit >= 0 ? '#059669' : '#dc2626'}; font-weight:600">$${s.profit.toFixed(2)}</td></tr>`;
+                });
+                html += '</table></div></div></div>';
+            }
+
+            // 5. Average Days to Sell
+            if (salesHistory.length > 0) {
+                const salesWithDates = salesHistory.filter(s => s.createdAt && s.completedDate);
+                html += '<div class="finance-section"><h3>Average Days to Sell</h3>';
+                if (salesWithDates.length > 0) {
+                    const totalDays = salesWithDates.reduce((sum, s) => {
+                        return sum + (new Date(s.completedDate) - new Date(s.createdAt)) / (1000 * 60 * 60 * 24);
+                    }, 0);
+                    const overallAvg = totalDays / salesWithDates.length;
+                    html += `<div class="stat-row"><span class="stat-label">Overall Average</span><span class="stat-value">${overallAvg.toFixed(1)} days</span></div>`;
+
+                    const catDays = {};
+                    salesWithDates.forEach(s => {
+                        const cat = s.category || 'other';
+                        if (!catDays[cat]) catDays[cat] = { total: 0, count: 0 };
+                        const days = (new Date(s.completedDate) - new Date(s.createdAt)) / (1000 * 60 * 60 * 24);
+                        catDays[cat].total += days;
+                        catDays[cat].count++;
+                    });
+                    Object.entries(catDays).sort((a, b) => (a[1].total / a[1].count) - (b[1].total / b[1].count)).forEach(([cat, d]) => {
+                        html += `<div class="stat-row"><span class="stat-label">${CATEGORY_LABELS[cat] || cat}</span><span class="stat-value">${(d.total / d.count).toFixed(1)} days</span></div>`;
+                    });
+                } else {
+                    html += '<p style="color:#6b7280; font-size:0.85rem">Date tracking will appear for future sales.</p>';
+                }
+                html += '</div>';
+            }
+
+            // 6. Mileage Tax Deduction
+            const sourcingMiles = sourcingTrips.reduce((s, t) => s + (t.miles || 0), 0);
+            const deliveryMiles = salesHistory.reduce((s, x) => s + (x.deliveryMileage || 0), 0);
+            const totalMiles = sourcingMiles + deliveryMiles;
+            const totalDeduction = totalMiles * MILEAGE_RATE;
+
+            if (totalMiles > 0) {
+                html += '<div class="finance-section"><h3>Mileage Tax Deduction</h3>';
+                html += `<div class="stat-row"><span class="stat-label">Sourcing Miles</span><span class="stat-value">${sourcingMiles.toFixed(1)} mi</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">Delivery Miles</span><span class="stat-value">${deliveryMiles.toFixed(1)} mi</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">Total Miles</span><span class="stat-value">${totalMiles.toFixed(1)} mi</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">IRS Rate</span><span class="stat-value">$${MILEAGE_RATE}/mi</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label" style="font-weight:700;color:#1f2937">Total Deduction</span><span class="stat-value positive" style="color:#059669">$${totalDeduction.toFixed(2)}</span></div>`;
+
+                // Monthly mileage chart
+                const mileageByMonth = {};
+                sourcingTrips.forEach(t => {
+                    const key = getMonthKey(t.date);
+                    if (!key) return;
+                    if (!mileageByMonth[key]) mileageByMonth[key] = 0;
+                    mileageByMonth[key] += t.miles || 0;
+                });
+                salesHistory.forEach(s => {
+                    const key = getMonthKey(s.completedDate);
+                    if (!key) return;
+                    if (!mileageByMonth[key]) mileageByMonth[key] = 0;
+                    mileageByMonth[key] += s.deliveryMileage || 0;
+                });
+                const mileageKeys = Object.keys(mileageByMonth).sort();
+                if (mileageKeys.length > 1) {
+                    const maxMileage = Math.max(...mileageKeys.map(k => mileageByMonth[k]));
+                    html += '<div style="margin-top:16px"><h4 style="font-size:0.85rem;margin-bottom:8px">Monthly Miles</h4>';
+                    html += buildBarChart(mileageKeys, maxMileage, k => getMonthLabel(k), k => [
+                        { value: mileageByMonth[k], cls: 'mileage', label: 'Miles' }
+                    ], 'mi');
+                    html += '</div>';
+                }
+                html += '</div>';
+            }
+
+            // 7. Inventory Value Snapshot
+            if (furnitureItems.length > 0) {
+                const invCost = furnitureItems.reduce((s, i) => s + calculateTotalCost(i), 0);
+                const invRevenue = furnitureItems.reduce((s, i) => s + (i.salePrice || 0), 0);
+                const invProfit = invRevenue - invCost;
+
+                html += '<div class="finance-section"><h3>Current Inventory Snapshot</h3>';
+                html += `<div class="stat-row"><span class="stat-label">Items in Inventory</span><span class="stat-value">${furnitureItems.length}</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">Total Invested</span><span class="stat-value">$${invCost.toFixed(2)}</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">Potential Revenue</span><span class="stat-value">$${invRevenue.toFixed(2)}</span></div>`;
+                html += `<div class="stat-row"><span class="stat-label">Potential Profit</span><span class="stat-value" style="color:${invProfit >= 0 ? '#059669' : '#dc2626'}">$${invProfit.toFixed(2)}</span></div>`;
+                html += '</div>';
+            }
+
+            // 8. Trends & Insights
+            if (salesHistory.length >= 2) {
+                html += '<div class="finance-section"><h3>Trends & Insights</h3><div class="insight-cards">';
+
+                // Best month
+                if (monthKeys.length > 0) {
+                    let bestMonth = monthKeys[0], bestMonthProfit = -Infinity;
+                    monthKeys.forEach(k => {
+                        const p = monthlyData[k].revenue - monthlyData[k].costs;
+                        if (p > bestMonthProfit) { bestMonthProfit = p; bestMonth = k; }
+                    });
+                    html += `<div class="insight-card">Best month: <strong>${getMonthLabel(bestMonth)}</strong> with $${bestMonthProfit.toFixed(2)} profit</div>`;
+                }
+
+                // Highest margin flip
+                const bestFlip = [...salesHistory].sort((a, b) => b.profit - a.profit)[0];
+                if (bestFlip) {
+                    const margin = bestFlip.totalCost > 0 ? ((bestFlip.profit / bestFlip.totalCost) * 100).toFixed(0) : '∞';
+                    html += `<div class="insight-card info">Highest margin flip: <strong>${bestFlip.item}</strong> — ${margin}% return ($${bestFlip.profit.toFixed(2)} profit)</div>`;
+                }
+
+                // Category speed comparison
+                if (catEntries.length >= 2) {
+                    const salesWithDates2 = salesHistory.filter(s => s.createdAt && s.completedDate);
+                    const catSpeed = {};
+                    salesWithDates2.forEach(s => {
+                        const cat = s.category || 'other';
+                        if (!catSpeed[cat]) catSpeed[cat] = { total: 0, count: 0 };
+                        catSpeed[cat].total += (new Date(s.completedDate) - new Date(s.createdAt)) / (1000 * 60 * 60 * 24);
+                        catSpeed[cat].count++;
+                    });
+                    const speedEntries = Object.entries(catSpeed).filter(([, v]) => v.count > 0).sort((a, b) => (a[1].total / a[1].count) - (b[1].total / b[1].count));
+                    if (speedEntries.length >= 2) {
+                        const fastest = speedEntries[0];
+                        const slowest = speedEntries[speedEntries.length - 1];
+                        html += `<div class="insight-card warn">Fastest selling: <strong>${CATEGORY_LABELS[fastest[0]] || fastest[0]}</strong> (${(fastest[1].total / fastest[1].count).toFixed(1)} days avg) — Slowest: <strong>${CATEGORY_LABELS[slowest[0]] || slowest[0]}</strong> (${(slowest[1].total / slowest[1].count).toFixed(1)} days avg)</div>`;
+                    }
+                }
+
+                // Avg profit trend
+                if (monthKeys.length >= 2) {
+                    const firstHalf = monthKeys.slice(0, Math.ceil(monthKeys.length / 2));
+                    const secondHalf = monthKeys.slice(Math.ceil(monthKeys.length / 2));
+                    const firstAvg = firstHalf.reduce((s, k) => s + monthlyData[k].revenue - monthlyData[k].costs, 0) / firstHalf.length;
+                    const secondAvg = secondHalf.reduce((s, k) => s + monthlyData[k].revenue - monthlyData[k].costs, 0) / secondHalf.length;
+                    if (secondAvg > firstAvg) {
+                        html += `<div class="insight-card">Profit trend is <strong>improving</strong> — recent months average $${secondAvg.toFixed(0)}/mo vs $${firstAvg.toFixed(0)}/mo earlier</div>`;
+                    } else if (secondAvg < firstAvg) {
+                        html += `<div class="insight-card warn">Profit trend is <strong>declining</strong> — recent months average $${secondAvg.toFixed(0)}/mo vs $${firstAvg.toFixed(0)}/mo earlier</div>`;
+                    }
+                }
+
+                html += '</div></div>';
+            }
+
+            html += '</div>';
+            container.innerHTML = html;
         }
 
         // Furniture Items Rendering
@@ -2979,6 +3376,11 @@
             stop.completed = !stop.completed;
             if (stop.completed) {
                 stop.completedAt = new Date().toISOString();
+                sendNtfyNotification(
+                    'Stop Completed ✅',
+                    stop.title + (stop.address ? ' at ' + stop.address : ''),
+                    'white_check_mark'
+                );
             } else {
                 delete stop.completedAt;
             }
@@ -3479,6 +3881,11 @@
             saveData();
             renderRouteStops();
             hideErrandModal();
+            sendNtfyNotification(
+                'Errand Added 🛒',
+                storeName + (shoppingList ? ' — ' + shoppingList : ''),
+                'shopping_cart'
+            );
         }
 
         function handleAddPickup(e) {
@@ -3504,6 +3911,11 @@
             saveData();
             renderRouteStops();
             hidePickupModal();
+            sendNtfyNotification(
+                'Pickup Added 📍',
+                'Pick up: ' + itemName + (address ? ' at ' + address : ''),
+                'round_pushpin'
+            );
         }
 
         function handleCreateDelivery(e) {
@@ -3560,6 +3972,11 @@
                 'Delivery Created',
                 itemName + ' to ' + customerName + ' on ' + deliveryDate.toLocaleDateString()
             );
+            sendNtfyNotification(
+                'New Delivery Scheduled 🚚',
+                itemName + ' to ' + customerName + ' on ' + deliveryDate.toLocaleDateString(),
+                'truck,calendar'
+            );
         }
 
         function handleCompleteDelivery(e) {
@@ -3593,7 +4010,9 @@
                 deliveryDate: currentCompletingDelivery.datetime,
                 completedDate: new Date().toISOString(),
                 notes: notes,
-                photo: item.photo
+                photo: item.photo,
+                category: item.category || 'other',
+                createdAt: item.createdAt || null
             };
 
             salesHistory.push(historyEntry);
@@ -3618,6 +4037,11 @@
             sendNotification(
                 'Delivery Complete',
                 historyEntry.item + ' - Profit: $' + profit.toFixed(2)
+            );
+            sendNtfyNotification(
+                'Delivery Complete ✅',
+                historyEntry.item + ' delivered to ' + historyEntry.customer + ' — Profit: $' + profit.toFixed(2),
+                'package,white_check_mark'
             );
         }
 
