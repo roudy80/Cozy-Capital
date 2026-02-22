@@ -11,6 +11,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -63,7 +67,7 @@
 
         .main-tabs {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 12px;
         }
 
@@ -478,6 +482,7 @@
             border-radius: 6px;
             padding: 20px;
             margin-bottom: 24px;
+            min-height: 200px;
         }
 
         .route-header {
@@ -636,6 +641,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
             margin-top: 2px;
+        }
+
+        .route-nav-link {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .route-nav-link:active {
+            opacity: 0.6;
         }
 
         .route-card-time {
@@ -1527,7 +1541,7 @@
             }
 
             .main-tabs {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .modal-content {
@@ -1674,31 +1688,35 @@
                 <button class="main-tab" onclick="switchTab('finances')">
                     💰 Finances
                 </button>
+                <button class="main-tab" onclick="switchTab('route')">
+                    🗺️ Route
+                </button>
             </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
+            <!-- Route Section (standalone tab) -->
+            <div id="route-section" class="route-section hidden">
+                <div class="route-header">
+                    <h3>🗺️ Today's Route</h3>
+                    <div class="quick-add-bar">
+                        <button class="quick-add-btn" onclick="openFullRoute()" style="background:#1e40af;color:white">🧭 Navigate Route</button>
+                        <button class="quick-add-btn errand" onclick="showErrandModal()">+ Errand</button>
+                        <button class="quick-add-btn pickup" onclick="showPickupModal()">+ Pickup</button>
+                    </div>
+                </div>
+                <div id="route-cards-list" class="route-cards-list">
+                    <!-- Route cards rendered here -->
+                </div>
+                <div id="route-empty" class="hidden" style="text-align:center; padding: 20px; color: #6b7280; font-size: 0.9rem;">
+                    No stops yet. Create a delivery or add an errand/pickup.
+                </div>
+            </div>
+
             <!-- Furniture Section -->
             <div id="furniture-section">
                 <h2 class="section-title">Current Inventory</h2>
-
-                <!-- Route Stops -->
-                <div id="route-section" class="route-section hidden">
-                    <div class="route-header">
-                        <h3>🗺️ Today's Route</h3>
-                        <div class="quick-add-bar">
-                            <button class="quick-add-btn errand" onclick="showErrandModal()">+ Errand</button>
-                            <button class="quick-add-btn pickup" onclick="showPickupModal()">+ Pickup</button>
-                        </div>
-                    </div>
-                    <div id="route-cards-list" class="route-cards-list">
-                        <!-- Route cards rendered here -->
-                    </div>
-                    <div id="route-empty" class="hidden" style="text-align:center; padding: 20px; color: #6b7280; font-size: 0.9rem;">
-                        No stops yet. Create a delivery or add an errand/pickup.
-                    </div>
-                </div>
 
                 <!-- Quick Stats -->
                 <div class="stats-grid">
@@ -2643,13 +2661,24 @@
             sourced: 'Sourced', fixing: 'Fixing Up', listed: 'Listed', pending: 'Pending Sale'
         };
 
+        // Firebase Setup
+        const firebaseConfig = {
+            apiKey: "AIzaSyADmO6e1Bcxut_s9eaOZLGBd2aTeOUu4BE",
+            authDomain: "tides-of-fortune.firebaseapp.com",
+            projectId: "tides-of-fortune",
+            databaseURL: "https://tides-of-fortune-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        let syncInProgress = false;
+
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
         });
 
-        function initializeApp() {
-            loadData();
+        async function initializeApp() {
+            await loadData();
             migrateData();
             seedAirbnbDefaults();
             renderAll();
@@ -2713,7 +2742,7 @@
         }
 
         // Data Management
-        function loadData() {
+        function loadDataFromLocal() {
             furnitureItems = JSON.parse(localStorage.getItem('furniture-items') || '[]');
             pendingDeliveries = JSON.parse(localStorage.getItem('pending-deliveries') || '[]');
             routeStops = JSON.parse(localStorage.getItem('route-stops') || '[]');
@@ -2727,7 +2756,60 @@
             sourcingTrips = JSON.parse(localStorage.getItem('sourcing-trips') || '[]');
         }
 
-        function saveData() {
+        function applySnapshot(data) {
+            furnitureItems = data.furnitureItems || [];
+            pendingDeliveries = data.pendingDeliveries || [];
+            routeStops = data.routeStops || [];
+            salesHistory = data.salesHistory || [];
+            airbnbSupplies = data.airbnbSupplies || [];
+            cleaningTemplates = data.cleaningTemplates || [];
+            cleaningLogs = data.cleaningLogs || [];
+            messageTemplates = data.messageTemplates || [];
+            maintenanceLog = data.maintenanceLog || [];
+            guestGuidebook = data.guestGuidebook || { propertyName: "", sections: [] };
+            sourcingTrips = data.sourcingTrips || [];
+        }
+
+        function getAppDataObject() {
+            return {
+                furnitureItems,
+                pendingDeliveries,
+                routeStops,
+                salesHistory,
+                airbnbSupplies,
+                cleaningTemplates,
+                cleaningLogs,
+                messageTemplates,
+                maintenanceLog,
+                guestGuidebook,
+                sourcingTrips
+            };
+        }
+
+        async function loadData() {
+            // Always load localStorage first as fallback
+            loadDataFromLocal();
+            try {
+                const snapshot = await db.ref('appData').once('value');
+                const data = snapshot.val();
+                if (data) {
+                    applySnapshot(data);
+                    saveDataToLocal();
+                } else {
+                    // Firebase empty but localStorage has data — migrate up
+                    const hasLocal = furnitureItems.length > 0 || routeStops.length > 0 || salesHistory.length > 0;
+                    if (hasLocal) {
+                        db.ref('appData').set(getAppDataObject());
+                    }
+                }
+            } catch (e) {
+                console.log('Firebase load failed, using localStorage:', e);
+            }
+            // Start real-time listener
+            startFirebaseListener();
+        }
+
+        function saveDataToLocal() {
             localStorage.setItem('furniture-items', JSON.stringify(furnitureItems));
             localStorage.setItem('pending-deliveries', JSON.stringify(pendingDeliveries));
             localStorage.setItem('route-stops', JSON.stringify(routeStops));
@@ -2739,6 +2821,27 @@
             localStorage.setItem('maintenance-log', JSON.stringify(maintenanceLog));
             localStorage.setItem('guest-guidebook', JSON.stringify(guestGuidebook));
             localStorage.setItem('sourcing-trips', JSON.stringify(sourcingTrips));
+        }
+
+        function saveData() {
+            saveDataToLocal();
+            syncInProgress = true;
+            db.ref('appData').set(getAppDataObject()).catch(e => {
+                console.log('Firebase save failed:', e);
+            }).finally(() => {
+                syncInProgress = false;
+            });
+        }
+
+        function startFirebaseListener() {
+            db.ref('appData').on('value', snapshot => {
+                if (syncInProgress) return;
+                const data = snapshot.val();
+                if (!data) return;
+                applySnapshot(data);
+                saveDataToLocal();
+                renderAll();
+            });
         }
 
         // Migration
@@ -2828,11 +2931,20 @@
             event.target.classList.add('active');
 
             document.querySelectorAll('[id$="-section"]').forEach(section => {
-                if (['furniture-section','airbnb-section','history-section','finances-section'].includes(section.id)) {
+                if (['furniture-section','airbnb-section','history-section','finances-section','route-section'].includes(section.id)) {
                     section.classList.add('hidden');
                 }
             });
             document.getElementById(tab + '-section').classList.remove('hidden');
+
+            // Show route on furniture tab too if there are stops
+            if (tab === 'furniture' && routeStops.length > 0) {
+                document.getElementById('route-section').classList.remove('hidden');
+            }
+            // On route tab, always show route section
+            if (tab === 'route') {
+                renderRouteStops();
+            }
         }
 
         // Status Pipeline Filter
@@ -3288,6 +3400,29 @@
             return card;
         }
 
+        // ========== MAPS NAVIGATION ==========
+
+        const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+
+        function openMaps(address) {
+            const encoded = encodeURIComponent(address);
+            if (isApple) {
+                window.open('https://maps.apple.com/?daddr=' + encoded, '_blank');
+            } else {
+                window.open('https://www.google.com/maps/dir/?api=1&destination=' + encoded, '_blank');
+            }
+        }
+
+        function openFullRoute() {
+            const incomplete = routeStops.filter(s => !s.completed && s.address).sort((a, b) => a.order - b.order);
+            if (incomplete.length === 0) return;
+
+            // Google Maps supports multi-stop: /maps/dir/stop1/stop2/stop3/
+            // Apple Maps only supports single destination, so use Google Maps for full route
+            const stops = incomplete.map(s => encodeURIComponent(s.address)).join('/');
+            window.open('https://www.google.com/maps/dir/' + stops + '/', '_blank');
+        }
+
         // ========== ROUTE STOPS ==========
 
         function renderRouteStops() {
@@ -3295,12 +3430,24 @@
             const list = document.getElementById('route-cards-list');
             const emptyEl = document.getElementById('route-empty');
 
+            const onRouteTab = currentTab === 'route';
+            const onFurnitureTab = currentTab === 'furniture';
+
             if (routeStops.length === 0) {
-                section.classList.add('hidden');
+                if (onRouteTab) {
+                    section.classList.remove('hidden');
+                    emptyEl.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+                list.innerHTML = '';
                 return;
             }
 
-            section.classList.remove('hidden');
+            emptyEl.classList.add('hidden');
+            if (onRouteTab || onFurnitureTab) {
+                section.classList.remove('hidden');
+            }
 
             // Sort: incomplete first (by order), completed at bottom
             const incomplete = routeStops.filter(s => !s.completed).sort((a, b) => a.order - b.order);
@@ -3331,16 +3478,25 @@
                     <div class="route-card-grab" data-grab="true">☰</div>
                     <div class="route-card-number">${num}</div>
                     <div class="route-card-body">
-                        <div class="route-card-title">${cfg.icon} ${stop.title}</div>
-                        ${stop.address ? '<div class="route-card-address">' + stop.address + '</div>' : ''}
+                        <div class="route-card-title">${cfg.icon} ${esc(stop.title)}</div>
+                        ${stop.address ? '<div class="route-card-address"><a href="#" data-address="' + esc(stop.address) + '" class="route-nav-link map-link">📍 ' + esc(stop.address) + '</a></div>' : ''}
                         ${timeStr ? '<div class="route-card-time">' + timeStr + '</div>' : ''}
-                        ${stop.notes ? '<div class="route-card-time">📝 ' + stop.notes + '</div>' : ''}
+                        ${stop.notes ? '<div class="route-card-time">📝 ' + esc(stop.notes) + '</div>' : ''}
                     </div>
                     <div class="route-card-check">
                         <input type="checkbox" ${stop.completed ? 'checked' : ''} onchange="toggleStopComplete('${stop.id}')">
                     </div>
                     <div class="route-card-delete" onclick="deleteRouteStop('${stop.id}')" title="Remove stop">✕</div>
                 `;
+
+                // Map link click handler
+                const mapLink = card.querySelector('.map-link');
+                if (mapLink) {
+                    mapLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openMaps(this.dataset.address);
+                    });
+                }
 
                 // Touch drag setup
                 const grabHandle = card.querySelector('[data-grab]');
