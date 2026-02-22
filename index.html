@@ -2928,7 +2928,7 @@
             document.querySelectorAll('.main-tab').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            if (event && event.target) event.target.classList.add('active');
 
             document.querySelectorAll('[id$="-section"]').forEach(section => {
                 if (['furniture-section','airbnb-section','history-section','finances-section','route-section'].includes(section.id)) {
@@ -2951,7 +2951,7 @@
         function filterByStatus(status) {
             currentStatusFilter = status;
             document.querySelectorAll('.status-pill').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) event.target.classList.add('active');
             renderFurnitureItems();
         }
 
@@ -3405,6 +3405,7 @@
         const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
 
         function openMaps(address) {
+            if (!address) return;
             const encoded = encodeURIComponent(address);
             if (isApple) {
                 window.open('https://maps.apple.com/?daddr=' + encoded, '_blank');
@@ -3755,6 +3756,7 @@
 
         function showDeliveryModal(itemId) {
             currentDeliveryItem = furnitureItems.find(item => item.id === itemId);
+            if (!currentDeliveryItem) return;
             document.getElementById('final-price').value = currentDeliveryItem.salePrice || '';
             document.getElementById('delivery-modal').classList.remove('hidden');
         }
@@ -3771,10 +3773,10 @@
 
             const summary = document.getElementById('delivery-summary');
             summary.innerHTML = `
-                <div style="font-weight: 600; margin-bottom: 8px;">📦 ${currentCompletingDelivery.item}</div>
+                <div style="font-weight: 600; margin-bottom: 8px;">📦 ${esc(currentCompletingDelivery.item)}</div>
                 <div style="color: #6b7280; font-size: 0.875rem; line-height: 1.6;">
-                    👤 ${currentCompletingDelivery.customer}<br>
-                    📍 ${currentCompletingDelivery.address}<br>
+                    👤 ${esc(currentCompletingDelivery.customer)}<br>
+                    📍 ${esc(currentCompletingDelivery.address)}<br>
                     💰 $${currentCompletingDelivery.price}
                 </div>
             `;
@@ -4082,6 +4084,7 @@
             const datetime = new Date(date + 'T' + time).toISOString();
 
             const customerName = document.getElementById('customer-name').value;
+            if (!currentDeliveryItem) return;
             const itemName = currentDeliveryItem.title;
 
             const deliveryRequest = {
@@ -5177,12 +5180,12 @@
                                 <button onclick="deleteGuidebookSection('${section.id}')" style="background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer;">✕</button>
                             </div>
                         </div>
-                        <textarea class="guidebook-edit-area" onchange="updateGuidebookContent('${section.id}', this.value)">${section.content}</textarea>
+                        <textarea class="guidebook-edit-area" onchange="updateGuidebookContent('${section.id}', this.value)">${esc(section.content)}</textarea>
                     `;
                 } else {
                     div.innerHTML = `
-                        <h4>${section.title}</h4>
-                        <div class="guidebook-content">${section.content}</div>
+                        <h4>${esc(section.title)}</h4>
+                        <div class="guidebook-content">${esc(section.content)}</div>
                     `;
                 }
                 container.appendChild(div);
@@ -5491,11 +5494,13 @@
         }
 
         function galleryPrev() {
+            if (galleryCurrentPhotos.length === 0) return;
             galleryCurrentIndex = (galleryCurrentIndex - 1 + galleryCurrentPhotos.length) % galleryCurrentPhotos.length;
             updateGalleryDisplay();
         }
 
         function galleryNext() {
+            if (galleryCurrentPhotos.length === 0) return;
             galleryCurrentIndex = (galleryCurrentIndex + 1) % galleryCurrentPhotos.length;
             updateGalleryDisplay();
         }
