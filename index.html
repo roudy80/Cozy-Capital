@@ -2707,7 +2707,7 @@
             if (!topic) return;
             fetch('https://ntfy.sh/' + encodeURIComponent(topic), {
                 method: 'POST',
-                headers: { 'Title': title, 'Tags': tags || 'loudspeaker' },
+                headers: { 'Title': title, 'Tags': tags || 'loudspeaker', 'Click': 'https://roudy80.github.io/Cozy-Capital/' },
                 body: body
             }).catch(err => console.log('ntfy error:', err));
         }
